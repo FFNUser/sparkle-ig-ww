@@ -411,6 +411,14 @@
 @property (nonatomic, copy, readwrite) NSArray *tools;
 @end
 
+// IGConsumerSubsStoryPeekDirectPlugin.IGConsumerSubsStoryPeekDirectManager — the
+// DM-inbox story peek entry. It calls presentPeek… (real) or presentPeekUpsell…
+// (subscribe dead-end) based on entitlement.
+@interface _TtC35IGConsumerSubsStoryPeekDirectPlugin36IGConsumerSubsStoryPeekDirectManager : NSObject
+- (void)presentPeekWithSourceView:(id)view reelPK:(id)pk presenting:(id)presenting onTapToOpenStory:(id)onTapToOpenStory onViewProfile:(id)onViewProfile;
+- (void)presentPeekUpsellWithSourceView:(id)view reelPK:(id)pk presenting:(id)presenting onSubscribeToInstagramPlus:(id)onSubscribe onViewProfile:(id)onViewProfile;
+@end
+
 @interface IGUFIInteractionCountsView : UIView
 @end
 

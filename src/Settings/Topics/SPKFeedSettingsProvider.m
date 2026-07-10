@@ -19,6 +19,9 @@ static NSString *const kSPKFeedActionButtonEnabledKey = @"feed_action_btn";
                         @"Choose what tapping the action button does. Long press opens the full menu."),
         SPKTopicSection(@"Layout", @[
             SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:@"Main Feed" icon:SPKSettingsIcon(@"feed") menu:SPKMainFeedModeMenu()], SPKSettingsIcon(@"feed")),
+            [SPKSetting switchCellWithTitle:@"Disable App Icon Gesture"
+                                       icon:SPKSettingsIcon(@"app")
+                                defaultsKey:@"feed_disable_appicon_gesture"],
             [SPKSetting switchCellWithTitle:@"Hide Stories Tray"
                                        icon:SPKSettingsIcon(@"story")
                                 defaultsKey:@"feed_hide_stories_tray"],
@@ -39,7 +42,8 @@ static NSString *const kSPKFeedActionButtonEnabledKey = @"feed_action_btn";
                                 defaultsKey:@"feed_hide_repost_btn"
                             requiresRestart:YES]
         ],
-                        @"1. Force Instagram's chronological Following feed instead of the algorithmic For You feed. Title stays \"For you\"."),
+                        @"1. Force Instagram's chronological Following feed instead of the algorithmic For You feed. Title stays \"For you\".\n"
+                        @"2. Stop the feed header logo long-press from opening Instagram's app icon picker. Sparkle has its own in Settings."),
         SPKTopicSection(@"Metrics", @[
             [SPKSetting switchCellWithTitle:@"Hide Like Count"
                                        icon:SPKSettingsIcon(@"heart")

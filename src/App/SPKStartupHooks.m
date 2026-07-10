@@ -88,6 +88,9 @@ FOUNDATION_EXPORT void SPKInstallDMAudioDownloadHooksIfNeeded(void);
 FOUNDATION_EXPORT void SPKInstallNotesActionsHooksIfEnabled(void);
 FOUNDATION_EXPORT void SPKInstallHideDirectCallButtonsHooksIfEnabled(void);
 FOUNDATION_EXPORT void SPKInstallFixDuplicateNotificationsHooksIfNeeded(void);
+FOUNDATION_EXPORT void SPKInstallDisableAppIconGestureHooksIfEnabled(void);
+FOUNDATION_EXPORT void SPKInstallUnlockStoryPreviewHooksIfEnabled(void);
+FOUNDATION_EXPORT void SPKInstallHideViewerPlusButtonHooksIfEnabled(void);
 
 // Master kill switch: when YES, suppress all feature hook installation, but
 // keep the home long-press shortcut so users can still reach Settings to turn
@@ -146,6 +149,7 @@ void SPKInstallFeedSurfaceHooksIfNeeded(void) {
     SPKInstallDisableHomeButtonRefreshHooksIfEnabled();
     SPKInstallCopyDescriptionHooksIfEnabled();
     SPKInstallHideMetricsHooksIfEnabled();
+    SPKInstallDisableAppIconGestureHooksIfEnabled();
 }
 
 void SPKInstallStorySurfaceHooksIfNeeded(void) {
@@ -163,6 +167,8 @@ void SPKInstallStorySurfaceHooksIfNeeded(void) {
     SPKInstallStickerInteractConfirmHooksIfEnabled();
     SPKInstallStoryPollVoteCountsHooksIfEnabled();
     SPKInstallDetailedColorPickerHooksIfEnabled();
+    SPKInstallUnlockStoryPreviewHooksIfEnabled();
+    SPKInstallHideViewerPlusButtonHooksIfEnabled();
 }
 
 void SPKInstallReelsSurfaceHooksIfNeeded(void) {

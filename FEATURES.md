@@ -91,6 +91,7 @@ Per-feature control of the Sparkle notification pill and its haptics. See **Noti
 
 ### Layout
 - **Main Feed**: `For You` or `Following`. Following mode forces the chronological feed, keeps pagination and cold starts on that source, and removes the For You picker entry. **(restart)**
+- **Disable App Icon Gesture**: Stops the feed header logo long-press from opening Instagram's app icon picker (Sparkle has its own under Settings).
 - **Hide Stories Tray**, **Hide Entire Feed**, **Hide Suggested Posts**, **Hide Suggested Accounts**, **Hide Suggested Reels**, **Hide Suggested Threads**.
 - **Hide Repost Button**: Removes the repost button from posts. **(restart)**
 
@@ -127,6 +128,10 @@ Per-feature control of the Sparkle notification pill and its haptics. See **Noti
 
 ### Confirmations
 - **Confirm Like**, **Confirm Quick Reaction**, **Confirm Sticker Interaction**.
+
+### Instagram Plus (not available in v410.1.0)
+- **Unlock Story Preview**: Unlocks the Instagram Plus "Story Preview" — long-pressing a story shows the real preview (photo, video, auto-advance) instead of the blurred upgrade upsell, without appearing on the viewer list. Also removes the "Try Instagram Plus" row from the long-press menu. Works from the feed story tray and DMs.
+- **Hide Viewer List Plus Button**: Hides the Instagram Plus button in your story's viewer list.
 
 ### Other
 - **Hide Story Midcards** Removes the "Join a trending" / "Add Yours" promo cards from the stories tray. 

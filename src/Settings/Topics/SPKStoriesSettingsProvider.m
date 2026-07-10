@@ -114,6 +114,18 @@ static NSArray *SPKStoriesSettingsSections(void) {
                         @"1. Show a confirmation alert when you try to like a story.\n"
                         @"2. Show a confirmation alert when you tap a quick reaction emoji.\n"
                         @"3. Show a confirmation alert when a story has a sticker and you tap on it."),
+        
+        SPKTopicSection(@"Instagram Plus", @[
+            [SPKSetting switchCellWithTitle:@"Unlock Story Preview"
+                                       icon:SPKSettingsIcon(@"story_preview")
+                                defaultsKey:@"stories_unlock_preview"],
+            [SPKSetting switchCellWithTitle:@"Hide Instagram Plus Button"
+                                       icon:SPKSettingsIcon(@"aura")
+                                defaultsKey:@"stories_hide_ig_plus_button"]
+        ],
+                        @"1. Unlock \"Story Preview\": the story long-press menu shows the actual story without appearing on the viewer list.\n"
+                        @"2. Hide the Instagram Plus button in your story's viewer list."),
+
         SPKTopicSection(@"Other", @[
             [SPKSetting switchCellWithTitle:@"Hide Join Trending"
                                        icon:SPKSettingsIcon(@"arrow_up_right")
