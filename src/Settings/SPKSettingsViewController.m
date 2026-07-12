@@ -1,6 +1,7 @@
 #import "SPKSettingsViewController.h"
 #import "../App/SPKStartupHooks.h"
 #import "../AssetUtils.h"
+#import "../Features/Messages/MessageSeenButtons.h"
 #import "../Features/Profile/FollowIndicator.h"
 #import "../Shared/ActionButton/ActionButtonCore.h"
 #import "../Shared/Avatars/SPKAvatarCache.h"
@@ -1150,6 +1151,9 @@ static UIImage *SPKSettingsBreadcrumbChevronImage(void) {
     }
     if ([defaultsKey hasPrefix:@"profile_follow_indicator"]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:SPKFollowIndicatorDidChangeNotification object:nil];
+    }
+    if ([defaultsKey isEqualToString:@"msgs_seen_button_position"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:SPKMessageSeenButtonPositionDidChangeNotification object:nil];
     }
 
     SPKLog(@"General", @"Menu changed: %@ = %@", writeKey, properties[@"value"]);

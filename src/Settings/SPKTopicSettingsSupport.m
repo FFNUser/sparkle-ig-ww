@@ -195,6 +195,13 @@ UIMenu *SPKMainFeedModeMenu(void) {
     ]];
 }
 
+UIMenu *SPKSeenButtonPositionMenu(void) {
+    return [UIMenu menuWithChildren:@[
+        SPKMenuCommand(@"Top", @"arrow_up", nil, @"msgs_seen_button_position", @"top", NO),
+        SPKMenuCommand(@"Bottom", @"arrow_down", nil, @"msgs_seen_button_position", @"bottom", NO)
+    ]];
+}
+
 UIMenu *SPKNavigationIconOrderingMenu(void) {
     return [UIMenu menuWithChildren:@[
         SPKMenuCommand(@"Default", nil, nil, @"interface_nav_order", @"default", YES),

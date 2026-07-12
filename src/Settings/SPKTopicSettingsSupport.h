@@ -17,6 +17,7 @@ SPKSetting *SPKActionButtonDefaultActionNavigationSetting(SPKActionButtonSource 
 SPKSetting *SPKActionButtonConfigurationNavigationSetting(SPKActionButtonSource source, NSString *topicTitle, NSArray<NSString *> *supportedActions, NSArray<SPKActionMenuSection *> *defaultSections);
 UIMenu *SPKReelsTapControlMenu(void);
 UIMenu *SPKMainFeedModeMenu(void);
+UIMenu *SPKSeenButtonPositionMenu(void);
 UIMenu *SPKNavigationIconOrderingMenu(void);
 UIMenu *SPKLaunchTabMenu(void);
 UIMenu *SPKSwipeBetweenTabsMenu(void);

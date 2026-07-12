@@ -69,6 +69,17 @@ static NSArray *SPKMessagesSettingsSections(void) {
         return [SPKUtils getBoolPref:@"msgs_manual_seen"];
     };
 
+    // Chooses where the manual-seen eye button lives: the top nav bar, or a
+    // draggable bubble above the composer. Only meaningful while manual seen is on.
+    // Up/Down arrows mirror the placement on both the menu items and the cell.
+    SPKSetting *seenButtonPosition = SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:@"Seen Button Position"
+                                                                                              icon:SPKSettingsIcon(@"arrow_up")
+                                                                                              menu:SPKSeenButtonPositionMenu()],
+                                                                     SPKSettingsIcon(@"arrow_up"));
+    seenButtonPosition.enabledProvider = ^BOOL {
+        return [SPKUtils getBoolPref:@"msgs_manual_seen"];
+    };
+
     // Advancing after a manual seen only applies while visual manual seen is on.
     SPKSetting *advanceVisual = [SPKSetting switchCellWithTitle:@"Advance After Manual Seen" icon:SPKSettingsIcon(@"autoscroll") defaultsKey:@"msgs_advance_visual_on_seen"];
     advanceVisual.enabledProvider = ^BOOL {
@@ -88,20 +99,23 @@ static NSArray *SPKMessagesSettingsSections(void) {
             [SPKSetting switchCellWithTitle:@"Manually Mark Seen"
                                        icon:SPKSettingsIcon(@"eye")
                                 defaultsKey:@"msgs_manual_seen"],
+            seenButtonPosition,
             seenOnSend,
             seenOnReply,
             seenOnReaction,
             manualSeenList,
         ],
                         manualSeen ? @"1. Prevents automatic seen receipts and adds an eye button to mark chats as seen.\n"
-                                     @"2. Marks a chat as seen when you send a message.\n"
-                                     @"3. Marks a chat as seen when you reply.\n"
-                                     @"4. Marks a chat as seen when you react.\n\n"
+                                     @"2. Places the seen button in the top nav bar, or as a draggable bubble above the composer within thumb reach (scroll to snap it back).\n"
+                                     @"3. Marks a chat as seen when you send a message.\n"
+                                     @"4. Marks a chat as seen when you reply.\n"
+                                     @"5. Marks a chat as seen when you react.\n\n"
                                      @"Excluded Chats keep Instagram's normal seen behavior. Manage them from the eye button, an inbox long press, or the list above."
                                    : @"1. Prevents automatic seen receipts and adds an eye button to mark chats as seen.\n"
-                                     @"2. Marks a chat as seen when you send a message.\n"
-                                     @"3. Marks a chat as seen when you reply.\n"
-                                     @"4. Marks a chat as seen when you react.\n\n"
+                                     @"2. Places the seen button in the top nav bar, or as a draggable bubble above the composer within thumb reach (scroll to snap it back).\n"
+                                     @"3. Marks a chat as seen when you send a message.\n"
+                                     @"4. Marks a chat as seen when you reply.\n"
+                                     @"5. Marks a chat as seen when you react.\n\n"
                                      @"Included Chats require the eye button or the auto-seen triggers above. Manage them from the eye button, an inbox long press, or the list above."),
         SPKTopicSection(@"Deleted Messages", @[
             [SPKSetting switchCellWithTitle:@"Keep Deleted Messages"
