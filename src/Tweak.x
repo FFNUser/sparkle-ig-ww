@@ -713,8 +713,8 @@ BOOL showSearchSectionLabelForTag(NSInteger tag) {
             cancelHandler:^{
                 SPKConsumePendingRepostFeedback(SPKActionButtonSourceFeed);
             }
-            title:@"Confirm Repost"
-            message:@"Are you sure you want to repost this post?"];
+            title:SPKLocalizedString(@"Confirm Repost")
+            message:SPKLocalizedString(@"Are you sure you want to repost this post?")];
     } else {
         %orig;
         SPKShowPendingRepostFeedbackIfNeeded(SPKActionButtonSourceFeed);
@@ -756,8 +756,8 @@ BOOL showSearchSectionLabelForTag(NSInteger tag) {
             cancelHandler:^{
                 SPKConsumePendingRepostFeedback(SPKActionButtonSourceReels);
             }
-            title:@"Confirm Reel Repost"
-            message:@"Are you sure you want to repost this reel?"];
+            title:SPKLocalizedString(@"Confirm Reel Repost")
+            message:SPKLocalizedString(@"Are you sure you want to repost this reel?")];
     } else {
         %orig;
         SPKShowPendingRepostFeedbackIfNeeded(SPKActionButtonSourceReels);
@@ -777,8 +777,8 @@ BOOL showSearchSectionLabelForTag(NSInteger tag) {
             cancelHandler:^{
                 SPKConsumePendingRepostFeedback(SPKActionButtonSourceReels);
             }
-            title:@"Confirm Reel Repost"
-            message:@"Are you sure you want to repost this reel?"];
+            title:SPKLocalizedString(@"Confirm Reel Repost")
+            message:SPKLocalizedString(@"Are you sure you want to repost this reel?")];
     } else {
         %orig;
         SPKShowPendingRepostFeedbackIfNeeded(SPKActionButtonSourceReels);
@@ -798,8 +798,8 @@ BOOL showSearchSectionLabelForTag(NSInteger tag) {
             cancelHandler:^{
                 SPKConsumePendingRepostFeedback(SPKActionButtonSourceReels);
             }
-            title:@"Confirm Reel Repost"
-            message:@"Are you sure you want to repost this reel?"];
+            title:SPKLocalizedString(@"Confirm Reel Repost")
+            message:SPKLocalizedString(@"Are you sure you want to repost this reel?")];
     } else {
         %orig;
         SPKShowPendingRepostFeedbackIfNeeded(SPKActionButtonSourceReels);

@@ -12,8 +12,8 @@
             showConfirmation:^(void) {
                 %orig;
             }
-                       title:@"Confirm Change Chat Theme"
-                     message:@"Are you sure you want to apply this theme to the chat?"];
+                       title:SPKLocalizedString(@"Confirm Change Chat Theme")
+                     message:SPKLocalizedString(@"Are you sure you want to apply this theme to the chat?")];
     } else {
         return %orig;
     }
@@ -26,8 +26,8 @@
             showConfirmation:^(void) {
                 %orig;
             }
-                       title:@"Confirm Change Chat Theme"
-                     message:@"Are you sure you want to apply this theme to the chat?"];
+                       title:SPKLocalizedString(@"Confirm Change Chat Theme")
+                     message:SPKLocalizedString(@"Are you sure you want to apply this theme to the chat?")];
     } else {
         return %orig;
     }
@@ -43,8 +43,8 @@
             showConfirmation:^(void) {
                 %orig;
             }
-                       title:@"Confirm Change Chat Theme"
-                     message:@"Are you sure you want to apply this theme to the chat?"];
+                       title:SPKLocalizedString(@"Confirm Change Chat Theme")
+                     message:SPKLocalizedString(@"Are you sure you want to apply this theme to the chat?")];
     } else {
         return %orig;
     }

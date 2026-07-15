@@ -48,7 +48,7 @@
 }
 
 + (SPKSetting *)perAccountSetting {
-    SPKSetting *setting = [SPKSetting switchCellWithTitle:@"Per-Account Settings"
+    SPKSetting *setting = [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Per-Account Settings")
                                                      icon:SPKSettingsIcon(@"user_circle")
                                               defaultsKey:kSPKPrefPerAccountSettings];
     // Changes which key namespace every feature reads, and most enabled-state is
@@ -58,7 +58,7 @@
 }
 
 + (SPKSetting *)perAccountInfoSetting {
-    return [SPKSetting buttonCellWithTitle:@"How It Works"
+    return [SPKSetting buttonCellWithTitle:SPKLocalizedString(@"How It Works")
                                   subtitle:nil
                                       icon:SPKSettingsIcon(@"info")
                                     action:^{
@@ -79,14 +79,14 @@
                                             @"Gallery media ownership is controlled separately in Gallery settings.";
 
                                         [SPKIGAlertPresenter presentAlertFromViewController:topMostController()
-                                                                                      title:@"Per-Account Settings"
+                                                                                      title:SPKLocalizedString(@"Per-Account Settings")
                                                                                     message:message
-                                                                                    actions:@[ [SPKIGAlertAction actionWithTitle:@"OK" style:SPKIGAlertActionStyleCancel handler:nil] ]];
+                                                                                    actions:@[ [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"OK") style:SPKIGAlertActionStyleCancel handler:nil] ]];
                                     }];
 }
 
 + (SPKSetting *)rootSetting {
-    SPKSetting *clearCacheSetting = [SPKSetting buttonCellWithTitle:@"Clear Cache"
+    SPKSetting *clearCacheSetting = [SPKSetting buttonCellWithTitle:SPKLocalizedString(@"Clear Cache")
                                                            subtitle:@""
                                                                icon:SPKSettingsIcon(@"trash")
                                                              action:^(void) {
@@ -103,17 +103,17 @@
     };
 
     return SPKTopicNavigationSetting(@"General", @"settings", 24.0, @[
-        SPKTopicSection(@"Behavior", @[
-            [SPKSetting switchCellWithTitle:@"Copy Text"
+        SPKTopicSection(SPKLocalizedString(@"Behavior"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Copy Text")
                                        icon:SPKSettingsIcon(@"text")
                                 defaultsKey:@"general_copy_text"],
-            [SPKSetting switchCellWithTitle:@"No Recent Searches"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"No Recent Searches")
                                        icon:SPKSettingsIcon(@"search")
                                 defaultsKey:@"general_no_recent_searches"],
-            [SPKSetting switchCellWithTitle:@"Copy Links Without Tracking"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Copy Links Without Tracking")
                                        icon:SPKSettingsIcon(@"user_unfollow")
                                 defaultsKey:@"general_strip_share_link_tracking"],
-            [SPKSetting switchCellWithTitle:@"Hold Send to Copy Link"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hold Send to Copy Link")
                                        icon:SPKSettingsIcon(@"link")
                                 defaultsKey:@"general_hold_send_copy_link"],
         ],
@@ -121,41 +121,41 @@
                         @"2. Search bars will no longer save recent searches.\n"
                         @"3. Remove the user and tracking identifiers from copied links.\n"
                         @"4. Long press the send/share button to copy the post link."),
-        SPKTopicSection(@"Sharing", @[
-            [SPKSetting switchCellWithTitle:@"Hide Create Group Button"
+        SPKTopicSection(SPKLocalizedString(@"Sharing"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Create Group Button")
                                        icon:SPKSettingsIcon(@"group")
                                 defaultsKey:@"general_hide_create_group"],
-            [SPKSetting switchCellWithTitle:@"Confirm Create Group"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Create Group")
                                        icon:SPKSettingsIcon(@"group")
                                 defaultsKey:@"general_confirm_create_group"],
-            [SPKSetting switchCellWithTitle:@"Confirm Sending Post"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Sending Post")
                                        icon:SPKSettingsIcon(@"messages")
                                 defaultsKey:@"general_confirm_send"],
         ],
                         @"1. Hide the create group button from the Instagram send/share sheet.\n"
                         @"2. Show a confirmation alert when you try to create a group.\n"
                         @"3. Show a confirmation alert when sending a post."),
-        SPKTopicSection(@"Media Preview", @[
-            [SPKSetting switchCellWithTitle:@"Show Media Info"
+        SPKTopicSection(SPKLocalizedString(@"Media Preview"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Show Media Info")
                                        icon:SPKSettingsIcon(@"info")
                                 defaultsKey:@"general_preview_show_metadata"],
         ],
                         @"Overlay the author and post date on the expanded photo preview."),
-        SPKTopicSection(@"Recommendations", @[
+        SPKTopicSection(SPKLocalizedString(@"Recommendations"), @[
             [SPKSetting navigationCellWithTitle:@"Ads"
                                        subtitle:@""
                                            icon:SPKSettingsIcon(@"ads")
                                     navSections:@[
-                                        SPKTopicSection(@"Ads", @[
-                                            [SPKSetting switchCellWithTitle:@"Hide Feed Ads"
+                                        SPKTopicSection(SPKLocalizedString(@"Ads"), @[
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Feed Ads")
                                                                 defaultsKey:@"general_hide_ads_feed"],
-                                            [SPKSetting switchCellWithTitle:@"Hide Story Ads"
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Story Ads")
                                                                 defaultsKey:@"general_hide_ads_stories"],
-                                            [SPKSetting switchCellWithTitle:@"Hide Reels Ads"
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Reels Ads")
                                                                 defaultsKey:@"general_hide_ads_reels"],
-                                            [SPKSetting switchCellWithTitle:@"Hide Explore Ads"
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Explore Ads")
                                                                 defaultsKey:@"general_hide_ads_explore"],
-                                            [SPKSetting switchCellWithTitle:@"Hide Reels Shopping CTA"
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Reels Shopping CTA")
                                                                 defaultsKey:@"general_hide_reels_shopping_cta"]
                                         ],
                                                         nil)
@@ -165,15 +165,15 @@
                                            icon:SPKSettingsIcon(@"meta_ai")
                                     navSections:@[
                                         SPKTopicSection(@"", @[
-                                            [SPKSetting switchCellWithTitle:@"Hide in Direct"
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide in Direct")
                                                                 defaultsKey:@"general_hide_meta_ai_msgs"],
-                                            [SPKSetting switchCellWithTitle:@"Hide in Explore & Search"
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide in Explore & Search")
                                                                 defaultsKey:@"general_hide_meta_ai_explore"],
-                                            [SPKSetting switchCellWithTitle:@"Hide in Comments"
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide in Comments")
                                                                 defaultsKey:@"general_hide_meta_ai_comments"],
-                                            [SPKSetting switchCellWithTitle:@"Hide in Creation Tools"
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide in Creation Tools")
                                                                 defaultsKey:@"general_hide_meta_ai_creation"],
-                                            [SPKSetting switchCellWithTitle:@"Hide Global AI Chrome"
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Global AI Chrome")
                                                                 defaultsKey:@"general_hide_meta_ai_global"]
                                         ],
                                                         @"Direct includes inbox, composer, recipients, themes, and message menus. Global chrome covers generic Meta AI buttons, placeholders, and branded entry points.")
@@ -182,36 +182,36 @@
                                        subtitle:@""
                                            icon:SPKSettingsIcon(@"users")
                                     navSections:@[
-                                        SPKTopicSection(@"Suggested Users", @[
-                                            [SPKSetting switchCellWithTitle:@"Hide Feed Suggestions"
+                                        SPKTopicSection(SPKLocalizedString(@"Suggested Users"), @[
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Feed Suggestions")
                                                                 defaultsKey:@"general_hide_suggested_users_feed"],
-                                            [SPKSetting switchCellWithTitle:@"Hide Reels Suggestions"
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Reels Suggestions")
                                                                 defaultsKey:@"general_hide_suggested_users_reels"],
-                                            [SPKSetting switchCellWithTitle:@"Hide Direct Suggestions"
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Direct Suggestions")
                                                                 defaultsKey:@"general_hide_suggested_users_msgs"],
-                                            [SPKSetting switchCellWithTitle:@"Hide Search Suggestions"
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Search Suggestions")
                                                                 defaultsKey:@"general_hide_suggested_users_search"],
-                                            [SPKSetting switchCellWithTitle:@"Hide Profile Suggestions"
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Profile Suggestions")
                                                                 defaultsKey:@"general_hide_suggested_users_profile"],
-                                            [SPKSetting switchCellWithTitle:@"Hide Activity Suggestions"
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Activity Suggestions")
                                                                 defaultsKey:@"general_hide_suggested_users_activity"],
-                                            [SPKSetting switchCellWithTitle:@"Hide Follow-List Suggestions"
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Follow-List Suggestions")
                                                                 defaultsKey:@"general_hide_suggested_users_follow_lists"],
-                                            [SPKSetting switchCellWithTitle:@"Hide Subscription Suggestions"
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Subscription Suggestions")
                                                                 defaultsKey:@"general_hide_suggested_users_subscriptions"]
                                         ],
                                                         nil)
                                     ]]
         ],
                         @"Control ads, AI and suggestions visibility by surface."),
-        SPKTopicSection(@"Comments", @[
-            [SPKSetting switchCellWithTitle:@"Copy Comment"
+        SPKTopicSection(SPKLocalizedString(@"Comments"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Copy Comment")
                                        icon:SPKSettingsIcon(@"copy")
                                 defaultsKey:@"general_comments_copy_text"],
-            [SPKSetting switchCellWithTitle:@"Comment Media Actions"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Comment Media Actions")
                                        icon:SPKSettingsIcon(@"action")
                                 defaultsKey:@"general_comments_media_actions"],
-            [SPKSetting switchCellWithTitle:@"Upload Photo from Gallery"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Upload Photo from Gallery")
                                        icon:SPKSettingsIcon(@"photo")
                                 defaultsKey:@"general_comments_gallery_upload"]
         ],
@@ -219,42 +219,42 @@
                         @"2. Adds Photos, Share, Gallery, and link actions for GIF and photo comments.\n"
                         @"3. Long-press the composer's photo button to attach an image from your Sparkle Gallery."),
         SPKTopicSection(@"", @[
-            [SPKSetting switchCellWithTitle:@"Swipe to Close Comments"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Swipe to Close Comments")
                                        icon:SPKSettingsIcon(@"left_right")
                                 defaultsKey:@"general_comments_swipe_close"],
             SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:@"Swipe Direction" icon:SPKSettingsIcon(@"left_right") menu:SPKSwipeCloseCommentsDirectionMenu()], SPKSettingsIcon(@"left_right")),
         ],
                         @"Adds a horizontal swipe gesture to close comment sheets, in the chosen direction."),
         SPKTopicSection(@"", @[
-            [SPKSetting switchCellWithTitle:@"Confirm Comment Like"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Comment Like")
                                        icon:SPKSettingsIcon(@"heart")
                                 defaultsKey:@"general_comments_confirm_like"],
-            [SPKSetting switchCellWithTitle:@"Hide Comment Shopping"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Comment Shopping")
                                        icon:SPKSettingsIcon(@"shopping_bag")
                                 defaultsKey:@"general_comments_hide_shopping"],
-            [SPKSetting switchCellWithTitle:@"Hide Gifts Button"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Gifts Button")
                                        icon:SPKSettingsIcon(@"gift")
                                 defaultsKey:@"general_comments_hide_gifts_button"],
         ],
                         @"1. Shows a confirmation alert before liking a comment.\n"
                         @"2. Removes commerce carousels in comment threads.\n"
                         @"3. Removes the gift shortcut from the comment composer."),
-        SPKTopicSection(@"Accounts", @[
+        SPKTopicSection(SPKLocalizedString(@"Accounts"), @[
             [self perAccountSetting],
             [self perAccountInfoSetting]
         ],
                         @"Give each logged-in account its own Sparkle settings."),
-        SPKTopicSection(@"Storage", @[
+        SPKTopicSection(SPKLocalizedString(@"Storage"), @[
             clearCacheSetting,
             [SPKSetting menuCellWithTitle:@"Auto Clear Cache"
                                      icon:SPKSettingsIcon(@"clock")
                                      menu:SPKCacheAutoClearMenu()]
         ],
                         @"Automatic clearing is checked whenever Instagram becomes active."),
-        SPKTopicSection(@"App", @[
+        SPKTopicSection(SPKLocalizedString(@"App"), @[
             [self appIconSetting],
             [self defaultMenuIconSetting],
-            [SPKSetting switchCellWithTitle:@"Disable App Haptics"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Disable App Haptics")
                                        icon:SPKSettingsIcon(@"haptics")
                                 defaultsKey:@"general_disable_haptics"]
         ],

@@ -146,7 +146,7 @@ static NSString *SPKViewerMediaIDFromItem(id item) {
         SPKLog(@"ViewerSearch", @"[Sparkle] Could not resolve media id from viewer list item");
         return;
     }
-    [SPKStoryViewersSearchViewController presentForMediaID:mediaID title:@"Story Viewers"];
+    [SPKStoryViewersSearchViewController presentForMediaID:mediaID title:SPKLocalizedString(@"Story Viewers")];
 }
 
 %end

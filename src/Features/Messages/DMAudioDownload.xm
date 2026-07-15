@@ -453,35 +453,35 @@ static void SPKDMPresentAudioActions(UIView *view, SPKAudioSource source) {
 
     UIViewController *presenter = [SPKUtils viewControllerForAncestralView:view] ?: topMostController();
     [SPKIGAlertPresenter presentActionSheetFromViewController:presenter
-                                                        title:@"Audio"
+                                                        title:SPKLocalizedString(@"Audio")
                                                       message:nil
                                                       actions:@[
-                                                          [SPKIGAlertAction actionWithTitle:@"Save Audio to Files"
+                                                          [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Save Audio to Files")
                                                                                       style:SPKIGAlertActionStyleDefault
                                                                                     handler:^{
                                                                                         [SPKAudioDownloadCoordinator performAction:SPKAudioActionSaveToFiles item:item presenter:presenter sourceView:view metadata:metadata notificationIdentifier:kSPKNotificationDownloadAudio];
                                                                                     }],
-                                                          [SPKIGAlertAction actionWithTitle:@"Share Audio"
+                                                          [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Share Audio")
                                                                                       style:SPKIGAlertActionStyleDefault
                                                                                     handler:^{
                                                                                         [SPKAudioDownloadCoordinator performAction:SPKAudioActionConvertAndShare item:item presenter:presenter sourceView:view metadata:metadata notificationIdentifier:kSPKNotificationDownloadAudioShare];
                                                                                     }],
-                                                          [SPKIGAlertAction actionWithTitle:@"Save Audio to Gallery"
+                                                          [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Save Audio to Gallery")
                                                                                       style:SPKIGAlertActionStyleDefault
                                                                                     handler:^{
                                                                                         [SPKAudioDownloadCoordinator performAction:SPKAudioActionConvertAndSaveToGallery item:item presenter:presenter sourceView:view metadata:metadata notificationIdentifier:kSPKNotificationDownloadAudioGallery];
                                                                                     }],
-                                                          [SPKIGAlertAction actionWithTitle:@"Play Audio"
+                                                          [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Play Audio")
                                                                                       style:SPKIGAlertActionStyleDefault
                                                                                     handler:^{
                                                                                         [SPKAudioDownloadCoordinator performAction:SPKAudioActionPlay item:item presenter:presenter sourceView:view metadata:metadata notificationIdentifier:kSPKNotificationPlayAudio];
                                                                                     }],
-                                                          [SPKIGAlertAction actionWithTitle:@"Copy Audio Download URL"
+                                                          [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Copy Audio Download URL")
                                                                                       style:SPKIGAlertActionStyleDefault
                                                                                     handler:^{
                                                                                         [SPKAudioDownloadCoordinator performAction:SPKAudioActionCopyURL item:item presenter:presenter sourceView:view metadata:metadata notificationIdentifier:kSPKNotificationCopyAudioURL];
                                                                                     }],
-                                                          [SPKIGAlertAction actionWithTitle:@"Cancel"
+                                                          [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Cancel")
                                                                                       style:SPKIGAlertActionStyleCancel
                                                                                     handler:nil]
                                                       ]];
@@ -630,35 +630,35 @@ static void SPKDMPresentDownloadAudioActionsForViewModel(id viewModel) {
     metadata.sourceMediaURLString = audioItem.sourceURLString ?: audioItem.url.absoluteString;
 
     [SPKIGAlertPresenter presentActionSheetFromViewController:presenter
-                                                        title:@"Audio"
+                                                        title:SPKLocalizedString(@"Audio")
                                                       message:nil
                                                       actions:@[
-                                                          [SPKIGAlertAction actionWithTitle:@"Save Audio to Files"
+                                                          [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Save Audio to Files")
                                                                                       style:SPKIGAlertActionStyleDefault
                                                                                     handler:^{
                                                                                         [SPKAudioDownloadCoordinator performAction:SPKAudioActionSaveToFiles item:audioItem presenter:presenter sourceView:sourceView metadata:metadata notificationIdentifier:kSPKNotificationDownloadAudio];
                                                                                     }],
-                                                          [SPKIGAlertAction actionWithTitle:@"Share Audio"
+                                                          [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Share Audio")
                                                                                       style:SPKIGAlertActionStyleDefault
                                                                                     handler:^{
                                                                                         [SPKAudioDownloadCoordinator performAction:SPKAudioActionConvertAndShare item:audioItem presenter:presenter sourceView:sourceView metadata:metadata notificationIdentifier:kSPKNotificationDownloadAudioShare];
                                                                                     }],
-                                                          [SPKIGAlertAction actionWithTitle:@"Save Audio to Gallery"
+                                                          [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Save Audio to Gallery")
                                                                                       style:SPKIGAlertActionStyleDefault
                                                                                     handler:^{
                                                                                         [SPKAudioDownloadCoordinator performAction:SPKAudioActionConvertAndSaveToGallery item:audioItem presenter:presenter sourceView:sourceView metadata:metadata notificationIdentifier:kSPKNotificationDownloadAudioGallery];
                                                                                     }],
-                                                          [SPKIGAlertAction actionWithTitle:@"Play Audio"
+                                                          [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Play Audio")
                                                                                       style:SPKIGAlertActionStyleDefault
                                                                                     handler:^{
                                                                                         [SPKAudioDownloadCoordinator performAction:SPKAudioActionPlay item:audioItem presenter:presenter sourceView:sourceView metadata:metadata notificationIdentifier:kSPKNotificationPlayAudio];
                                                                                     }],
-                                                          [SPKIGAlertAction actionWithTitle:@"Copy Audio Download URL"
+                                                          [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Copy Audio Download URL")
                                                                                       style:SPKIGAlertActionStyleDefault
                                                                                     handler:^{
                                                                                         [SPKAudioDownloadCoordinator performAction:SPKAudioActionCopyURL item:audioItem presenter:presenter sourceView:sourceView metadata:metadata notificationIdentifier:kSPKNotificationCopyAudioURL];
                                                                                     }],
-                                                          [SPKIGAlertAction actionWithTitle:@"Cancel"
+                                                          [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Cancel")
                                                                                       style:SPKIGAlertActionStyleCancel
                                                                                     handler:nil]
                                                       ]];

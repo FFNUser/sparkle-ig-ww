@@ -73,31 +73,31 @@ NSArray<SPKHeaderDestination *> *SPKHeaderButtonAllDestinations(void) {
     dispatch_once(&onceToken, ^{
         destinations = @[
             [SPKHeaderDestination destinationWithIdentifier:kSPKHeaderDestGallery
-                                                      title:@"Gallery"
+                                                      title:SPKLocalizedString(@"Gallery")
                                                    iconName:@"sparkle_gallery"
                                                     present:^(UIWindow *window) {
                                                         [SPKGalleryViewController presentGallery];
                                                     }],
             [SPKHeaderDestination destinationWithIdentifier:kSPKHeaderDestAnalyzer
-                                                      title:@"Profile Analyzer"
+                                                      title:SPKLocalizedString(@"Profile Analyzer")
                                                    iconName:@"profile_analyzer"
                                                     present:^(UIWindow *window) {
                                                         [SPKProfileAnalyzerViewController presentFromTop];
                                                     }],
             [SPKHeaderDestination destinationWithIdentifier:kSPKHeaderDestDeleted
-                                                      title:@"Deleted Messages"
+                                                      title:SPKLocalizedString(@"Deleted Messages")
                                                    iconName:@"channels"
                                                     present:^(UIWindow *window) {
                                                         [SPKDeletedMessagesViewController presentFromViewController:nil];
                                                     }],
             [SPKHeaderDestination destinationWithIdentifier:kSPKHeaderDestDownloads
-                                                      title:@"Downloads"
+                                                      title:SPKLocalizedString(@"Downloads")
                                                    iconName:@"download"
                                                     present:^(UIWindow *window) {
                                                         [SPKDownloadService presentDownloadsHistorySheet];
                                                     }],
             [SPKHeaderDestination destinationWithIdentifier:kSPKHeaderDestSettings
-                                                      title:@"Sparkle Settings"
+                                                      title:SPKLocalizedString(@"Sparkle Settings")
                                                    iconName:@"settings"
                                                     present:^(UIWindow *window) {
                                                         [SPKUtils showSettingsVC:window];

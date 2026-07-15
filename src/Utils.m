@@ -589,6 +589,32 @@ static void SPKPresentSettingsAfterUnlock(UIViewController *presenter, dispatch_
         presentation();
 }
 
+
+// MARK: Localization
+NSString *SPKLocalizedString(NSString *key) {
+    static NSBundle *bundle = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *bundlePath = @"/var/jb/Library/Application Support/Sparkle.bundle";
+        if (![[NSFileManager defaultManager] fileExistsAtPath:bundlePath]) {
+            bundlePath = @"/Library/Application Support/Sparkle.bundle";
+        }
+        if (![[NSFileManager defaultManager] fileExistsAtPath:bundlePath]) {
+            bundlePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Sparkle.bundle"];
+        }
+        bundle = [NSBundle bundleWithPath:bundlePath];
+    });
+
+    if (bundle) {
+        NSString *localized = [bundle localizedStringForKey:key value:key table:nil];
+        if (localized) {
+            return localized;
+        }
+    }
+    return key;
+}
+
+
 @implementation SPKUtils
 
 // Master kill switch overlay: when "Disable All Settings" is on, runtime
@@ -1574,13 +1600,13 @@ static id SPKPrefValueWithMasterOverlay(NSString *key) {
                                                   title:title ?: @"Confirm Action"
                                                 message:message ?: @"Are you sure you want to continue?"
                                                 actions:@[
-                                                    [SPKIGAlertAction actionWithTitle:@"Cancel"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Cancel")
                                                                                 style:SPKIGAlertActionStyleCancel
                                                                               handler:^{
                                                                                   if (cancelHandler)
                                                                                       cancelHandler();
                                                                               }],
-                                                    [SPKIGAlertAction actionWithTitle:@"Confirm"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Confirm")
                                                                                 style:SPKIGAlertActionStyleDefault
                                                                               handler:^{
                                                                                   if (okHandler)
@@ -1597,13 +1623,13 @@ static id SPKPrefValueWithMasterOverlay(NSString *key) {
 }
 + (void)showRestartConfirmation {
     [SPKIGAlertPresenter presentAlertFromViewController:topMostController()
-                                                  title:@"Restart Required"
-                                                message:@"You must restart the app to apply this change"
+                                                  title:SPKLocalizedString(@"Restart Required")
+                                                message:SPKLocalizedString(@"You must restart the app to apply this change")
                                                 actions:@[
-                                                    [SPKIGAlertAction actionWithTitle:@"Later"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Later")
                                                                                 style:SPKIGAlertActionStyleCancel
                                                                               handler:nil],
-                                                    [SPKIGAlertAction actionWithTitle:@"Restart"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Restart")
                                                                                 style:SPKIGAlertActionStyleDefault
                                                                               handler:^{
                                                                                   exit(0);

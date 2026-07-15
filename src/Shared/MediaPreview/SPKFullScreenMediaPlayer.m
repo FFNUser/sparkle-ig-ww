@@ -1282,7 +1282,7 @@ static CGPoint SPKCenterForBounds(CGRect bounds) {
 
     if (file.hasOpenableOriginalMedia) {
         [actions addObject:[UIAction
-                               actionWithTitle:@"Open Original Post"
+                               actionWithTitle:SPKLocalizedString(@"Open Original Post")
                                          image:SPKGalleryPreviewMenuIcon(
                                                    @"external_link")
                                     identifier:nil
@@ -1295,7 +1295,7 @@ static CGPoint SPKCenterForBounds(CGRect bounds) {
     if (file.hasOpenableProfile) {
         [actions
             addObject:[UIAction
-                          actionWithTitle:@"Open Profile"
+                          actionWithTitle:SPKLocalizedString(@"Open Profile")
                                     image:SPKGalleryPreviewMenuIcon(@"user_circle")
                                identifier:nil
                                   handler:^(__unused UIAction *action) {
@@ -1304,7 +1304,7 @@ static CGPoint SPKCenterForBounds(CGRect bounds) {
     }
 
     if (actions.count == 0) {
-        UIAction *empty = [UIAction actionWithTitle:@"No origin actions available"
+        UIAction *empty = [UIAction actionWithTitle:SPKLocalizedString(@"No origin actions available")
                                               image:nil
                                          identifier:nil
                                             handler:^(__unused UIAction *action){
@@ -2409,15 +2409,15 @@ static CGPoint SPKCenterForBounds(CGRect bounds) {
     __weak typeof(self) weakSelf = self;
     [SPKIGAlertPresenter
         presentAlertFromViewController:self
-                                 title:@"Delete from Gallery"
-                               message:@"This will permanently remove this file."
+                                 title:SPKLocalizedString(@"Delete from Gallery")
+                               message:SPKLocalizedString(@"This will permanently remove this file.")
                                actions:@[
                                    [SPKIGAlertAction
-                                       actionWithTitle:@"Cancel"
+                                       actionWithTitle:SPKLocalizedString(@"Cancel")
                                                  style:SPKIGAlertActionStyleCancel
                                                handler:nil],
                                    [SPKIGAlertAction
-                                       actionWithTitle:@"Delete"
+                                       actionWithTitle:SPKLocalizedString(@"Delete")
                                                  style:
                                                      SPKIGAlertActionStyleDestructive
                                                handler:^{

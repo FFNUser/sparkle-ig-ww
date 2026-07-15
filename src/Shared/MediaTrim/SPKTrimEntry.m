@@ -99,7 +99,7 @@
     }
     __weak typeof(self) weakSelf = self;
     [self downloadURLs:@[ editURL ]
-                 title:@"Preparing video..."
+                 title:SPKLocalizedString(@"Preparing video...")
                   pill:nil
             completion:^(NSArray<NSURL *> *locals) {
                 if (locals.count > 0) {
@@ -287,7 +287,7 @@
                                                                    onCancel:nil];
         __weak typeof(self) weakSelf = self;
         [self downloadURLs:sources
-                     title:@"Downloading high quality..."
+                     title:SPKLocalizedString(@"Downloading high quality...")
                       pill:pill
                 completion:^(NSArray<NSURL *> *locals) {
                     __strong typeof(weakSelf) self = weakSelf;

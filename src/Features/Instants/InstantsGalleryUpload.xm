@@ -665,7 +665,7 @@ static void SPKPresentInstantsSourcePicker(__unused UIView *sourceView) {
     UIViewController *presenter = SPKInstantsTopPresenter();
     NSMutableArray<SPKIGAlertAction *> *actions = [NSMutableArray array];
 
-    [actions addObject:[SPKIGAlertAction actionWithTitle:@"Select from Photos"
+    [actions addObject:[SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Select from Photos")
                                                    style:SPKIGAlertActionStyleDefault
                                                  handler:^{
                                                      UIImagePickerController *picker = [[UIImagePickerController alloc] init];
@@ -677,11 +677,11 @@ static void SPKPresentInstantsSourcePicker(__unused UIView *sourceView) {
                                                  }]];
 
     if ([SPKGalleryPickerViewController hasSelectableFilesForAllowedMediaTypes:[NSSet setWithObject:@(SPKGalleryMediaTypeImage)]]) {
-        [actions addObject:[SPKIGAlertAction actionWithTitle:@"Select from Gallery"
+        [actions addObject:[SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Select from Gallery")
                                                        style:SPKIGAlertActionStyleDefault
                                                      handler:^{
                                                          [SPKGalleryPickerViewController presentFromViewController:SPKInstantsTopPresenter()
-                                                                                                             title:@"Choose Photo"
+                                                                                                             title:SPKLocalizedString(@"Choose Photo")
                                                                                                  allowedMediaTypes:[NSSet setWithObject:@(SPKGalleryMediaTypeImage)]
                                                                                            allowsMultipleSelection:NO
                                                                                                         completion:^(NSArray<SPKGalleryFile *> *selectedFiles) {
@@ -693,7 +693,7 @@ static void SPKPresentInstantsSourcePicker(__unused UIView *sourceView) {
                                                      }]];
     }
 
-    [actions addObject:[SPKIGAlertAction actionWithTitle:@"Select from Files"
+    [actions addObject:[SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Select from Files")
                                                    style:SPKIGAlertActionStyleDefault
                                                  handler:^{
                                                      UIDocumentPickerViewController *picker = [[UIDocumentPickerViewController alloc] initForOpeningContentTypes:@[ UTTypeImage ] asCopy:YES];
@@ -702,16 +702,16 @@ static void SPKPresentInstantsSourcePicker(__unused UIView *sourceView) {
                                                      [SPKInstantsTopPresenter() presentViewController:picker animated:YES completion:nil];
                                                  }]];
 
-    [actions addObject:[SPKIGAlertAction actionWithTitle:@"Instants Settings"
+    [actions addObject:[SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Instants Settings")
                                                    style:SPKIGAlertActionStyleDefault
                                                  handler:^{
                                                      [SPKUtils showSettingsForTopicTitle:@"Instants"];
                                                  }]];
 
-    [actions addObject:[SPKIGAlertAction actionWithTitle:@"Cancel" style:SPKIGAlertActionStyleCancel handler:nil]];
+    [actions addObject:[SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Cancel") style:SPKIGAlertActionStyleCancel handler:nil]];
     if (![SPKIGAlertPresenter presentActionSheetFromViewController:presenter
-                                                             title:@"Upload Photo"
-                                                           message:@"Choose a photo to position and crop, then send as an Instant."
+                                                             title:SPKLocalizedString(@"Upload Photo")
+                                                           message:SPKLocalizedString(@"Choose a photo to position and crop, then send as an Instant.")
                                                            actions:actions]) {
         UIImpactFeedbackGenerator *feedback = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleLight];
         [feedback impactOccurred];

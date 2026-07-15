@@ -18,8 +18,8 @@
     };
 
     return SPKTopicNavigationSetting(@"Gallery", @"sparkle_gallery", 24.0, @[
-        SPKTopicSection(@"Access", @[
-            [SPKSetting buttonCellWithTitle:@"Open Gallery"
+        SPKTopicSection(SPKLocalizedString(@"Access"), @[
+            [SPKSetting buttonCellWithTitle:SPKLocalizedString(@"Open Gallery")
                                    subtitle:@""
                                        icon:SPKSettingsIcon(@"sparkle_gallery")
                                      action:^(void) {
@@ -28,10 +28,10 @@
             SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:@"Quick Gallery Access" icon:SPKSettingsIcon(@"circle_off") menu:SPKGalleryShortcutTargetMenu()], SPKSettingsIcon(@"circle_off"))
         ],
                         @"Choose the tab that opens Gallery on long press. None disables the action."),
-        SPKTopicSection(@"Settings", @[
+        SPKTopicSection(SPKLocalizedString(@"Settings"), @[
             gallerySettings
         ],
-                        @"The same screen you reach from inside Gallery.")
+                        SPKLocalizedString(@"The same screen you reach from inside Gallery."))
     ]);
 }
 

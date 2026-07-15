@@ -414,7 +414,7 @@ typedef NS_ENUM(NSInteger, SPKPASortMode) {
 
 - (UIMenu *)moreMenu {
     __weak typeof(self) weakSelf = self;
-    UIAction *refreshAvatars = [UIAction actionWithTitle:@"Refresh Profile Pictures"
+    UIAction *refreshAvatars = [UIAction actionWithTitle:SPKLocalizedString(@"Refresh Profile Pictures")
                                                    image:[SPKAssetUtils menuIconNamed:@"user_circle"]
                                               identifier:nil
                                                  handler:^(__unused UIAction *action) {
@@ -426,7 +426,7 @@ typedef NS_ENUM(NSInteger, SPKPASortMode) {
 
     // Visited history is the only mutable-in-bulk list; offer a destructive clear.
     if (self.kind == SPKPAListKindVisited) {
-        UIAction *clearHistory = [UIAction actionWithTitle:@"Clear History"
+        UIAction *clearHistory = [UIAction actionWithTitle:SPKLocalizedString(@"Clear History")
                                                      image:[SPKAssetUtils menuIconNamed:@"trash"]
                                                 identifier:nil
                                                    handler:^(__unused UIAction *action) {
@@ -442,13 +442,13 @@ typedef NS_ENUM(NSInteger, SPKPASortMode) {
 - (void)confirmClearHistory {
     __weak typeof(self) weakSelf = self;
     [SPKIGAlertPresenter presentAlertFromViewController:self
-                                                  title:@"Clear Visited History"
-                                                message:@"This removes every profile from your visited history. This cannot be undone."
+                                                  title:SPKLocalizedString(@"Clear Visited History")
+                                                message:SPKLocalizedString(@"This removes every profile from your visited history. This cannot be undone.")
                                                 actions:@[
-                                                    [SPKIGAlertAction actionWithTitle:@"Cancel"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Cancel")
                                                                                 style:SPKIGAlertActionStyleCancel
                                                                               handler:nil],
-                                                    [SPKIGAlertAction actionWithTitle:@"Clear History"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Clear History")
                                                                                 style:SPKIGAlertActionStyleDestructive
                                                                               handler:^{
                                                                                   typeof(self) strongSelf = weakSelf;

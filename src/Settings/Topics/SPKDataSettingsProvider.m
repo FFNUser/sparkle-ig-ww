@@ -53,7 +53,7 @@
 }
 
 - (void)rebuildSections {
-    SPKSetting *settingsRow = [SPKSetting buttonCellWithTitle:@"Settings"
+    SPKSetting *settingsRow = [SPKSetting buttonCellWithTitle:SPKLocalizedString(@"Settings")
                                                      subtitle:@""
                                                          icon:SPKSettingsIcon(@"settings")
                                                        action:^{
@@ -63,7 +63,7 @@
                                                        }];
     settingsRow.userInfo = @{@"checkmarked" : @(self.includeSettings)};
 
-    SPKSetting *galleryRow = [SPKSetting buttonCellWithTitle:@"Gallery"
+    SPKSetting *galleryRow = [SPKSetting buttonCellWithTitle:SPKLocalizedString(@"Gallery")
                                                     subtitle:@""
                                                         icon:SPKSettingsIcon(@"sparkle_gallery")
                                                       action:^{
@@ -73,7 +73,7 @@
                                                       }];
     galleryRow.userInfo = @{@"checkmarked" : @(self.includeGallery)};
 
-    SPKSetting *deletedMessagesRow = [SPKSetting buttonCellWithTitle:@"Deleted Messages"
+    SPKSetting *deletedMessagesRow = [SPKSetting buttonCellWithTitle:SPKLocalizedString(@"Deleted Messages")
                                                             subtitle:@""
                                                                 icon:SPKSettingsIcon(@"channels")
                                                               action:^{
@@ -83,7 +83,7 @@
                                                               }];
     deletedMessagesRow.userInfo = @{@"checkmarked" : @(self.includeDeletedMessages)};
 
-    SPKSetting *profileAnalyzerRow = [SPKSetting buttonCellWithTitle:@"Profile Analyzer"
+    SPKSetting *profileAnalyzerRow = [SPKSetting buttonCellWithTitle:SPKLocalizedString(@"Profile Analyzer")
                                                             subtitle:@""
                                                                 icon:SPKSettingsIcon(@"profile_analyzer")
                                                               action:^{
@@ -141,7 +141,7 @@
 @implementation SPKDataSettingsProvider
 
 + (SPKSetting *)rootSetting {
-    SPKSetting *resetAllSettings = [SPKSetting buttonCellWithTitle:@"Reset All Settings"
+    SPKSetting *resetAllSettings = [SPKSetting buttonCellWithTitle:SPKLocalizedString(@"Reset All Settings")
                                                           subtitle:@""
                                                               icon:SPKSettingsIcon(@"arrow_ccw")
                                                             action:^(void) {
@@ -155,14 +155,14 @@
     resetAllSettings.iconTintColor = [SPKUtils SPKColor_InstagramDestructive];
 
     NSArray *sections = @[
-        SPKTopicSection(@"Storage", @[
+        SPKTopicSection(SPKLocalizedString(@"Storage"), @[
             [SPKSetting navigationCellWithTitle:@"Storage Usage"
                                        subtitle:@""
                                            icon:SPKSettingsIcon(@"info")
                                  viewController:[SPKStorageUsageViewController new]]
         ],
-                        @"See how much on-device space each Sparkle feature uses."),
-        SPKTopicSection(@"Backup & Transfer", @[
+                        SPKLocalizedString(@"See how much on-device space each Sparkle feature uses.")),
+        SPKTopicSection(SPKLocalizedString(@"Backup & Transfer"), @[
             SPKSettingApplyIconTint([SPKSetting navigationCellWithTitle:@"Export"
                                                                subtitle:@""
                                                                    icon:SPKSettingsIcon(@"arrow_up")
@@ -175,10 +175,10 @@
                                     [SPKUtils SPKColor_InstagramPrimaryText])
         ],
                         @"Choose to export or import settings, Gallery media, Deleted Messages, and Profile Analyzer data."),
-        SPKTopicSection(@"Reset", @[
+        SPKTopicSection(SPKLocalizedString(@"Reset"), @[
             resetAllSettings
         ],
-                        @"Restore every preference to its default value.")
+                        SPKLocalizedString(@"Restore every preference to its default value."))
     ];
 
     return SPKTopicNavigationSetting(@"Data & Settings", @"cloud", 24.0, sections);

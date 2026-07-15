@@ -83,8 +83,8 @@ static void SPKConfirmDMRefresh(id self, id arg, void (^confirmBlock)(void)) {
             sSPKDMRefreshAlertVisible = NO;
             SPKDMEndRefreshIfNeeded(self, arg);
         }
-        title:@"Confirm Inbox Refresh"
-        message:@"Refreshing your inbox reloads direct messages from the server. Any unsent messages kept in chats will be lost."];
+        title:SPKLocalizedString(@"Confirm Inbox Refresh")
+        message:SPKLocalizedString(@"Refreshing your inbox reloads direct messages from the server. Any unsent messages kept in chats will be lost.")];
 }
 
 static void replaced_inboxRefreshControlArg(id self, SEL _cmd, id arg) {
@@ -129,8 +129,8 @@ static BOOL replaced_executePullToRefreshWithParams(id self, SEL _cmd, id params
             sSPKDMRefreshAlertVisible = NO;
             SPKDMEndRefreshIfNeeded(self, nil);
         }
-        title:@"Confirm Inbox Refresh"
-        message:@"Refreshing your inbox reloads direct messages from the server. Any unsent messages kept in chats will be lost."];
+        title:SPKLocalizedString(@"Confirm Inbox Refresh")
+        message:SPKLocalizedString(@"Refreshing your inbox reloads direct messages from the server. Any unsent messages kept in chats will be lost.")];
 
     return NO;
 }
