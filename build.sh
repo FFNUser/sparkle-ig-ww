@@ -32,39 +32,6 @@ ensure_ffmpeg_frameworks() {
     done
 }
 
-inject_ffmpeg_frameworks() {
-    local input_ipa="$1"
-    local output_ipa="$2"
-    local temp_dir
-    temp_dir="$(mktemp -d "${TMPDIR:-/tmp}/sparkle-ffmpeg-ipa.XXXXXX")"
-
-    unzip -q "$input_ipa" -d "$temp_dir"
-
-    local app_dir
-    app_dir="$(find "$temp_dir/Payload" -maxdepth 1 -type d -name "*.app" | head -n 1)"
-    if [ -z "$app_dir" ]; then
-        echo -e '\033[1m\033[0;31mCould not find Payload/*.app in IPA.\033[0m'
-        rm -rf "$temp_dir"
-        exit 1
-    fi
-
-    mkdir -p "$app_dir/Frameworks"
-    for framework in "${FFMPEG_FRAMEWORKS[@]}"; do
-        local destination="$app_dir/Frameworks/$(basename "$framework")"
-        rm -rf "$destination"
-        ditto "$framework" "$destination"
-    done
-
-    rm -f "$output_ipa"
-    (
-        cd "$temp_dir"
-        zip -qry "$output_ipa" Payload
-    )
-    rm -rf "$temp_dir"
-}
-
-
-
 ensure_flexing_submodule() {
     if [ -z "$(ls -A modules/FLEXing 2>/dev/null)" ]; then
         echo -e '\033[1m\033[0;31mFLEXing submodule not found.\nPlease run the following command to checkout submodules:\n\n\033[0m    git submodule update --init --recursive'
@@ -101,42 +68,6 @@ theos_dylib_path() {
     return 1
 }
 
-select_input_ipa() {
-    local ipa_files=("$@")
-    local selected_index
-
-    if [ ${#ipa_files[@]} -eq 1 ]; then
-        basename "${ipa_files[0]}"
-        return 0
-    fi
-
-    if [ -t 0 ] && [ -z "${CI:-}" ]; then
-        echo -e '\033[1m\033[0;33mMultiple IPA files found in packages directory. Choose one to build:\033[0m' >&2
-        local i=1
-        for ipa_path in "${ipa_files[@]}"; do
-            echo "  [$i] $(basename "$ipa_path")" >&2
-            i=$((i + 1))
-        done
-
-        while true; do
-            printf 'Selection [1-%d]: ' "${#ipa_files[@]}" >&2
-            read -r selected_index
-            if [[ "$selected_index" =~ ^[0-9]+$ ]] && [ "$selected_index" -ge 1 ] && [ "$selected_index" -le "${#ipa_files[@]}" ]; then
-                basename "${ipa_files[$((selected_index - 1))]}"
-                return 0
-            fi
-            echo -e '\033[1m\033[0;31mInvalid selection.\033[0m' >&2
-        done
-    fi
-
-    echo -e '\033[1m\033[0;33mMultiple IPA files found in packages directory. Non-interactive environment detected; using the latest one:\033[0m' >&2
-    for ipa_path in "${ipa_files[@]}"; do
-        echo "  - $(basename "$ipa_path")" >&2
-    done
-    echo >&2
-    basename "${ipa_files[${#ipa_files[@]}-1]}"
-}
-
 sideload_fix_dylib_path() {
     local path
     for path in \
@@ -148,194 +79,6 @@ sideload_fix_dylib_path() {
         fi
     done
     return 1
-}
-
-copy_flex_library_into_ipa() {
-    local input_ipa="$1"
-    local output_ipa="$2"
-    local libflex_path="$3"
-    local temp_dir
-    temp_dir="$(mktemp -d "${TMPDIR:-/tmp}/sparkle-flex-ipa.XXXXXX")"
-
-    unzip -q "$input_ipa" -d "$temp_dir"
-
-    local app_dir
-    app_dir="$(find "$temp_dir/Payload" -maxdepth 1 -type d -name "*.app" | head -n 1)"
-    if [ -z "$app_dir" ]; then
-        echo -e '\033[1m\033[0;31mCould not find Payload/*.app in IPA.\033[0m'
-        rm -rf "$temp_dir"
-        exit 1
-    fi
-
-    mkdir -p "$app_dir/Frameworks"
-    ditto "$libflex_path" "$app_dir/Frameworks/libFLEX.dylib"
-
-    rm -f "$output_ipa"
-    (
-        cd "$temp_dir"
-        zip -qry "$output_ipa" Payload
-    )
-    rm -rf "$temp_dir"
-}
-
-strip_appex_bundles() {
-    local input_ipa="$1"
-    local output_ipa="$2"
-    local temp_dir
-    local app_dir
-    local appex_count
-    temp_dir="$(mktemp -d "${TMPDIR:-/tmp}/sparkle-strip-appex.XXXXXX")"
-
-    unzip -q "$input_ipa" -d "$temp_dir"
-
-    app_dir="$(find "$temp_dir/Payload" -maxdepth 1 -type d -name "*.app" | head -n 1)"
-    if [ -z "$app_dir" ]; then
-        echo -e '\033[1m\033[0;31mCould not find Payload/*.app in IPA.\033[0m'
-        rm -rf "$temp_dir"
-        exit 1
-    fi
-
-    appex_count="$(find "$app_dir" -type d -name "*.appex" | wc -l | tr -d ' ')"
-    find "$app_dir" -type d -name "*.appex" -prune -exec rm -rf {} +
-    echo -e "\033[1m\033[0;33mStripped ${appex_count} app extension bundle(s).\033[0m"
-
-    rm -f "$output_ipa"
-    (
-        cd "$temp_dir"
-        zip -qry "$output_ipa" Payload
-    )
-    rm -rf "$temp_dir"
-}
-
-embed_safari_extension() {
-    local input_ipa="$1"
-    local output_ipa="$2"
-    local appex_src="$ROOT_DIR/modules/OpenInstagramSafariExtension.appex"
-    local temp_dir
-    local app_dir
-
-    [ -d "$appex_src" ] || {
-        echo -e "\033[1m\033[0;31mSafari extension source not found at ${appex_src}\033[0m"
-        return 1
-    }
-
-    temp_dir="$(mktemp -d "${TMPDIR:-/tmp}/sparkle-embed-safari.XXXXXX")"
-
-    unzip -q "$input_ipa" -d "$temp_dir"
-
-    app_dir="$(find "$temp_dir/Payload" -maxdepth 1 -type d -name "*.app" | head -n 1)"
-    if [ -z "$app_dir" ]; then
-        echo -e '\033[1m\033[0;31mCould not find Payload/*.app in IPA.\033[0m'
-        rm -rf "$temp_dir"
-        exit 1
-    fi
-
-    mkdir -p "$app_dir/PlugIns"
-    rm -rf "$app_dir/PlugIns/OpenInstagramSafariExtension.appex"
-    cp -R "$appex_src" "$app_dir/PlugIns/"
-
-    rm -f "$output_ipa"
-    (
-        cd "$temp_dir"
-        zip -qry "$output_ipa" Payload
-    )
-    rm -rf "$temp_dir"
-}
-
-
-inject_sparkle_bundle() {
-    local input_ipa="$1"
-    local output_ipa="$2"
-    local temp_dir
-    temp_dir="$(mktemp -d "${TMPDIR:-/tmp}/sparkle-bundle-ipa.XXXXXX")"
-
-    unzip -q "$input_ipa" -d "$temp_dir"
-
-    local app_dir
-    app_dir="$(find "$temp_dir/Payload" -maxdepth 1 -type d -name "*.app" | head -n 1)"
-    if [ -z "$app_dir" ]; then
-        echo -e '\033[1m\033[0;31mCould not find Payload/*.app in IPA.\033[0m'
-        rm -rf "$temp_dir"
-        return 1
-    fi
-
-    echo -e '\033[1m\033[32mInjecting Sparkle.bundle...\033[0m'
-
-    cp -a "$ROOT_DIR/resources/Sparkle.bundle" "$app_dir/"
-
-    cd "$temp_dir" || return 1
-    zip -qr "$ROOT_DIR/$output_ipa" "Payload"
-    cd "$ROOT_DIR" || return 1
-
-    rm -rf "$temp_dir"
-}
-
-inject_custom_icons() {
-
-    local input_ipa="$1"
-    local output_ipa="$2"
-    local temp_dir
-    temp_dir="$(mktemp -d "${TMPDIR:-/tmp}/sparkle-icons-ipa.XXXXXX")"
-
-    unzip -q "$input_ipa" -d "$temp_dir"
-
-    local app_dir
-    app_dir="$(find "$temp_dir/Payload" -maxdepth 1 -type d -name "*.app" | head -n 1)"
-    if [ -z "$app_dir" ]; then
-        echo -e '\033[1m\033[0;31mCould not find Payload/*.app in IPA.\033[0m'
-        rm -rf "$temp_dir"
-        exit 1
-    fi
-
-    echo -e '\033[1m\033[32mInjecting Sparkle app icons...\033[0m'
-
-    # Copy precompiled @2x PNGs and create @3x copies (required for modern iPhones)
-    cp "$ROOT_DIR/resources/sparkle_icons"/*.png "$app_dir/"
-    for f in "$app_dir"/sparkle*@2x.png; do
-        cp "$f" "${f/@2x/@3x}"
-    done
-
-    local plist="$app_dir/Info.plist"
-    local pb=/usr/libexec/PlistBuddy
-
-    # Register one alternate icon under a CFBundleIcons container (PlistBuddy
-    # operates on binary plists in place). Args: <container> <name> <file...>
-    spk_add_alt_icon() {
-        local container="$1" name="$2"; shift 2
-        local base=":${container}:CFBundleAlternateIcons:${name}"
-        # Start clean in case a previous run already added this entry.
-        "$pb" -c "Delete ${base}" "$plist" 2>/dev/null || true
-        "$pb" -c "Add ${base} dict" "$plist"
-        "$pb" -c "Add ${base}:CFBundleIconFiles array" "$plist"
-        local i=0
-        for f in "$@"; do
-            "$pb" -c "Add ${base}:CFBundleIconFiles:${i} string ${f}" "$plist"
-            i=$((i + 1))
-        done
-        "$pb" -c "Add ${base}:UIPrerenderedIcon bool false" "$plist"
-    }
-
-    # Ensure the CFBundleIcons containers exist (ignore if IG already has them).
-    "$pb" -c "Add :CFBundleIcons dict" "$plist" 2>/dev/null || true
-    "$pb" -c "Add :CFBundleIcons:CFBundleAlternateIcons dict" "$plist" 2>/dev/null || true
-    "$pb" -c "Add :CFBundleIcons~ipad dict" "$plist" 2>/dev/null || true
-    "$pb" -c "Add :CFBundleIcons~ipad:CFBundleAlternateIcons dict" "$plist" 2>/dev/null || true
-
-    for icon in sparkle sparkle-dark sparkle-neutral; do
-        spk_add_alt_icon "CFBundleIcons" "$icon" \
-            "${icon}60x60@2x" "${icon}60x60@3x"
-        spk_add_alt_icon "CFBundleIcons~ipad" "$icon" \
-            "${icon}60x60@2x" "${icon}60x60@3x" "${icon}76x76@2x" "${icon}76x76@3x"
-    done
-
-    echo '  Added 3 Sparkle alternate icon entries to Info.plist'
-
-    rm -f "$output_ipa"
-    (
-        cd "$temp_dir"
-        zip -qry "$output_ipa" Payload
-    )
-    rm -rf "$temp_dir"
 }
 
 # Rename the freshly built .deb to Sparkle_v<version>_<rootless|rootful>.deb.
@@ -353,36 +96,10 @@ rename_sparkle_deb() {
     echo "$dest"
 }
 
-# Read the Instagram marketing version (CFBundleShortVersionString) from an IPA.
-# Falls back to a filename-derived guess, then to "unknown".
-ig_app_version() {
-    local ipa="$1"
-    local tmp plist version
-    tmp="$(mktemp -d "${TMPDIR:-/tmp}/sparkle-igver.XXXXXX")"
-
-    if unzip -o -q "$ipa" "Payload/*.app/Info.plist" -d "$tmp" >/dev/null 2>&1; then
-        plist="$(find "$tmp/Payload" -maxdepth 2 -name Info.plist 2>/dev/null | head -n 1)"
-        if [ -n "$plist" ]; then
-            version="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$plist" 2>/dev/null)"
-        fi
-    fi
-    rm -rf "$tmp"
-
-    if [ -z "$version" ]; then
-        # e.g. com.burbn.instagram_437.1.0.decrypted.ipa -> 437.1.0
-        version="$(basename "$ipa" | sed -E 's/^[^0-9]*([0-9]+(\.[0-9]+)*).*/\1/')"
-    fi
-    [ -z "$version" ] && version="unknown"
-    echo "$version"
-}
-
 # Build the "<flags>" segment of the output name from the OPT_* globals.
-# Empty for a plain release build (--inject --ffmpeg --patch, no extras).
 sparkle_flag_token() {
     local parts=()
     if [ "${OPT_INJECT:-0}" -eq 1 ] && [ "${OPT_FFMPEG:-0}" -eq 1 ] && [ "${OPT_PATCH:-0}" -eq 1 ]; then
-        # Canonical full release build (flex included): only annotate the
-        # notable deviations from it.
         [ "${OPT_DEV:-0}" -eq 1 ] && parts+=(dev)
         [ "${OPT_FLEX:-0}" -eq 0 ] && parts+=(no-flex)
         if [ "${OPT_SIDESTORE:-0}" -eq 1 ]; then
@@ -391,7 +108,6 @@ sparkle_flag_token() {
             parts+=(no-ext)
         fi
     else
-        # Partial / à la carte build: spell out every included component.
         [ "${OPT_INJECT:-0}" -eq 1 ] && parts+=(inject)
         [ "${OPT_FFMPEG:-0}" -eq 1 ] && parts+=(ffmpeg)
         [ "${OPT_FLEX:-0}" -eq 1 ] && parts+=(flex)
@@ -407,17 +123,15 @@ sparkle_flag_token() {
     echo "${parts[*]}"
 }
 
-# Compose the output IPA name:
-#   Sparkle[_<flags>]_v<sparkle version>_IG_v<instagram version>.ipa
-# Globals: SPARKLE_VERSION, IG_VERSION, OPT_*
-sparkle_sideload_output_ipa() {
+# Compose the output ZIP archive name:
+#   Sparkle[_<flags>]_v<sparkle version>_tweaks.zip
+sparkle_sideload_output_zip() {
     local flags name
     flags="$(sparkle_flag_token)"
     name="Sparkle"
     [ -n "$flags" ] && name="${name}_${flags}"
-    name="${name}_v${SPARKLE_VERSION}"
-    [ -n "${IG_VERSION:-}" ] && name="${name}_IG_v${IG_VERSION}"
-    echo "${name}.ipa"
+    name="${name}_v${SPARKLE_VERSION}_tweaks.zip"
+    echo "${name}"
 }
 
 # Building modes
@@ -431,7 +145,6 @@ then
     OPT_STRIP_EXTENSIONS=0
     OPT_SIDESTORE=0
     OPT_DEV=0
-    OPT_BUILDONLY=0
     OPT_BUNDLE_ID=""
 
     while [ $# -gt 0 ]; do
@@ -454,14 +167,12 @@ then
                 OPT_SIDESTORE=1
                 ;;
             --dev) OPT_DEV=1 ;;
-            --buildonly) OPT_BUILDONLY=1 ;;
             --bundle-id)
                 OPT_BUNDLE_ID="$2"
                 shift
                 ;;
             *)
-                echo -e "\033[1m\033[0;31mUnknown ipa flag: $1\033[0m"
-                echo "Use: ./build.sh ipa [--release|--inject|--ffmpeg|--flex|--patch|--no-ext|--sidestore|--dev|--buildonly|--bundle-id <id>] ..."
+                echo -e "\033[1m\033[0;31mUnknown package flag: $1\033[0m"
                 exit 1
                 ;;
         esac
@@ -469,15 +180,13 @@ then
     done
 
     if [ "$OPT_INJECT" -eq 0 ] && [ "$OPT_FFMPEG" -eq 0 ] && [ "$OPT_FLEX" -eq 0 ] && [ "$OPT_STRIP_EXTENSIONS" -eq 0 ]; then
-        echo -e '\033[1m\033[0;31msideload: specify at least one of --release, --inject, --ffmpeg, --flex, --no-ext, --sidestore\033[0m'
+        echo -e '\033[1m\033[0;31msideload: specify at least one target compilation flag\033[0m'
         exit 1
     fi
 
     MAKEARGS='SIDELOAD=1 DEBUG=0 FINALPACKAGE=1'
-    COMPRESSION=9
     if [ "$OPT_DEV" -eq 1 ]; then
         MAKEARGS='SIDELOAD=1 DEV=1'
-        COMPRESSION=0
     fi
 
     if [ "$OPT_FLEX" -eq 1 ]; then
@@ -492,30 +201,7 @@ then
         rm -rf .theos
     fi
 
-    if [ "$OPT_BUILDONLY" -eq 0 ]; then
-        candidateIpaFiles=($(ls packages/com.burbn.instagram*.ipa 2>/dev/null | sort -V))
-        if [ ${#candidateIpaFiles[@]} -eq 0 ]; then
-            echo -e '\033[1m\033[0;31m./packages/com.burbn.instagram.ipa not found.\nPlease put a decrypted Instagram IPA in its path.\033[0m'
-            exit 1
-        fi
-        ipaFiles=()
-        for candidateIpa in "${candidateIpaFiles[@]}"; do
-            case "$(basename "$candidateIpa")" in
-                *-dev*.ipa|*-inject*.ipa|*-ffmpeg*.ipa|*-flex*.ipa|*-patch*.ipa|*-sidestore*.ipa|*-no-ext*.ipa)
-                    ;;
-                *)
-                    ipaFiles+=("$candidateIpa")
-                    ;;
-            esac
-        done
-        if [ ${#ipaFiles[@]} -eq 0 ]; then
-            ipaFiles=("${candidateIpaFiles[@]}")
-        fi
-
-        ipaFile="$(select_input_ipa "${ipaFiles[@]}")"
-    fi
-
-    echo -e '\033[1m\033[32mSideload build...\033[0m'
+    echo -e '\033[1m\033[32mSideload compilation...\033[0m'
     if [ "$OPT_INJECT" -eq 1 ]; then
         make $MAKEARGS
     fi
@@ -526,14 +212,10 @@ then
         build_sideload_fix_library
     fi
 
-    if [ "$OPT_BUILDONLY" -eq 1 ]; then
-        echo -e '\033[1m\033[32mBuild-only mode: skipping IPA.\033[0m'
-        exit 0
-    fi
-
     SPARKLEPATH=""
     LIBFLEXPATH=""
     SIDELOADFIXPATH=""
+    
     if [ "$OPT_INJECT" -eq 1 ]; then
         SPARKLEPATH="$(theos_dylib_path Sparkle)" || {
             echo -e '\033[1m\033[0;31mCould not find built Sparkle.dylib.\033[0m'
@@ -556,150 +238,80 @@ then
         ensure_ffmpeg_frameworks
     fi
 
-    IG_VERSION="$(ig_app_version "packages/${ipaFile}")"
-    OUTPUT_IPA="$(sparkle_sideload_output_ipa)"
-    ipa_out="$ROOT_DIR/packages/${OUTPUT_IPA}"
-    ipa_ffmpeg_tmp="$ROOT_DIR/packages/.sparkle-build-tmp-ffmpeg.ipa"
-    ipa_stage_input="$ROOT_DIR/packages/.sparkle-build-stage-input.ipa"
-    ipa_flex_tmp="$ROOT_DIR/packages/.sparkle-build-tmp-flex.ipa"
-    ipa_strip_tmp="$ROOT_DIR/packages/.sparkle-build-tmp-strip.ipa"
-    ipa_icons_tmp="$ROOT_DIR/packages/.sparkle-build-tmp-icons.ipa"
-    rm -f "$ipa_out" "$ipa_ffmpeg_tmp" "$ipa_stage_input" "$ipa_flex_tmp" "$ipa_strip_tmp" "$ipa_icons_tmp"
+    # Create staging payload folder structure to gather modifications
+    ZIP_OUTPUT_NAME="$(sparkle_sideload_output_zip)"
+    zip_out_archive="$ROOT_DIR/packages/${ZIP_OUTPUT_NAME}"
+    stage_dir="$(mktemp -d "${TMPDIR:-/tmp}/sparkle-zip-payload.XXXXXX")"
+    
+    mkdir -p "$stage_dir/Tweaks"
+    mkdir -p "$stage_dir/Frameworks"
+    mkdir -p "$stage_dir/Resources"
 
+    echo -e '\033[1m\033[32mGathering modifications into ZIP staging payload...\033[0m'
+
+    # Copy primary tweaks and dynamic libraries
+    if [ -n "$SPARKLEPATH" ] && [ -f "$SPARKLEPATH" ]; then
+        cp -a "$SPARKLEPATH" "$stage_dir/Tweaks/"
+    fi
+    if [ -n "$LIBFLEXPATH" ] && [ -f "$LIBFLEXPATH" ]; then
+        cp -a "$LIBFLEXPATH" "$stage_dir/Tweaks/"
+    fi
+    if [ -n "$SIDELOADFIXPATH" ] && [ -f "$SIDELOADFIXPATH" ]; then
+        cp -a "$SIDELOADFIXPATH" "$stage_dir/Tweaks/"
+    fi
+
+    # Copy FFmpeg frameworks if needed
     if [ "$OPT_FFMPEG" -eq 1 ]; then
-        echo -e '\033[1m\033[32mInjecting FFmpeg frameworks...\033[0m'
-        inject_ffmpeg_frameworks "packages/${ipaFile}" "$ipa_ffmpeg_tmp"
-        mv -f "$ipa_ffmpeg_tmp" "$ipa_stage_input"
-    else
-        cp "packages/${ipaFile}" "$ipa_stage_input"
+        for framework in "${FFMPEG_FRAMEWORKS[@]}"; do
+            ditto "$framework" "$stage_dir/Frameworks/$(basename "$framework")"
+        done
     fi
 
-    if [ "$OPT_FLEX" -eq 1 ]; then
-        echo -e '\033[1m\033[32mInjecting libFLEX.dylib...\033[0m'
-        copy_flex_library_into_ipa "$ipa_stage_input" "$ipa_flex_tmp" "$LIBFLEXPATH"
-        mv -f "$ipa_flex_tmp" "$ipa_stage_input"
+    # Pack additional core resources, app icon files, and bundles
+    if [ -d "$ROOT_DIR/resources/Sparkle.bundle" ]; then
+        cp -a "$ROOT_DIR/resources/Sparkle.bundle" "$stage_dir/Resources/"
+    fi
+    if [ -d "$ROOT_DIR/resources/sparkle_icons" ]; then
+        cp -a "$ROOT_DIR/resources/sparkle_icons" "$stage_dir/Resources/"
+    fi
+    if [ -d "$ROOT_DIR/modules/OpenInstagramSafariExtension.appex" ] && [ "$OPT_STRIP_EXTENSIONS" -eq 0 ]; then
+        cp -a "$ROOT_DIR/modules/OpenInstagramSafariExtension.appex" "$stage_dir/Resources/"
     fi
 
-    if [ "$OPT_STRIP_EXTENSIONS" -eq 1 ]; then
-        echo -e '\033[1m\033[32mStripping app extensions...\033[0m'
-        strip_appex_bundles "$ipa_stage_input" "$ipa_strip_tmp"
-        mv -f "$ipa_strip_tmp" "$ipa_stage_input"
-    else
-        echo -e '\033[1m\033[32mEmbedding Safari extension...\033[0m'
-        ipa_embed_tmp="$ROOT_DIR/packages/.sparkle-build-tmp-embed.ipa"
-        embed_safari_extension "$ipa_stage_input" "$ipa_embed_tmp"
-        mv -f "$ipa_embed_tmp" "$ipa_stage_input"
-    fi
+    # Packaging modifications directly into zip
+    echo -e '\033[1m\033[32mCompressing modifications and tweaks into ZIP...\033[0m'
+    rm -f "$zip_out_archive"
+    (
+        cd "$stage_dir"
+        zip -qry "$zip_out_archive" .
+    )
+    rm -rf "$stage_dir"
 
-
-    # Inject Sparkle alternate icons
-    inject_custom_icons "$ipa_stage_input" "$ipa_icons_tmp"
-    mv -f "$ipa_icons_tmp" "$ipa_stage_input"
-
-    # Inject Sparkle.bundle
-    ipa_bundle_tmp="$ROOT_DIR/packages/.sparkle-build-tmp-bundle.ipa"
-    inject_sparkle_bundle "$ipa_stage_input" "$ipa_bundle_tmp"
-    mv -f "$ipa_bundle_tmp" "$ipa_stage_input"
-
-
-    echo -e '\033[1m\033[32mCreating the IPA file...\033[0m'
-    CYAN_FILES=()
-    if [ "$OPT_INJECT" -eq 1 ]; then
-        CYAN_FILES+=("$SPARKLEPATH")
-    fi
-    if [ "$OPT_PATCH" -eq 1 ] && [ "$OPT_STRIP_EXTENSIONS" -eq 1 ]; then
-        CYAN_FILES+=("$SIDELOADFIXPATH")
-    fi
-
-    if [ "${#CYAN_FILES[@]}" -gt 0 ]; then
-        if [ -n "$OPT_BUNDLE_ID" ]; then
-            cyan -i "$ipa_stage_input" -o "$ipa_out" -f "${CYAN_FILES[@]}" -c "$COMPRESSION" -m 15.0 -duq -b "$OPT_BUNDLE_ID"
-        else
-            cyan -i "$ipa_stage_input" -o "$ipa_out" -f "${CYAN_FILES[@]}" -c "$COMPRESSION" -m 15.0 -duq
-        fi
-    else
-        cp "$ipa_stage_input" "$ipa_out"
-    fi
-
-    rm -f "$ipa_stage_input"
-
-    if [ "$OPT_PATCH" -eq 1 ] && [ "$OPT_STRIP_EXTENSIONS" -eq 0 ]; then
-        echo -e '\033[1m\033[32mPatching IPA for sideloading...\033[0m'
-        ipapatch --input "$ipa_out" --inplace --noconfirm --dylib "$SIDELOADFIXPATH"
-    elif [ "$OPT_PATCH" -eq 1 ]; then
-        echo -e '\033[1m\033[32mSkipping ipapatch\033[0m'
-    fi
-
-    echo -e "\033[1m\033[32mDone, we hope you enjoy Sparkle!\033[0m\n\nOutput IPA: $ipa_out"
+    echo -e "\033[1m\033[32mDone, we hope you enjoy Sparkle!\033[0m\n\nOutput ZIP: $zip_out_archive"
 
 elif [ "$1" == "rootless" ];
 then
-    
-    # Clean build artifacts
     make clean
     rm -rf .theos
-
     echo -e '\033[1m\033[32mBuilding Sparkle tweak for rootless\033[0m'
-
     export THEOS_PACKAGE_SCHEME=rootless
     make package
-
     ensure_ffmpeg_frameworks
-
     DEB_OUT="$(rename_sparkle_deb rootless)"
-
     echo -e "\033[1m\033[32mDone, we hope you enjoy Sparkle!\033[0m\n\nOutput deb: ${DEB_OUT}"
 
 elif [ "$1" == "rootful" ];
 then
-
-    # Clean build artifacts
     make clean
     rm -rf .theos
-
     echo -e '\033[1m\033[32mBuilding Sparkle tweak for rootful\033[0m'
-
     unset THEOS_PACKAGE_SCHEME
     make package
-
     ensure_ffmpeg_frameworks
-
     DEB_OUT="$(rename_sparkle_deb rootful)"
-
     echo -e "\033[1m\033[32mDone, we hope you enjoy Sparkle!\033[0m\n\nOutput deb: ${DEB_OUT}"
 
 else
-    echo '+--------------------+'
-    echo '|Sparkle Build Script|'
-    echo '+--------------------+'
-    echo
-    echo 'Usage: ./build.sh <rootless|rootful|sideload>'
-    echo
-    echo '  rootless - Build a rootless .deb package'
-    echo '  rootful  - Build a rootful .deb package'
-    echo '  ipa      - Build a patched IPA'
-    echo
-    echo 'When building an IPA, use at least one of the following flags:'
-    echo '  --release         equivalent to --inject --ffmpeg --patch'
-    echo '  --inject          include Sparkle.dylib'
-    echo '  --ffmpeg          include FFmpegKit frameworks'
-    echo '  --flex            include libFLEX.dylib'
-    echo '  --patch           run ipapatch'
-    echo '  --no-ext          remove all .appex bundles before final injection'
-    echo '  --sidestore       equivalent to --release --no-ext'
-    echo '  --dev             DEV=1 build'
-    echo '  --buildonly       build dylibs only, skip IPA'
-    echo '  --bundle-id <id>  override bundle ID'
-    echo
-    echo 'Examples:'
-    echo '    ./build.sh ipa --release'
-    echo '    ./build.sh ipa --release --flex'
-    echo '    ./build.sh ipa --sidestore'
-    echo '    ./build.sh ipa --ffmpeg    (FFmpeg in IPA only)'
-    echo
-    echo 'Output names:'
-    echo '    IPA  Sparkle[_<flags>]_v<version>_IG_v<ig version>.ipa'
-    echo '    deb  Sparkle_v<version>_<rootless|rootful>.deb'
-    echo
+    echo 'Usage: ./build.sh <rootless|rootful|ipa>'
     exit 1
 fi
