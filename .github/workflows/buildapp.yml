@@ -40,9 +40,10 @@ jobs:
             contents: write
 
         steps:
-            - name: Checkout Main
+            - name: Checkout Dev
               uses: actions/checkout@v4
               with:
+                ref: dev            # <--- Force checkout of the dev branch
                 path: main
                 submodules: recursive
 
@@ -128,10 +129,7 @@ jobs:
                 if [ -n "${{ inputs.bundle_id }}" ]; then
                   FLAGS="$FLAGS --bundle-id ${{ inputs.bundle_id }}"
                 fi
-                
-                # Running compilation directly rather than "build.sh ipa" which expects an IPA.
-                # Adjust compile/package command here if your build.sh has a custom non-ipa build target
-                ./build.sh $FLAGS
+                ./build.sh ipa $FLAGS
                 
               env:
                 THEOS: ${{ github.workspace }}/theos
@@ -142,19 +140,14 @@ jobs:
                 cd main
                 mkdir -p zip_payload
                 
-                # Gather your built tweaks, bundles, dynamic libraries, and configuration files here.
-                # Customize this cp command depending on what directory output build.sh produces.
-                # Commonly, compiled products live in .theos/obj/debug/ or similar project subfolders.
                 cp -r .theos/obj/*.dylib zip_payload/ 2>/dev/null || true
                 cp -r *.bundle zip_payload/ 2>/dev/null || true
                 cp -r packages/* zip_payload/ 2>/dev/null || true
                 
-                # Fallback: if nothing copied yet, pack the build outputs from the packages directory
                 if [ -z "$(ls -A zip_payload)" ]; then
                    cp -r packages zip_payload/
                 fi
 
-                # Compress into a zip named after the version
                 ZIP_NAME="Sparkle_v${{ env.SPARKLE_VERSION }}_tweaks.zip"
                 zip -r "$ZIP_NAME" zip_payload/
                 
