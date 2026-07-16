@@ -33,7 +33,7 @@ ensure_ffmpeg_frameworks() {
 }
 
 ensure_flexing_submodule() {
-    if [ -z "$(ls -A modules/FLEXing 2>/dev/null)" ]; then
+    if [ -z "$(ls -A "$ROOT_DIR/modules/FLEXing" 2>/dev/null)" ]; then
         echo -e '\033[1m\033[0;31mFLEXing submodule not found.\nPlease run the following command to checkout submodules:\n\n\033[0m    git submodule update --init --recursive'
         exit 1
     fi
@@ -59,8 +59,8 @@ theos_dylib_path() {
             ".theos/obj/debug/${name}.dylib" \
             "modules/FLEXing/libflex/.theos/obj/${name}.dylib" \
             "modules/FLEXing/libflex/.theos/obj/debug/${name}.dylib"; do
-            if [ -f "$path" ]; then
-                echo "$path"
+            if [ -f "$ROOT_DIR/$path" ]; then
+                echo "$ROOT_DIR/$path"
                 return 0
             fi
         done
@@ -82,7 +82,6 @@ sideload_fix_dylib_path() {
 }
 
 # Rename the freshly built .deb to Sparkle_v<version>_<rootless|rootful>.deb.
-# Arg: scheme name (rootless|rootful). Echoes the final path.
 rename_sparkle_deb() {
     local scheme="$1"
     local newest dest
@@ -96,7 +95,6 @@ rename_sparkle_deb() {
     echo "$dest"
 }
 
-# Build the "<flags>" segment of the output name from the OPT_* globals.
 sparkle_flag_token() {
     local parts=()
     if [ "${OPT_INJECT:-0}" -eq 1 ] && [ "${OPT_FFMPEG:-0}" -eq 1 ] && [ "${OPT_PATCH:-0}" -eq 1 ]; then
@@ -123,8 +121,6 @@ sparkle_flag_token() {
     echo "${parts[*]}"
 }
 
-# Compose the output ZIP archive name:
-#   Sparkle[_<flags>]_v<sparkle version>_tweaks.zip
 sparkle_sideload_output_zip() {
     local flags name
     flags="$(sparkle_flag_token)"
@@ -134,8 +130,11 @@ sparkle_sideload_output_zip() {
     echo "${name}"
 }
 
+# Ensure package output directory exists
+mkdir -p "$ROOT_DIR/packages"
+
 # Building modes
-if [ "$1" == "ipa" ];
+if [ "$1" = "ipa" ] || [ "$1" = "sideload" ];
 then
     shift
     OPT_INJECT=0
@@ -179,9 +178,10 @@ then
         shift
     done
 
+    # Fallback default targets if no flags were passed
     if [ "$OPT_INJECT" -eq 0 ] && [ "$OPT_FFMPEG" -eq 0 ] && [ "$OPT_FLEX" -eq 0 ] && [ "$OPT_STRIP_EXTENSIONS" -eq 0 ]; then
-        echo -e '\033[1m\033[0;31msideload: specify at least one target compilation flag\033[0m'
-        exit 1
+        OPT_INJECT=1
+        OPT_PATCH=1
     fi
 
     MAKEARGS='SIDELOAD=1 DEBUG=0 FINALPACKAGE=1'
@@ -195,7 +195,7 @@ then
 
     if [ "$OPT_INJECT" -eq 1 ]; then
         if [ "$OPT_DEV" -eq 0 ]; then
-            rm -rf "packages/cache"
+            rm -rf "$ROOT_DIR/packages/cache"
         fi
         make clean
         rm -rf .theos
@@ -289,7 +289,7 @@ then
 
     echo -e "\033[1m\033[32mDone, we hope you enjoy Sparkle!\033[0m\n\nOutput ZIP: $zip_out_archive"
 
-elif [ "$1" == "rootless" ];
+elif [ "$1" = "rootless" ];
 then
     make clean
     rm -rf .theos
@@ -300,7 +300,7 @@ then
     DEB_OUT="$(rename_sparkle_deb rootless)"
     echo -e "\033[1m\033[32mDone, we hope you enjoy Sparkle!\033[0m\n\nOutput deb: ${DEB_OUT}"
 
-elif [ "$1" == "rootful" ];
+elif [ "$1" = "rootful" ];
 then
     make clean
     rm -rf .theos
@@ -312,6 +312,6 @@ then
     echo -e "\033[1m\033[32mDone, we hope you enjoy Sparkle!\033[0m\n\nOutput deb: ${DEB_OUT}"
 
 else
-    echo 'Usage: ./build.sh <rootless|rootful|ipa>'
+    echo "Usage: $0 <rootless|rootful|ipa>"
     exit 1
 fi
