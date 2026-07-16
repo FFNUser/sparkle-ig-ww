@@ -27,41 +27,41 @@ static NSArray *SPKInstantsSettingsSections(void);
 
 static NSArray *SPKInstantsSettingsSections(void) {
     return @[
-        SPKTopicSection(@"Action Button", @[
-            [SPKSetting switchCellWithTitle:@"Instants Action Button"
+        SPKTopicSection(SPKLocalizedString(@"Action Button"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Instants Action Button")
                                        icon:SPKSettingsIcon(@"action")
                                 defaultsKey:kSPKInstantsActionButtonEnabledKey],
             SPKActionButtonDefaultActionNavigationSetting(SPKActionButtonSourceInstants),
             SPKActionButtonConfigurationNavigationSetting(SPKActionButtonSourceInstants, @"Instants", SPKActionButtonSupportedActionsForSource(SPKActionButtonSourceInstants), SPKActionButtonDefaultSectionsForSource(SPKActionButtonSourceInstants))
         ],
                         @"Choose what tapping the action button does. Long press opens the full menu."),
-        SPKTopicSection(@"Privacy", @[
-            [SPKSetting switchCellWithTitle:@"Allow Screenshots"
+        SPKTopicSection(SPKLocalizedString(@"Privacy"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Allow Screenshots")
                                        icon:SPKSettingsIcon(@"warning")
                                 defaultsKey:@"instants_allow_screenshot"],
         ],
                         @"Bypass screenshot and screen recording detection in the Instants viewer."),
-        SPKTopicSection(@"Creation", @[
+        SPKTopicSection(SPKLocalizedString(@"Creation"), @[
             ({
-                SPKSetting *s = [SPKSetting switchCellWithTitle:@"Disable Instants Creation" icon:SPKSettingsIcon(@"instants") defaultsKey:@"instants_disable_creation"];
+                SPKSetting *s = [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Disable Instants Creation") icon:SPKSettingsIcon(@"instants") defaultsKey:@"instants_disable_creation"];
                 s.switchChangeHandler = ^(BOOL isOn) {
                     SPKPreferenceSetObject(@(isOn), @"instants_disable_creation");
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"SPKQuickSnapCreationPrefChangedNotification" object:nil];
                 };
                 s;
             }),
-            [SPKSetting switchCellWithTitle:@"Skip Camera After Instants"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Skip Camera After Instants")
                                        icon:SPKSettingsIcon(@"camera")
                                 defaultsKey:@"instants_skip_camera_after_viewing"],
             ({
                 BOOL cameraControlAvailable = SPKPrefIsAvailable(@"instants_disable_camera_control");
-                SPKSetting *s = [SPKSetting switchCellWithTitle:@"Disable Camera Control"
+                SPKSetting *s = [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Disable Camera Control")
                                                        subtitle:cameraControlAvailable ? @"" : @"Requires an iPhone with Camera Control"
                                                            icon:SPKSettingsSystemIcon(@"button.vertical.right.press", SPKSettingsCellIconPointSize, UIImageSymbolWeightSemibold)
                                                     defaultsKey:@"instants_disable_camera_control"];
                 s;
             }),
-            [SPKSetting switchCellWithTitle:@"Upload from Gallery"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Upload from Gallery")
                                        icon:SPKSettingsIcon(@"photo_gallery")
                                 defaultsKey:@"instants_upload_from_gallery"],
         ],
@@ -69,9 +69,9 @@ static NSArray *SPKInstantsSettingsSections(void) {
                         @"2. Skips the camera page Instagram opens after viewing the last Instant.\n"
                         @"3. Stops the hardware Camera Control button (iPhone 16/17) from taking an Instant.\n"
                         @"4. Adds a button to the Instants navigation bar to upload from Photos, Files, or Gallery."),
-        SPKTopicSection(@"Confirmation", @[
+        SPKTopicSection(SPKLocalizedString(@"Confirmation"), @[
             ({
-                SPKSetting *s = [SPKSetting switchCellWithTitle:@"Confirm Instant Capture"
+                SPKSetting *s = [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Instant Capture")
                                                            icon:SPKSettingsIcon(@"instants_burst")
                                                     defaultsKey:@"instants_confirm_capture"];
                 s.enabledProvider = ^BOOL {
@@ -79,7 +79,7 @@ static NSArray *SPKInstantsSettingsSections(void) {
                 };
                 s;
             }),
-            [SPKSetting switchCellWithTitle:@"Confirm Instant Reaction"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Instant Reaction")
                                        icon:SPKSettingsIcon(@"reactions")
                                 defaultsKey:@"instants_confirm_reaction"],
         ],

@@ -39,14 +39,14 @@
 - (void)rebuildSections {
     NSMutableArray *sections = [NSMutableArray array];
 
-    [sections addObject:SPKTopicSection(@"Overview", @[
+    [sections addObject:SPKTopicSection(SPKLocalizedString(@"Overview"), @[
                   [SPKSetting valueCellWithTitle:@"Total"
                                         subtitle:[self formattedKey:@"total"]
                                             icon:SPKSettingsIcon(@"info")],
               ],
                                         @"On-device storage used by all Sparkle data. Instagram's own cache is not included.")];
 
-    [sections addObject:SPKTopicSection(@"Breakdown", @[
+    [sections addObject:SPKTopicSection(SPKLocalizedString(@"Breakdown"), @[
                   [SPKSetting valueCellWithTitle:@"Gallery"
                                         subtitle:[self formattedKey:@"gallery"]
                                             icon:SPKSettingsIcon(@"sparkle_gallery")],
@@ -65,7 +65,7 @@
               ],
                                         nil)];
 
-    SPKSetting *clearAvatars = [SPKSetting buttonCellWithTitle:@"Clear Cached Profile Pictures"
+    SPKSetting *clearAvatars = [SPKSetting buttonCellWithTitle:SPKLocalizedString(@"Clear Cached Profile Pictures")
                                                       subtitle:nil
                                                           icon:SPKSettingsIcon(@"user_circle")
                                                         action:^{
@@ -74,21 +74,21 @@
     clearAvatars.tintColor = [SPKUtils SPKColor_InstagramDestructive];
     clearAvatars.iconTintColor = [SPKUtils SPKColor_InstagramDestructive];
 
-    [sections addObject:SPKTopicSection(@"Profile Pictures", @[ clearAvatars ],
-                                        @"Profile pictures are a shared cache reused across Sparkle. Clearing them frees space; they re-download as needed.")];
+    [sections addObject:SPKTopicSection(SPKLocalizedString(@"Profile Pictures"), @[ clearAvatars ],
+                                        SPKLocalizedString(@"Profile pictures are a shared cache reused across Sparkle. Clearing them frees space; they re-download as needed."))];
 
     [self replaceSections:sections];
 }
 
 - (void)confirmClearAvatars {
     [SPKIGAlertPresenter presentAlertFromViewController:self
-                                                  title:@"Clear cached profile pictures?"
-                                                message:@"This removes all on-device profile pictures. They will re-download when next shown."
+                                                  title:SPKLocalizedString(@"Clear cached profile pictures?")
+                                                message:SPKLocalizedString(@"This removes all on-device profile pictures. They will re-download when next shown.")
                                                 actions:@[
-                                                    [SPKIGAlertAction actionWithTitle:@"Cancel"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Cancel")
                                                                                 style:SPKIGAlertActionStyleCancel
                                                                               handler:nil],
-                                                    [SPKIGAlertAction actionWithTitle:@"Clear"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Clear")
                                                                                 style:SPKIGAlertActionStyleDestructive
                                                                               handler:^{
                                                                                   [[SPKAvatarCache shared] purge];

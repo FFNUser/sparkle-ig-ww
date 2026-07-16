@@ -101,7 +101,7 @@
 
     NSString *title = (result.mode == SPKTrimResultModeFrameOnly) ? @"Save Photo" : (result.mode == SPKTrimResultModeTrimmedAudio) ? @"Save Audio"
                                                                                                                                    : @"Save Trimmed Clip";
-    SPKIGAlertAction *copy = [SPKIGAlertAction actionWithTitle:@"Save as Copy"
+    SPKIGAlertAction *copy = [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Save as Copy")
                                                          style:SPKIGAlertActionStyleDefault
                                                        handler:^{
                                                            [self renderResult:result
@@ -113,7 +113,7 @@
                                                                  }
                                                                    completion:completion];
                                                        }];
-    SPKIGAlertAction *replace = [SPKIGAlertAction actionWithTitle:@"Replace Original"
+    SPKIGAlertAction *replace = [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Replace Original")
                                                             style:SPKIGAlertActionStyleDestructive
                                                           handler:^{
                                                               [self renderResult:result
@@ -125,7 +125,7 @@
                                                                     }
                                                                       completion:completion];
                                                           }];
-    SPKIGAlertAction *cancel = [SPKIGAlertAction actionWithTitle:@"Cancel"
+    SPKIGAlertAction *cancel = [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Cancel")
                                                            style:SPKIGAlertActionStyleCancel
                                                          handler:^{
                                                              if (completion)
@@ -134,7 +134,7 @@
 
     BOOL presented = [SPKIGAlertPresenter presentActionSheetFromViewController:presenter
                                                                          title:title
-                                                                       message:@"Do you want to replace the original file or save a copy?"
+                                                                       message:SPKLocalizedString(@"Do you want to replace the original file or save a copy?")
                                                                        actions:@[ replace, copy, cancel ]];
     if (!presented) {
         [self renderResult:result
@@ -558,18 +558,18 @@
             onConfirm();
         return;
     }
-    SPKIGAlertAction *keep = [SPKIGAlertAction actionWithTitle:@"Continue"
+    SPKIGAlertAction *keep = [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Continue")
                                                          style:SPKIGAlertActionStyleCancel
                                                        handler:nil];
-    SPKIGAlertAction *stop = [SPKIGAlertAction actionWithTitle:@"Stop"
+    SPKIGAlertAction *stop = [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Stop")
                                                          style:SPKIGAlertActionStyleDestructive
                                                        handler:^{
                                                            if (onConfirm)
                                                                onConfirm();
                                                        }];
     [SPKIGAlertPresenter presentAlertFromViewController:host
-                                                  title:@"Cancel Trim"
-                                                message:@"Stop trimming and discard progress?"
+                                                  title:SPKLocalizedString(@"Cancel Trim")
+                                                message:SPKLocalizedString(@"Stop trimming and discard progress?")
                                                 actions:@[ keep, stop ]];
 }
 

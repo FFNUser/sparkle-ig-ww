@@ -10,16 +10,16 @@ static NSString *const kSPKFeedActionButtonEnabledKey = @"feed_action_btn";
 
 + (SPKSetting *)rootSetting {
     return SPKTopicNavigationSetting(@"Feed", @"feed", 24.0, @[
-        SPKTopicSection(@"Action Button", @[
-            [SPKSetting switchCellWithTitle:@"Feed Action Button"
+        SPKTopicSection(SPKLocalizedString(@"Action Button"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Feed Action Button")
                                        icon:SPKSettingsIcon(@"action")
                                 defaultsKey:kSPKFeedActionButtonEnabledKey],
             SPKActionButtonDefaultActionNavigationSetting(SPKActionButtonSourceFeed),
             SPKActionButtonConfigurationNavigationSetting(SPKActionButtonSourceFeed, @"Feed", SPKActionButtonSupportedActionsForSource(SPKActionButtonSourceFeed), SPKActionButtonDefaultSectionsForSource(SPKActionButtonSourceFeed))
         ],
                         @"Choose what tapping the action button does. Long press opens the full menu."),
-        SPKTopicSection(@"Header Shortcut", @[
-            [SPKSetting switchCellWithTitle:@"Feed Header Button"
+        SPKTopicSection(SPKLocalizedString(@"Header Shortcut"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Feed Header Button")
                                        icon:SPKSettingsIcon(@"action")
                                 defaultsKey:kSPKHeaderButtonEnabledKey],
             SPKFeedHeaderButtonDefaultActionNavigationSetting(),
@@ -27,20 +27,20 @@ static NSString *const kSPKFeedActionButtonEnabledKey = @"feed_action_btn";
                                        subtitle:@""
                                            icon:SPKSettingsIcon(@"sliders")
                                     navSections:@[
-                                        SPKTopicSection(@"Destinations", @[
-                                            [SPKSetting switchCellWithTitle:@"Gallery"
+                                        SPKTopicSection(SPKLocalizedString(@"Destinations"), @[
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Gallery")
                                                                        icon:SPKSettingsIcon(@"sparkle_gallery")
                                                                 defaultsKey:@"feed_header_button_dest_gallery"],
-                                            [SPKSetting switchCellWithTitle:@"Profile Analyzer"
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Profile Analyzer")
                                                                        icon:SPKSettingsIcon(@"profile_analyzer")
                                                                 defaultsKey:@"feed_header_button_dest_analyzer"],
-                                            [SPKSetting switchCellWithTitle:@"Deleted Messages"
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Deleted Messages")
                                                                        icon:SPKSettingsIcon(@"channels")
                                                                 defaultsKey:@"feed_header_button_dest_deleted"],
-                                            [SPKSetting switchCellWithTitle:@"Downloads"
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Downloads")
                                                                        icon:SPKSettingsIcon(@"download")
                                                                 defaultsKey:@"feed_header_button_dest_downloads"],
-                                            [SPKSetting switchCellWithTitle:@"Sparkle Settings"
+                                            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Sparkle Settings")
                                                                        icon:SPKSettingsIcon(@"settings")
                                                                 defaultsKey:@"feed_header_button_dest_settings"],
                                         ],
@@ -49,27 +49,27 @@ static NSString *const kSPKFeedActionButtonEnabledKey = @"feed_action_btn";
         ],
                         @"Adds a Sparkle button to the home feed header. "
                         @"Tap opens the selected destination. Long press opens the menu of enabled destinations."),
-        SPKTopicSection(@"Layout", @[
+        SPKTopicSection(SPKLocalizedString(@"Layout"), @[
             SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:@"Main Feed" icon:SPKSettingsIcon(@"feed") menu:SPKMainFeedModeMenu()], SPKSettingsIcon(@"feed")),
-            [SPKSetting switchCellWithTitle:@"Disable App Icon Gesture"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Disable App Icon Gesture")
                                        icon:SPKSettingsIcon(@"app")
                                 defaultsKey:@"feed_disable_appicon_gesture"],
-            [SPKSetting switchCellWithTitle:@"Hide Stories Tray"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Stories Tray")
                                        icon:SPKSettingsIcon(@"story")
                                 defaultsKey:@"feed_hide_stories_tray"],
-            [SPKSetting switchCellWithTitle:@"Hide Entire Feed"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Entire Feed")
                                        icon:SPKSettingsIcon(@"feed")
                                 defaultsKey:@"feed_hide_entire_feed"],
-            [SPKSetting switchCellWithTitle:@"Hide Suggested Posts"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Suggested Posts")
                                        icon:SPKSettingsIcon(@"carousel")
                                 defaultsKey:@"feed_hide_suggested_posts"],
-            [SPKSetting switchCellWithTitle:@"Hide Suggested Reels"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Suggested Reels")
                                        icon:SPKSettingsIcon(@"reels_gallery")
                                 defaultsKey:@"feed_hide_suggested_reels"],
-            [SPKSetting switchCellWithTitle:@"Hide Suggested Threads"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Suggested Threads")
                                        icon:SPKSettingsIcon(@"threads")
                                 defaultsKey:@"feed_hide_suggested_threads"],
-            [SPKSetting switchCellWithTitle:@"Hide Repost Button"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Repost Button")
                                        icon:SPKSettingsIcon(@"repost")
                                 defaultsKey:@"feed_hide_repost_btn"
                             requiresRestart:YES]
@@ -82,54 +82,54 @@ static NSString *const kSPKFeedActionButtonEnabledKey = @"feed_action_btn";
                         @"6. Remove suggested reels from the feed.\n"
                         @"7. Remove suggested Threads posts from the feed.\n"
                         @"8. Hide the repost button on feed posts."),
-        SPKTopicSection(@"Metrics", @[
-            [SPKSetting switchCellWithTitle:@"Hide Like Count"
+        SPKTopicSection(SPKLocalizedString(@"Metrics"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Like Count")
                                        icon:SPKSettingsIcon(@"heart")
                                 defaultsKey:@"feed_hide_like_count"],
-            [SPKSetting switchCellWithTitle:@"Hide Comment Count"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Comment Count")
                                        icon:SPKSettingsIcon(@"comment")
                                 defaultsKey:@"feed_hide_comment_count"],
-            [SPKSetting switchCellWithTitle:@"Hide Repost Count"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Repost Count")
                                        icon:SPKSettingsIcon(@"repost")
                                 defaultsKey:@"feed_hide_repost_count"],
-            [SPKSetting switchCellWithTitle:@"Hide Reshare Count"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Reshare Count")
                                        icon:SPKSettingsIcon(@"messages")
                                 defaultsKey:@"feed_hide_reshare_count"]
         ],
                         nil),
-        SPKTopicSection(@"Media", @[
-            [SPKSetting switchCellWithTitle:@"Long Press to Expand"
+        SPKTopicSection(SPKLocalizedString(@"Media"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Long Press to Expand")
                                        icon:SPKSettingsIcon(@"expand")
                                 defaultsKey:@"feed_long_press_expand"],
-            [SPKSetting switchCellWithTitle:@"Disable Video Autoplay"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Disable Video Autoplay")
                                        icon:SPKSettingsIcon(@"autoplay_off")
                                 defaultsKey:@"feed_disable_autoplay"
                             requiresRestart:YES],
-            [SPKSetting switchCellWithTitle:@"Start Expanded Videos Muted"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Start Expanded Videos Muted")
                                        icon:SPKSettingsIcon(@"volume_off")
                                 defaultsKey:@"feed_expanded_vid_start_muted"],
         ],
                         @"Long press media in the feed to open it expanded. Autoplay controls prevent feed videos from playing automatically."),
-        SPKTopicSection(@"Refresh", @[
-            [SPKSetting switchCellWithTitle:@"Disable Home Tab Refresh"
+        SPKTopicSection(SPKLocalizedString(@"Refresh"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Disable Home Tab Refresh")
                                        icon:SPKSettingsIcon(@"home")
                                 defaultsKey:@"feed_disable_home_refresh"],
-            [SPKSetting switchCellWithTitle:@"Disable Background Refresh"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Disable Background Refresh")
                                        icon:SPKSettingsIcon(@"arrow_cw")
                                 defaultsKey:@"feed_disable_bg_refresh"]
         ],
                         @"Prevents refreshes from re-tapping the Home tab or from background app activity."),
-        SPKTopicSection(@"Confirmation", @[
-            [SPKSetting switchCellWithTitle:@"Confirm Like"
+        SPKTopicSection(SPKLocalizedString(@"Confirmation"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Like")
                                        icon:SPKSettingsIcon(@"heart")
                                 defaultsKey:@"feed_confirm_post_like"],
-            [SPKSetting switchCellWithTitle:@"Confirm Double Tap"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Double Tap")
                                        icon:SPKSettingsIcon(@"heart")
                                 defaultsKey:@"feed_confirm_double_tap_like"],
-            [SPKSetting switchCellWithTitle:@"Confirm Repost"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Repost")
                                        icon:SPKSettingsIcon(@"repost")
                                 defaultsKey:@"feed_confirm_repost"],
-            [SPKSetting switchCellWithTitle:@"Confirm Posting Comment"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Posting Comment")
                                        icon:SPKSettingsIcon(@"comment")
                                 defaultsKey:@"feed_confirm_post_comment"]
         ],

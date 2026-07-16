@@ -316,7 +316,7 @@ static NSArray<NSURL *> *SPKDownloadSucceededFileURLsForJob(SPKDownloadJob *job)
         return;
     }
     if (job.state == SPKDownloadStateCancelled) {
-        [self.activePill showInfoWithTitle:@"Download cancelled" subtitle:@"Tap to open Downloads" icon:nil];
+        [self.activePill showInfoWithTitle:@"Download cancelled" subtitle:SPKLocalizedString(@"Tap to open Downloads") icon:nil];
         self.activePill.onTapWhenCompleted = openHistory;
         return;
     }

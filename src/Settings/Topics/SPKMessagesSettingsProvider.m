@@ -57,10 +57,10 @@ static NSArray *SPKMessagesSettingsSections(void) {
 
     // Auto-seen triggers only act while manual seen is on. Keep their stored value
     // but lock the cells when manual seen is off.
-    SPKSetting *seenOnSend = [SPKSetting switchCellWithTitle:@"Mark Seen on Message Send" icon:SPKSettingsIcon(@"messages") defaultsKey:@"msgs_seen_on_send"];
-    SPKSetting *seenOnReply = [SPKSetting switchCellWithTitle:@"Mark Seen on Message Reply" icon:SPKSettingsIcon(@"reply") defaultsKey:@"msgs_seen_on_reply"];
-    SPKSetting *seenOnReaction = [SPKSetting switchCellWithTitle:@"Mark Seen on Reaction" icon:SPKSettingsIcon(@"reactions") defaultsKey:@"msgs_seen_on_reaction"];
-    SPKSetting *seenOnTyping = [SPKSetting switchCellWithTitle:@"Mark Seen on Typing" icon:SPKSettingsIcon(@"keyboard") defaultsKey:@"msgs_seen_on_typing"];
+    SPKSetting *seenOnSend = [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Mark Seen on Message Send") icon:SPKSettingsIcon(@"messages") defaultsKey:@"msgs_seen_on_send"];
+    SPKSetting *seenOnReply = [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Mark Seen on Message Reply") icon:SPKSettingsIcon(@"reply") defaultsKey:@"msgs_seen_on_reply"];
+    SPKSetting *seenOnReaction = [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Mark Seen on Reaction") icon:SPKSettingsIcon(@"reactions") defaultsKey:@"msgs_seen_on_reaction"];
+    SPKSetting *seenOnTyping = [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Mark Seen on Typing") icon:SPKSettingsIcon(@"keyboard") defaultsKey:@"msgs_seen_on_typing"];
     seenOnSend.enabledProvider = ^BOOL {
         return [SPKUtils getBoolPref:@"msgs_manual_seen"];
     };
@@ -86,7 +86,7 @@ static NSArray *SPKMessagesSettingsSections(void) {
     };
 
     // Advancing after a manual seen only applies while visual manual seen is on.
-    SPKSetting *advanceVisual = [SPKSetting switchCellWithTitle:@"Advance After Manual Seen" icon:SPKSettingsIcon(@"autoscroll") defaultsKey:@"msgs_advance_visual_on_seen"];
+    SPKSetting *advanceVisual = [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Advance After Manual Seen") icon:SPKSettingsIcon(@"autoscroll") defaultsKey:@"msgs_advance_visual_on_seen"];
     advanceVisual.enabledProvider = ^BOOL {
         return [SPKUtils getBoolPref:@"msgs_manual_visual_seen"];
     };
@@ -101,7 +101,7 @@ static NSArray *SPKMessagesSettingsSections(void) {
     // Extends the action button to the full-screen viewer for permanent chat media
     // (camera-roll photos/videos, chat-menu media), replacing IG's native Save.
     // Only meaningful while the master action button toggle is on.
-    SPKSetting *chatMediaActionButton = [SPKSetting switchCellWithTitle:@"Also Show on Chat Media"
+    SPKSetting *chatMediaActionButton = [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Also Show on Chat Media")
                                                                   icon:SPKSettingsIcon(@"photo")
                                                            defaultsKey:kSPKMessagesActionButtonChatMediaKey];
     chatMediaActionButton.enabledProvider = ^BOOL {
@@ -109,8 +109,8 @@ static NSArray *SPKMessagesSettingsSections(void) {
     };
 
     return @[
-        SPKTopicSection(@"Action Button", @[
-            [SPKSetting switchCellWithTitle:@"Messages Action Button"
+        SPKTopicSection(SPKLocalizedString(@"Action Button"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Messages Action Button")
                                        icon:SPKSettingsIcon(@"action")
                                 defaultsKey:kSPKMessagesActionButtonEnabledKey],
             chatMediaActionButton,
@@ -119,8 +119,8 @@ static NSArray *SPKMessagesSettingsSections(void) {
         ],
                         @"Choose what tapping the action button does. Long press opens the full menu.\n"
                         @"\"Also Show on Chat Media\" adds it to camera-roll photos and videos opened in a chat."),
-        SPKTopicSection(@"Messaging", @[
-            [SPKSetting switchCellWithTitle:@"Manually Mark Seen"
+        SPKTopicSection(SPKLocalizedString(@"Messaging"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Manually Mark Seen")
                                        icon:SPKSettingsIcon(@"eye")
                                 defaultsKey:@"msgs_manual_seen"],
             seenButtonPosition,
@@ -144,20 +144,20 @@ static NSArray *SPKMessagesSettingsSections(void) {
                                      @"5. Marks a chat as seen when you react.\n"
                                      @"6. Marks a chat as seen when you start typing a reply.\n\n"
                                      @"Included Chats require the eye button or the auto-seen triggers above. Manage them from the eye button, an inbox long press, or the list above."),
-        SPKTopicSection(@"Deleted Messages", @[
-            [SPKSetting switchCellWithTitle:@"Keep Deleted Messages"
+        SPKTopicSection(SPKLocalizedString(@"Deleted Messages"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Keep Deleted Messages")
                                        icon:SPKSettingsIcon(@"undo_circle")
                                 defaultsKey:@"msgs_keep_deleted"],
-            [SPKSetting switchCellWithTitle:@"Confirm Inbox Refresh"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Inbox Refresh")
                                        icon:SPKSettingsIcon(@"arrow_cw")
                                 defaultsKey:@"msgs_confirm_refresh"],
-            [SPKSetting switchCellWithTitle:@"Log Deleted Messages"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Log Deleted Messages")
                                        icon:SPKSettingsIcon(@"logs")
                                 defaultsKey:@"msgs_deleted_log"],
-            [SPKSetting switchCellWithTitle:@"Log Removed Reactions"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Log Removed Reactions")
                                        icon:SPKSettingsIcon(@"reactions")
                                 defaultsKey:@"msgs_deleted_log_reactions"],
-            [SPKSetting switchCellWithTitle:@"Respect Seen Chat List"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Respect Seen Chat List")
                                        icon:SPKSettingsIcon(@"eye")
                                 defaultsKey:@"msgs_deleted_log_respect_seen_list"],
             [SPKSetting navigationCellWithTitle:@"View Deleted Messages"
@@ -171,21 +171,21 @@ static NSArray *SPKMessagesSettingsSections(void) {
                         @"4. Also logs reactions that are removed.\n"
                         @"5. Skips log capture and unsent notifications for chats in your manual-seen include/exclude list.\n"
                         @"6. Opens the captured deleted-message logs."),
-        SPKTopicSection(@"Interface", @[
+        SPKTopicSection(SPKLocalizedString(@"Interface"), @[
             lastActiveFormat,
-            [SPKSetting switchCellWithTitle:@"Hide Typing Status"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Typing Status")
                                        icon:SPKSettingsIcon(@"keyboard")
                                 defaultsKey:@"msgs_disable_typing"],
-            [SPKSetting switchCellWithTitle:@"Hide Reels Blend Button"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Reels Blend Button")
                                        icon:SPKSettingsIcon(@"blend")
                                 defaultsKey:@"msgs_hide_reels_blend"],
-            [SPKSetting switchCellWithTitle:@"Hide Audio Call Button"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Audio Call Button")
                                        icon:SPKSettingsIcon(@"call")
                                 defaultsKey:@"msgs_hide_audio_call_btn"],
-            [SPKSetting switchCellWithTitle:@"Hide Video Call Button"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Video Call Button")
                                        icon:SPKSettingsIcon(@"video")
                                 defaultsKey:@"msgs_hide_video_call_btn"],
-            [SPKSetting switchCellWithTitle:@"No Suggested Chats"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"No Suggested Chats")
                                        icon:SPKSettingsIcon(@"question")
                                 defaultsKey:@"msgs_hide_suggested_chats"],
         ],
@@ -196,18 +196,18 @@ static NSArray *SPKMessagesSettingsSections(void) {
                         @"4. Hides the audio call button in the chat header.\n"
                         @"5. Hides the video call button in the chat header.\n"
                         @"6. Removes suggested chats from the inbox."),
-        SPKTopicSection(@"Visual Messages", @[
-            [SPKSetting switchCellWithTitle:@"Manually Mark Seen"
+        SPKTopicSection(SPKLocalizedString(@"Visual Messages"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Manually Mark Seen")
                                        icon:SPKSettingsIcon(@"eye")
                                 defaultsKey:@"msgs_manual_visual_seen"],
             advanceVisual,
-            [SPKSetting switchCellWithTitle:@"Stop Auto Advance"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Stop Auto Advance")
                                        icon:SPKSettingsIcon(@"autoscroll")
                                 defaultsKey:@"msgs_stop_visual_auto_advance"],
-            [SPKSetting switchCellWithTitle:@"Disable View-Once Limitations"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Disable View-Once Limitations")
                                        icon:SPKSettingsIcon(@"view_once")
                                 defaultsKey:@"msgs_disable_view_once"],
-            [SPKSetting switchCellWithTitle:@"Disable Screenshot Detection"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Disable Screenshot Detection")
                                        icon:SPKSettingsIcon(@"warning")
                                 defaultsKey:@"msgs_disable_screenshot_detection"]
         ],
@@ -216,70 +216,70 @@ static NSArray *SPKMessagesSettingsSections(void) {
                         @"3. Keeps the current visual message on screen instead of auto-advancing when it ends.\n"
                         @"4. View-once messages behave like normal visual messages.\n"
                         @"5. Allows screen capture of visual messages."),
-        SPKTopicSection(@"Vanish Mode", @[
-            [SPKSetting switchCellWithTitle:@"Disable Swipe-Up Gesture"
+        SPKTopicSection(SPKLocalizedString(@"Vanish Mode"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Disable Swipe-Up Gesture")
                                        icon:SPKSettingsIcon(@"arrow_up")
                                 defaultsKey:@"msgs_disable_vanish_swipe_up"],
-            [SPKSetting switchCellWithTitle:@"Disable Screenshot Detection"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Disable Screenshot Detection")
                                        icon:SPKSettingsIcon(@"warning")
                                 defaultsKey:@"msgs_hide_vanish_screenshot"],
         ],
                         @"1. Disable the gesture that enables vanish mode.\n"
                         @"2. Allows screen capture while vanish mode is active."),
-        SPKTopicSection(@"Notes", @[
-            [SPKSetting switchCellWithTitle:@"Hide Notes Tray"
+        SPKTopicSection(SPKLocalizedString(@"Notes"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Notes Tray")
                                        icon:SPKSettingsIcon(@"notes")
                                 defaultsKey:@"msgs_hide_notes_tray"],
-            [SPKSetting switchCellWithTitle:@"Hide Friends Map"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Friends Map")
                                        icon:SPKSettingsIcon(@"map")
                                 defaultsKey:@"msgs_hide_friends_map"],
             SPKAudioGatedSwitch(@"Download Notes Audio", SPKSettingsIcon(@"audio"), @"msgs_download_notes_audio"),
-            [SPKSetting switchCellWithTitle:@"Copy Note Text"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Copy Note Text")
                                        icon:SPKSettingsIcon(@"copy")
                                 defaultsKey:@"msgs_copy_note_text"]
         ],
                         @"Long-press a note in the tray to download its audio or copy its text. Each action only appears when the note has that content."),
-        SPKTopicSection(@"Audio", @[
+        SPKTopicSection(SPKLocalizedString(@"Audio"), @[
             SPKAudioGatedSwitch(@"Download Voice Messages", SPKSettingsIcon(@"audio_download"), @"msgs_download_audio_messages"),
-            [SPKSetting switchCellWithTitle:@"Upload Audio"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Upload Audio")
                                        icon:SPKSettingsIcon(@"audio_upload")
                                 defaultsKey:@"msgs_upload_audio_messages"],
-            [SPKSetting switchCellWithTitle:@"Trim Before Sending"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Trim Before Sending")
                                        icon:SPKSettingsIcon(@"trim")
                                 defaultsKey:@"msgs_audio_upload_trim"]
         ],
                         @"1. Adds audio actions to supported voice/audio message views.\n"
                         @"2. Adds an option to the composer plus (+) menu that sends the selected audio or video as a voice message.\n"
                         @"3. When uploading, offers to trim the audio before sending it."),
-        SPKTopicSection(@"Media", @[
-            [SPKSetting switchCellWithTitle:@"Upload Photo from Gallery"
+        SPKTopicSection(SPKLocalizedString(@"Media"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Upload Photo from Gallery")
                                        icon:SPKSettingsIcon(@"photo")
                                 defaultsKey:@"msgs_upload_gallery_media"]
         ],
-                        @"Adds an option to the composer plus (+) menu that sends a photo from the Sparkle Gallery into the chat."),
-        SPKTopicSection(@"Confirmation", @[
-            [SPKSetting switchCellWithTitle:@"Confirm Audio Call"
+                        SPKLocalizedString(@"Adds an option to the composer plus (+) menu that sends a photo from the Sparkle Gallery into the chat.")),
+        SPKTopicSection(SPKLocalizedString(@"Confirmation"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Audio Call")
                                        icon:SPKSettingsIcon(@"call")
                                 defaultsKey:kSPKMessagesAudioCallConfirmKey],
-            [SPKSetting switchCellWithTitle:@"Confirm Video Call"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Video Call")
                                        icon:SPKSettingsIcon(@"video")
                                 defaultsKey:kSPKMessagesVideoCallConfirmKey],
-            [SPKSetting switchCellWithTitle:@"Confirm Double Tap"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Double Tap")
                                        icon:SPKSettingsIcon(@"heart")
                                 defaultsKey:@"msgs_confirm_double_tap"],
-            [SPKSetting switchCellWithTitle:@"Confirm Reactions"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Reactions")
                                        icon:SPKSettingsIcon(@"reactions")
                                 defaultsKey:@"msgs_confirm_reaction"],
-            [SPKSetting switchCellWithTitle:@"Confirm Voice Messages"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Voice Messages")
                                        icon:SPKSettingsIcon(@"voice")
                                 defaultsKey:@"msgs_confirm_voice_msg"],
-            [SPKSetting switchCellWithTitle:@"Confirm Follow Requests"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Follow Requests")
                                        icon:SPKSettingsIcon(@"user_request")
                                 defaultsKey:@"msgs_confirm_follow_request"],
-            [SPKSetting switchCellWithTitle:@"Confirm Vanish Mode"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Vanish Mode")
                                        icon:SPKSettingsIcon(@"vanish")
                                 defaultsKey:@"msgs_confirm_vanish_mode"],
-            [SPKSetting switchCellWithTitle:@"Confirm Changing Theme"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Changing Theme")
                                        icon:SPKSettingsIcon(@"palette")
                                 defaultsKey:@"msgs_confirm_theme_change"]
         ],

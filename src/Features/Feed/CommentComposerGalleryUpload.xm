@@ -86,7 +86,7 @@ static void SPKCommentComposerPresentGalleryPicker(UIView *composerView) {
 
     __weak UIView *weakComposer = composerView;
     [SPKGalleryPickerViewController presentFromViewController:topMostController()
-                                                        title:@"Choose Photo"
+                                                        title:SPKLocalizedString(@"Choose Photo")
                                             allowedMediaTypes:imageTypes
                                       allowsMultipleSelection:NO
                                                    completion:^(NSArray<SPKGalleryFile *> *selectedFiles) {

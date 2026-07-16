@@ -93,7 +93,7 @@ NSNotificationName const SPKProfileAnalyzerProgressDidChangeNotification = @"SPK
     if (self.isRunning) {
         if (completion)
             completion(nil, [self errorWithCode:SPKProfileAnalyzerErrorAlreadyRunning
-                                        message:@"Another analysis is already running"]);
+                                        message:SPKLocalizedString(@"Another analysis is already running")]);
         return;
     }
     self.isRunning = YES;
@@ -102,7 +102,7 @@ NSNotificationName const SPKProfileAnalyzerProgressDidChangeNotification = @"SPK
     NSString *selfPK = [SPKUtils currentUserPK];
     if (!selfPK.length) {
         [self finishWithSnapshot:nil
-                           error:[self errorWithCode:SPKProfileAnalyzerErrorNoSession message:@"No active Instagram session found"]
+                           error:[self errorWithCode:SPKProfileAnalyzerErrorNoSession message:SPKLocalizedString(@"No active Instagram session found")]
                       completion:completion];
         return;
     }
@@ -119,14 +119,14 @@ NSNotificationName const SPKProfileAnalyzerProgressDidChangeNotification = @"SPK
                                         return;
                                     if (strongSelf.cancelled) {
                                         [strongSelf finishWithSnapshot:nil
-                                                                 error:[strongSelf errorWithCode:SPKProfileAnalyzerErrorCancelled message:@"Cancelled"]
+                                                                 error:[strongSelf errorWithCode:SPKProfileAnalyzerErrorCancelled message:SPKLocalizedString(@"Cancelled")]
                                                             completion:completion];
                                         return;
                                     }
                                     NSDictionary *user = [resp[@"user"] isKindOfClass:[NSDictionary class]] ? resp[@"user"] : nil;
                                     if (!user) {
                                         [strongSelf finishWithSnapshot:nil
-                                                                 error:[strongSelf errorWithCode:SPKProfileAnalyzerErrorNetwork message:@"Couldn't fetch profile information"]
+                                                                 error:[strongSelf errorWithCode:SPKProfileAnalyzerErrorNetwork message:SPKLocalizedString(@"Couldn't fetch profile information")]
                                                             completion:completion];
                                         return;
                                     }
@@ -136,7 +136,7 @@ NSNotificationName const SPKProfileAnalyzerProgressDidChangeNotification = @"SPK
                                     if (followerCount + followingCount > SPKProfileAnalyzerMaxConnectionCount) {
                                         [strongSelf finishWithSnapshot:nil
                                                                  error:[strongSelf errorWithCode:SPKProfileAnalyzerErrorTooManyFollowers
-                                                                                         message:@"Too many connections to analyze"]
+                                                                                         message:SPKLocalizedString(@"Too many connections to analyze")]
                                                             completion:completion];
                                         return;
                                     }
@@ -182,14 +182,14 @@ NSNotificationName const SPKProfileAnalyzerProgressDidChangeNotification = @"SPK
         completion:^(NSArray *users, NSError *error) {
             if (error || self.cancelled) {
                 [self finishWithSnapshot:nil
-                                   error:error ?: [self errorWithCode:SPKProfileAnalyzerErrorCancelled message:@"Cancelled"]
+                                   error:error ?: [self errorWithCode:SPKProfileAnalyzerErrorCancelled message:SPKLocalizedString(@"Cancelled")]
                               completion:completion];
                 return;
             }
             if (![self stageCount:users.count plausibleForExpected:snap.followerCount]) {
                 [self finishWithSnapshot:nil
                                    error:[self errorWithCode:SPKProfileAnalyzerErrorNetwork
-                                                     message:@"Couldn't fetch the full followers list (Instagram rate limit). Try again in a few minutes."]
+                                                     message:SPKLocalizedString(@"Couldn't fetch the full followers list (Instagram rate limit). Try again in a few minutes.")]
                               completion:completion];
                 return;
             }
@@ -212,14 +212,14 @@ NSNotificationName const SPKProfileAnalyzerProgressDidChangeNotification = @"SPK
         completion:^(NSArray *users, NSError *error) {
             if (error || self.cancelled) {
                 [self finishWithSnapshot:nil
-                                   error:error ?: [self errorWithCode:SPKProfileAnalyzerErrorCancelled message:@"Cancelled"]
+                                   error:error ?: [self errorWithCode:SPKProfileAnalyzerErrorCancelled message:SPKLocalizedString(@"Cancelled")]
                               completion:completion];
                 return;
             }
             if (![self stageCount:users.count plausibleForExpected:snap.followingCount]) {
                 [self finishWithSnapshot:nil
                                    error:[self errorWithCode:SPKProfileAnalyzerErrorNetwork
-                                                     message:@"Couldn't fetch the full following list (Instagram rate limit). Try again in a few minutes."]
+                                                     message:SPKLocalizedString(@"Couldn't fetch the full following list (Instagram rate limit). Try again in a few minutes.")]
                               completion:completion];
                 return;
             }
@@ -261,7 +261,7 @@ NSNotificationName const SPKProfileAnalyzerProgressDidChangeNotification = @"SPK
         progress:(SPKPAProgress)progress
       completion:(void (^)(NSArray *users, NSError *error))completion {
     if (self.cancelled) {
-        completion(nil, [self errorWithCode:SPKProfileAnalyzerErrorCancelled message:@"Cancelled"]);
+        completion(nil, [self errorWithCode:SPKProfileAnalyzerErrorCancelled message:SPKLocalizedString(@"Cancelled")]);
         return;
     }
     NSString *path = maxId.length ? [NSString stringWithFormat:@"%@?max_id=%@", basePath, maxId] : basePath;
@@ -332,7 +332,7 @@ NSNotificationName const SPKProfileAnalyzerProgressDidChangeNotification = @"SPK
                                     [strongSelf reportProgress:progress status:label fraction:frac];
 
                                     if (!nextMax.length || strongSelf.cancelled) {
-                                        completion(acc, strongSelf.cancelled ? [strongSelf errorWithCode:SPKProfileAnalyzerErrorCancelled message:@"Cancelled"] : nil);
+                                        completion(acc, strongSelf.cancelled ? [strongSelf errorWithCode:SPKProfileAnalyzerErrorCancelled message:SPKLocalizedString(@"Cancelled")] : nil);
                                         return;
                                     }
                                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(SPK_PA_PAGE_DELAY_S * NSEC_PER_SEC)),

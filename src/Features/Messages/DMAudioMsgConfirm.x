@@ -49,8 +49,8 @@ void SPKDMConfirmVoiceMessageIfNeeded(void (^confirmBlock)(void), void (^cancelB
             if (cancelBlock)
                 cancelBlock();
         }
-        title:@"Confirm Sending Voice Message"
-        message:@"Are you sure you want to send this voice message?"];
+        title:SPKLocalizedString(@"Confirm Sending Voice Message")
+        message:SPKLocalizedString(@"Are you sure you want to send this voice message?")];
 }
 
 static void SPKDMConfirmVoiceMessage(void (^confirmBlock)(void)) {

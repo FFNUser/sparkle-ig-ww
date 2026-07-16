@@ -417,8 +417,8 @@ static char kSPKActionsListSwitchAssocKey;
     __weak typeof(self) weakSelf = self;
     [[SPKSettingsTransferManager sharedManager]
         resetConfigurationGroupFromController:self
-                                        title:@"Reset to Default"
-                                      message:@"This restores this surface's menu sections, default action, and bulk menus to their defaults. The action button stays enabled and other surfaces are unaffected."
+                                        title:SPKLocalizedString(@"Reset to Default")
+                                      message:SPKLocalizedString(@"This restores this surface's menu sections, default action, and bulk menus to their defaults. The action button stays enabled and other surfaces are unaffected.")
                                  confirmTitle:@"Reset"
                                          keys:[self configurationResetKeys]
                                       onReset:^{

@@ -226,18 +226,18 @@ typedef NS_ENUM(NSInteger, SPKDetailsEditRow) {
                                                          [weakSelf.tableView reloadData];
                                                      }]];
     }
-    [actions addObject:[SPKIGAlertAction actionWithTitle:@"Unassigned"
+    [actions addObject:[SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Unassigned")
                                                    style:SPKIGAlertActionStyleDestructive
                                                  handler:^{
                                                      weakSelf.selectedOwnerPK = nil;
                                                      weakSelf.selectedOwnerUsername = nil;
                                                      [weakSelf.tableView reloadData];
                                                  }]];
-    [actions addObject:[SPKIGAlertAction actionWithTitle:@"Cancel" style:SPKIGAlertActionStyleCancel handler:nil]];
+    [actions addObject:[SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Cancel") style:SPKIGAlertActionStyleCancel handler:nil]];
 
     [SPKIGAlertPresenter presentActionSheetFromViewController:self
-                                                        title:@"Change File Owner"
-                                                      message:@"Which account does this file belong to?"
+                                                        title:SPKLocalizedString(@"Change File Owner")
+                                                      message:SPKLocalizedString(@"Which account does this file belong to?")
                                                       actions:actions];
 }
 

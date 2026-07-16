@@ -1581,7 +1581,7 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
     [sections
         addObject:SPKTopicSection(
                       @"", @[ [SPKSetting
-                               switchCellWithTitle:@"Advanced Encoding"
+                               switchCellWithTitle:SPKLocalizedString(@"Advanced Encoding")
                                        defaultsKey:@"downloads_adv_encoding"] ],
                       @"Advanced Encoding exposes codec, preset, bitrate, CRF, "
                       @"resolution, and audio overrides. In advanced mode, the "
@@ -1590,7 +1590,7 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
 
     if ([SPKUtils getBoolPref:@"downloads_adv_encoding"]) {
         [sections addObject:SPKTopicSection(
-                                @"Video",
+                                SPKLocalizedString(@"Video"),
                                 @[
                                     [SPKSetting menuCellWithTitle:@"Video Codec"
                                                          subtitle:nil
@@ -1609,7 +1609,7 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
 
         [sections
             addObject:SPKTopicSection(
-                          @"Quality",
+                          SPKLocalizedString(@"Quality"),
                           @[
                               [SPKSetting
                                   textFieldCellWithTitle:@"CRF"
@@ -1630,7 +1630,7 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
 
         [sections
             addObject:SPKTopicSection(
-                          @"Audio",
+                          SPKLocalizedString(@"Audio"),
                           @[
                               [SPKSetting
                                   textFieldCellWithTitle:@"Audio Bitrate"
@@ -1647,13 +1647,13 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
         [sections
             addObject:
                 SPKTopicSection(
-                    @"Advanced",
+                    SPKLocalizedString(@"Advanced"),
                     @[
                         [SPKSetting menuCellWithTitle:@"Pixel Format"
                                              subtitle:nil
                                                  menu:[self pixelFormatMenu]],
                         [SPKSetting
-                            switchCellWithTitle:@"Fast Start"
+                            switchCellWithTitle:SPKLocalizedString(@"Fast Start")
                                     defaultsKey:@"downloads_encoding_faststart"]
                     ],
                     @"Fast Start moves MP4 metadata to the beginning of the "
@@ -1662,14 +1662,14 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
 
         __weak typeof(self) weakSelf = self;
         SPKSetting *resetEncoding = 
-            [SPKSetting buttonCellWithTitle:@"Reset Encoding Settings"
+            [SPKSetting buttonCellWithTitle:SPKLocalizedString(@"Reset Encoding Settings")
                                    subtitle:nil
                                        icon:SPKSettingsIcon(@"arrow_ccw")
                                      action:^{
                                         [[SPKSettingsTransferManager sharedManager]
                                             resetConfigurationGroupFromController:weakSelf
-                                                                            title:@"Reset Encoding Settings"
-                                                                          message:@"This restores every advanced encoding option to its default value. Advanced Encoding stays on."
+                                                                            title:SPKLocalizedString(@"Reset Encoding Settings")
+                                                                          message:SPKLocalizedString(@"This restores every advanced encoding option to its default value. Advanced Encoding stays on.")
                                                                      confirmTitle:@"Reset"
                                                                             keys:@[
                                                                                 @"downloads_encoding_speed",
@@ -1695,7 +1695,7 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
 
         SPKSetting *ffmpegInfo = [SPKSetting
             linkCellWithTitle:@"About FFmpeg Encoding"
-                     subtitle:@"Tap to learn more"
+                     subtitle:SPKLocalizedString(@"Tap to learn more")
                      imageUrl:@"https://ffmpeg.org/favicon.ico"
                           url:@"https://trac.ffmpeg.org/wiki/Encode/H.264"];
         ffmpegInfo.userInfo = @{@"remoteImageCircular" : @NO};
@@ -1704,7 +1704,7 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
         [sections
             addObject:
                 SPKTopicSection(
-                    @"Video", @[ [SPKSetting menuCellWithTitle:@"Encoding Speed"
+                    SPKLocalizedString(@"Video"), @[ [SPKSetting menuCellWithTitle:@"Encoding Speed"
                                                       subtitle:nil
                                                           menu:[self speedMenu]] ],
                     @"Controls the libx264 encoding effort. Slower presets take "
@@ -1718,20 +1718,20 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
 - (NSArray *)searchSections {
     SPKSetting *ffmpegInfo = [SPKSetting
         linkCellWithTitle:@"About FFmpeg Encoding"
-                 subtitle:@"Tap to learn more"
+                 subtitle:SPKLocalizedString(@"Tap to learn more")
                  imageUrl:@"https://ffmpeg.org/favicon.ico"
                       url:@"https://trac.ffmpeg.org/wiki/Encode/H.264"];
     ffmpegInfo.userInfo = @{@"remoteImageCircular" : @NO};
 
     return @[
         SPKTopicSection(
-            @"", @[ [SPKSetting switchCellWithTitle:@"Advanced Encoding"
+            @"", @[ [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Advanced Encoding")
                                         defaultsKey:@"downloads_adv_encoding"] ],
             @"Advanced Encoding exposes codec, preset, bitrate, CRF, resolution, "
             @"and audio overrides. In advanced mode, the selected video codec is "
             @"used for DASH merges while audio remains copied."),
         SPKTopicSection(
-            @"Video",
+            SPKLocalizedString(@"Video"),
             @[
                 [SPKSetting menuCellWithTitle:@"Encoding Speed"
                                      subtitle:nil
@@ -1753,7 +1753,7 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
             @"produce smaller files at the same visual quality. Ultrafast is "
             @"fastest but produces larger files."),
         SPKTopicSection(
-            @"Quality",
+            SPKLocalizedString(@"Quality"),
             @[
                 [SPKSetting textFieldCellWithTitle:@"CRF"
                                        placeholder:@"Auto"
@@ -1770,7 +1770,7 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
             ],
             nil),
         SPKTopicSection(
-            @"Audio",
+            SPKLocalizedString(@"Audio"),
             @[
                 [SPKSetting
                     textFieldCellWithTitle:@"Audio Bitrate"
@@ -1783,12 +1783,12 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
             ],
             nil),
         SPKTopicSection(
-            @"Advanced",
+            SPKLocalizedString(@"Advanced"),
             @[
                 [SPKSetting menuCellWithTitle:@"Pixel Format"
                                      subtitle:nil
                                          menu:[self pixelFormatMenu]],
-                [SPKSetting switchCellWithTitle:@"Fast Start"
+                [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Fast Start")
                                     defaultsKey:@"downloads_encoding_faststart"]
             ],
             @"Fast Start moves MP4 metadata to the beginning of the file, allowing "
@@ -2103,7 +2103,7 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
     if (option.secondaryURL.absoluteString.length > 0) {
         [children
             addObject:[UIAction
-                          actionWithTitle:@"Copy Audio URL"
+                          actionWithTitle:SPKLocalizedString(@"Copy Audio URL")
                                     image:SPKMediaIcon(@"audio",
                                                        kSPKMediaOptionIconPointSize)
                                identifier:nil
@@ -2115,7 +2115,7 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
 
     [children
         addObject:[UIAction
-                      actionWithTitle:@"Copy Quality Info"
+                      actionWithTitle:SPKLocalizedString(@"Copy Quality Info")
                                 image:SPKMediaIcon(@"copy",
                                                    kSPKMediaOptionIconPointSize)
                            identifier:nil
@@ -2127,7 +2127,7 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
     if (option.kind == SPKMediaOptionKindPhotoProgressive) {
         [children
             addObject:[UIAction
-                          actionWithTitle:@"View Image"
+                          actionWithTitle:SPKLocalizedString(@"View Image")
                                     image:SPKMediaIcon(@"photo",
                                                        kSPKMediaOptionIconPointSize)
                                identifier:nil
@@ -2138,7 +2138,7 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
     } else if (option.kind == SPKMediaOptionKindAudioDash) {
         [children
             addObject:[UIAction
-                          actionWithTitle:@"Play Audio"
+                          actionWithTitle:SPKLocalizedString(@"Play Audio")
                                     image:SPKMediaIcon(@"play",
                                                        kSPKMediaOptionIconPointSize)
                                identifier:nil

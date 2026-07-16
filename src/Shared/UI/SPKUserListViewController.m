@@ -190,7 +190,7 @@ typedef NS_ENUM(NSInteger, SPKUserListSortMode) {
         if (weakSelf.enablesSort)
             [children addObjectsFromArray:[weakSelf sortMenuElements]];
         if (weakSelf.infoText.length) {
-            UIAction *info = [UIAction actionWithTitle:@"How It Works"
+            UIAction *info = [UIAction actionWithTitle:SPKLocalizedString(@"How It Works")
                                                  image:[SPKAssetUtils menuIconNamed:@"info"]
                                             identifier:nil
                                                handler:^(__unused UIAction *action) {
@@ -228,9 +228,9 @@ typedef NS_ENUM(NSInteger, SPKUserListSortMode) {
     if (!self.infoText.length)
         return;
     [SPKIGAlertPresenter presentAlertFromViewController:self
-                                                  title:@"How It Works"
+                                                  title:SPKLocalizedString(@"How It Works")
                                                 message:self.infoText
-                                                actions:@[ [SPKIGAlertAction actionWithTitle:@"OK" style:SPKIGAlertActionStyleCancel handler:nil] ]];
+                                                actions:@[ [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"OK") style:SPKIGAlertActionStyleCancel handler:nil] ]];
 }
 
 - (void)spk_addTapped {

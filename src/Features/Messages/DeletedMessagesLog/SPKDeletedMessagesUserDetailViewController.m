@@ -416,10 +416,10 @@ static SPKDeletedMessageKind SPKDMDetailChipKindForIndex(NSInteger index) {
                                                                                                  title:isGroup ? @"Delete group log?" : @"Delete sender log?"
                                                                                                message:[NSString stringWithFormat:@"This removes all logged messages from %@.", who]
                                                                                                actions:@[
-                                                                                                   [SPKIGAlertAction actionWithTitle:@"Cancel"
+                                                                                                   [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Cancel")
                                                                                                                                style:SPKIGAlertActionStyleCancel
                                                                                                                              handler:nil],
-                                                                                                   [SPKIGAlertAction actionWithTitle:@"Delete"
+                                                                                                   [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Delete")
                                                                                                                                style:SPKIGAlertActionStyleDestructive
                                                                                                                              handler:^{
                                                                                                                                  if (weakSelf.group.isGroup)
@@ -435,7 +435,7 @@ static SPKDeletedMessageKind SPKDMDetailChipKindForIndex(NSInteger index) {
 
     UIMenu *destructiveSection = [UIMenu menuWithTitle:@"" image:nil identifier:nil options:UIMenuOptionsDisplayInline children:@[ deleteAction ]];
 
-    UIAction *refreshAvatarsAction = [UIAction actionWithTitle:@"Refresh Profile Pictures"
+    UIAction *refreshAvatarsAction = [UIAction actionWithTitle:SPKLocalizedString(@"Refresh Profile Pictures")
                                                          image:[SPKAssetUtils menuIconNamed:@"user_circle"]
                                                     identifier:nil
                                                        handler:^(__unused UIAction *a) {
@@ -445,7 +445,7 @@ static SPKDeletedMessageKind SPKDMDetailChipKindForIndex(NSInteger index) {
 
     if (!isGroup && self.group.senderUsername.length) {
         NSString *username = self.group.senderUsername;
-        UIAction *openProfileAction = [UIAction actionWithTitle:@"Open Profile"
+        UIAction *openProfileAction = [UIAction actionWithTitle:SPKLocalizedString(@"Open Profile")
                                                           image:[SPKAssetUtils menuIconNamed:@"user"]
                                                      identifier:nil
                                                         handler:^(__unused UIAction *a) {
@@ -684,7 +684,7 @@ static SPKDeletedMessageKind SPKDMDetailChipKindForIndex(NSInteger index) {
     NSMutableArray<UIMenuElement *> *children = [NSMutableArray array];
 
     if (message.text.length || message.previewText.length) {
-        UIAction *copyAction = [UIAction actionWithTitle:@"Copy Text"
+        UIAction *copyAction = [UIAction actionWithTitle:SPKLocalizedString(@"Copy Text")
                                                    image:[SPKAssetUtils menuIconNamed:@"copy"]
                                               identifier:nil
                                                  handler:^(__unused UIAction *a) {
@@ -696,7 +696,7 @@ static SPKDeletedMessageKind SPKDMDetailChipKindForIndex(NSInteger index) {
 
     NSURL *mediaURL = [self localOrRemoteURLForMessage:message];
     if (mediaURL) {
-        UIAction *shareAction = [UIAction actionWithTitle:@"Share"
+        UIAction *shareAction = [UIAction actionWithTitle:SPKLocalizedString(@"Share")
                                                     image:[SPKAssetUtils menuIconNamed:@"share"]
                                                identifier:nil
                                                   handler:^(__unused UIAction *a) {
@@ -706,7 +706,7 @@ static SPKDeletedMessageKind SPKDMDetailChipKindForIndex(NSInteger index) {
         [children addObject:shareAction];
 
         if (![mediaURL isFileURL]) {
-            UIAction *copyLinkAction = [UIAction actionWithTitle:@"Copy Link"
+            UIAction *copyLinkAction = [UIAction actionWithTitle:SPKLocalizedString(@"Copy Link")
                                                            image:[SPKAssetUtils menuIconNamed:@"link"]
                                                       identifier:nil
                                                          handler:^(__unused UIAction *a) {
@@ -717,7 +717,7 @@ static SPKDeletedMessageKind SPKDMDetailChipKindForIndex(NSInteger index) {
         }
     }
 
-    UIAction *deleteAction = [UIAction actionWithTitle:@"Delete"
+    UIAction *deleteAction = [UIAction actionWithTitle:SPKLocalizedString(@"Delete")
                                                  image:[SPKAssetUtils menuIconNamed:@"trash"]
                                             identifier:nil
                                                handler:^(__unused UIAction *a) {

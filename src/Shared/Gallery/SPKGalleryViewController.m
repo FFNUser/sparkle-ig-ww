@@ -1506,13 +1506,13 @@ typedef NS_ENUM(NSInteger, SPKGalleryViewMode) {
 
     NSString *message = [NSString stringWithFormat:@"This will permanently remove %ld file%@ from the gallery.", (long)files.count, files.count == 1 ? @"" : @"s"];
     [SPKIGAlertPresenter presentAlertFromViewController:self
-                                                  title:@"Delete Selected Files?"
+                                                  title:SPKLocalizedString(@"Delete Selected Files?")
                                                 message:message
                                                 actions:@[
-                                                    [SPKIGAlertAction actionWithTitle:@"Cancel"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Cancel")
                                                                                 style:SPKIGAlertActionStyleCancel
                                                                               handler:nil],
-                                                    [SPKIGAlertAction actionWithTitle:@"Delete"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Delete")
                                                                                 style:SPKIGAlertActionStyleDestructive
                                                                               handler:^{
                                                                                   NSError *firstError = nil;
@@ -1572,7 +1572,7 @@ typedef NS_ENUM(NSInteger, SPKGalleryViewMode) {
                                                  }];
 
     UIImage *editImg = SPKGalleryMenuActionIcon(@"edit");
-    UIAction *renameAction = [UIAction actionWithTitle:@"Edit Details"
+    UIAction *renameAction = [UIAction actionWithTitle:SPKLocalizedString(@"Edit Details")
                                                  image:editImg
                                             identifier:nil
                                                handler:^(UIAction *a) {
@@ -1580,7 +1580,7 @@ typedef NS_ENUM(NSInteger, SPKGalleryViewMode) {
                                                }];
 
     UIImage *moveImg = SPKGalleryMenuActionIcon(@"folder_move");
-    UIAction *moveAction = [UIAction actionWithTitle:@"Move to Folder"
+    UIAction *moveAction = [UIAction actionWithTitle:SPKLocalizedString(@"Move to Folder")
                                                image:moveImg
                                           identifier:nil
                                              handler:^(UIAction *a) {
@@ -1589,7 +1589,7 @@ typedef NS_ENUM(NSInteger, SPKGalleryViewMode) {
 
     UIAction *trimAction = nil;
     if (file.mediaType == SPKGalleryMediaTypeVideo || file.mediaType == SPKGalleryMediaTypeAudio) {
-        trimAction = [UIAction actionWithTitle:@"Trim"
+        trimAction = [UIAction actionWithTitle:SPKLocalizedString(@"Trim")
                                          image:SPKGalleryMenuActionIcon(@"trim")
                                     identifier:nil
                                        handler:^(__unused UIAction *a) {
@@ -1599,7 +1599,7 @@ typedef NS_ENUM(NSInteger, SPKGalleryViewMode) {
 
     UIAction *editAction = nil;
     if (file.mediaType == SPKGalleryMediaTypeImage) {
-        editAction = [UIAction actionWithTitle:@"Edit"
+        editAction = [UIAction actionWithTitle:SPKLocalizedString(@"Edit")
                                          image:SPKGalleryMenuActionIcon(@"crop")
                                     identifier:nil
                                        handler:^(__unused UIAction *a) {
@@ -1608,7 +1608,7 @@ typedef NS_ENUM(NSInteger, SPKGalleryViewMode) {
     }
 
     UIImage *shareImg = SPKGalleryMenuActionIcon(@"share");
-    UIAction *shareAction = [UIAction actionWithTitle:@"Share"
+    UIAction *shareAction = [UIAction actionWithTitle:SPKLocalizedString(@"Share")
                                                 image:shareImg
                                            identifier:nil
                                               handler:^(UIAction *a) {
@@ -1629,7 +1629,7 @@ typedef NS_ENUM(NSInteger, SPKGalleryViewMode) {
 
     UIAction *openProfileAction = nil;
     if (file.hasOpenableProfile) {
-        openProfileAction = [UIAction actionWithTitle:@"Open Profile"
+        openProfileAction = [UIAction actionWithTitle:SPKLocalizedString(@"Open Profile")
                                                 image:SPKGalleryMenuActionIcon(@"user_circle")
                                            identifier:nil
                                               handler:^(__unused UIAction *a) {
@@ -1638,18 +1638,18 @@ typedef NS_ENUM(NSInteger, SPKGalleryViewMode) {
     }
 
     UIImage *deleteImg = SPKGalleryMenuActionIcon(@"trash");
-    UIAction *deleteAction = [UIAction actionWithTitle:@"Delete"
+    UIAction *deleteAction = [UIAction actionWithTitle:SPKLocalizedString(@"Delete")
                                                  image:deleteImg
                                             identifier:nil
                                                handler:^(UIAction *a) {
                                                    [SPKIGAlertPresenter presentAlertFromViewController:weakSelf
-                                                                                                 title:@"Delete from Gallery"
-                                                                                               message:@"This will permanently remove this file from the gallery."
+                                                                                                 title:SPKLocalizedString(@"Delete from Gallery")
+                                                                                               message:SPKLocalizedString(@"This will permanently remove this file from the gallery.")
                                                                                                actions:@[
-                                                                                                   [SPKIGAlertAction actionWithTitle:@"Cancel"
+                                                                                                   [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Cancel")
                                                                                                                                style:SPKIGAlertActionStyleCancel
                                                                                                                              handler:nil],
-                                                                                                   [SPKIGAlertAction actionWithTitle:@"Delete"
+                                                                                                   [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Delete")
                                                                                                                                style:SPKIGAlertActionStyleDestructive
                                                                                                                              handler:^{
                                                                                                                                  NSError *err;
@@ -1728,7 +1728,7 @@ typedef NS_ENUM(NSInteger, SPKGalleryViewMode) {
 - (UIMenu *)folderActionsMenuForFolderPath:(NSString *)folderPath {
     __weak typeof(self) weakSelf = self;
     UIImage *folderRenameImg = SPKGalleryMenuActionIcon(@"edit");
-    UIAction *renameAction = [UIAction actionWithTitle:@"Rename Folder"
+    UIAction *renameAction = [UIAction actionWithTitle:SPKLocalizedString(@"Rename Folder")
                                                  image:folderRenameImg
                                             identifier:nil
                                                handler:^(UIAction *a) {
@@ -1736,7 +1736,7 @@ typedef NS_ENUM(NSInteger, SPKGalleryViewMode) {
                                                }];
 
     UIImage *folderDeleteImg = SPKGalleryMenuActionIcon(@"trash");
-    UIAction *deleteAction = [UIAction actionWithTitle:@"Delete Folder"
+    UIAction *deleteAction = [UIAction actionWithTitle:SPKLocalizedString(@"Delete Folder")
                                                  image:folderDeleteImg
                                             identifier:nil
                                                handler:^(UIAction *a) {
@@ -1752,7 +1752,7 @@ typedef NS_ENUM(NSInteger, SPKGalleryViewMode) {
 
 - (void)presentCreateFolder {
     [SPKIGAlertPresenter presentTextInputAlertFromViewController:self
-                                                           title:@"New Folder"
+                                                           title:SPKLocalizedString(@"New Folder")
                                                          message:@""
                                                      placeholder:@"Folder name"
                                                      initialText:nil
@@ -1813,8 +1813,8 @@ typedef NS_ENUM(NSInteger, SPKGalleryViewMode) {
 
 - (void)renameFolder:(NSString *)folderPath {
     [SPKIGAlertPresenter presentTextInputAlertFromViewController:self
-                                                           title:@"Rename Folder"
-                                                         message:@"Enter a new name for this folder."
+                                                           title:SPKLocalizedString(@"Rename Folder")
+                                                         message:SPKLocalizedString(@"Enter a new name for this folder.")
                                                      placeholder:nil
                                                      initialText:[folderPath lastPathComponent]
                                                  autocapitalized:YES
@@ -1886,13 +1886,13 @@ typedef NS_ENUM(NSInteger, SPKGalleryViewMode) {
                         : [NSString stringWithFormat:@"This folder contains %ld file(s). They will be moved to the parent folder.", (long)count];
 
     [SPKIGAlertPresenter presentAlertFromViewController:self
-                                                  title:@"Delete Folder?"
+                                                  title:SPKLocalizedString(@"Delete Folder?")
                                                 message:msg
                                                 actions:@[
-                                                    [SPKIGAlertAction actionWithTitle:@"Cancel"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Cancel")
                                                                                 style:SPKIGAlertActionStyleCancel
                                                                               handler:nil],
-                                                    [SPKIGAlertAction actionWithTitle:@"Delete"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Delete")
                                                                                 style:SPKIGAlertActionStyleDestructive
                                                                               handler:^{
                                                                                   [self performDeleteFolder:folderPath];
@@ -2064,12 +2064,12 @@ typedef NS_ENUM(NSInteger, SPKGalleryViewMode) {
                                                      }]];
     }
 
-    [actions addObject:[SPKIGAlertAction actionWithTitle:@"New folder..."
+    [actions addObject:[SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"New folder...")
                                                    style:SPKIGAlertActionStyleDefault
                                                  handler:^{
                                                      [SPKIGAlertPresenter presentTextInputAlertFromViewController:self
-                                                                                                            title:@"New Folder"
-                                                                                                          message:@"Enter a new folder name, then move the selected files there."
+                                                                                                            title:SPKLocalizedString(@"New Folder")
+                                                                                                          message:SPKLocalizedString(@"Enter a new folder name, then move the selected files there.")
                                                                                                       placeholder:@"Folder name"
                                                                                                       initialText:nil
                                                                                                   autocapitalized:NO
@@ -2087,7 +2087,7 @@ typedef NS_ENUM(NSInteger, SPKGalleryViewMode) {
                                                                                                       cancelBlock:nil];
                                                  }]];
 
-    [actions addObject:[SPKIGAlertAction actionWithTitle:@"Cancel" style:SPKIGAlertActionStyleCancel handler:nil]];
+    [actions addObject:[SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Cancel") style:SPKIGAlertActionStyleCancel handler:nil]];
 
     NSString *message = @"Choose where to move the selected file(s).";
     if (sharesCurrentFolder) {
@@ -2095,7 +2095,7 @@ typedef NS_ENUM(NSInteger, SPKGalleryViewMode) {
         message = [NSString stringWithFormat:@"Currently in %@. Choose where to move the selected file(s).", currentName];
     }
     [SPKIGAlertPresenter presentActionSheetFromViewController:self
-                                                        title:@"Move to Folder"
+                                                        title:SPKLocalizedString(@"Move to Folder")
                                                       message:message
                                                       actions:actions
                                                    forceSheet:YES];

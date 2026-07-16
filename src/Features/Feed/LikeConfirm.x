@@ -613,8 +613,8 @@ static void SPKInstallStoryLikeConfirmHookIfNeeded(void) {
                 if (SPKActiveStoryOverlayForInteractions())
                     SPKStoryReplySideEffects();
             }
-                       title:@"Confirm Quick Reaction"
-                     message:@"Are you sure you want to send this emoji reaction?"];
+                       title:SPKLocalizedString(@"Confirm Quick Reaction")
+                     message:SPKLocalizedString(@"Are you sure you want to send this emoji reaction?")];
         return;
     }
     if (SPKActiveStoryOverlayForInteractions()) {
@@ -633,8 +633,8 @@ static void SPKInstallStoryLikeConfirmHookIfNeeded(void) {
                 if (SPKActiveStoryOverlayForInteractions())
                     SPKStoryReplySideEffects();
             }
-                       title:@"Confirm Quick Reaction"
-                     message:@"Are you sure you want to send this emoji reaction?"];
+                       title:SPKLocalizedString(@"Confirm Quick Reaction")
+                     message:SPKLocalizedString(@"Are you sure you want to send this emoji reaction?")];
         return;
     }
     if (SPKActiveStoryOverlayForInteractions()) {
@@ -655,8 +655,8 @@ static void SPKHookedStoryFooterEmojiQuick(id self, SEL _cmd, id inputView, id b
                     orig_storyFooterEmojiQuick(self, _cmd, inputView, button);
                 SPKStoryReplySideEffects();
             }
-                       title:@"Confirm Quick Reaction"
-                     message:@"Are you sure you want to send this emoji reaction?"];
+                       title:SPKLocalizedString(@"Confirm Quick Reaction")
+                     message:SPKLocalizedString(@"Are you sure you want to send this emoji reaction?")];
         return;
     }
     if (orig_storyFooterEmojiQuick)
@@ -673,8 +673,8 @@ static void SPKHookedStoryFooterEmojiReaction(id self, SEL _cmd, id inputView, i
                     orig_storyFooterEmojiReaction(self, _cmd, inputView, button);
                 SPKStoryReplySideEffects();
             }
-                       title:@"Confirm Quick Reaction"
-                     message:@"Are you sure you want to send this emoji reaction?"];
+                       title:SPKLocalizedString(@"Confirm Quick Reaction")
+                     message:SPKLocalizedString(@"Are you sure you want to send this emoji reaction?")];
         return;
     }
     if (orig_storyFooterEmojiReaction)
@@ -691,8 +691,8 @@ static void SPKHookedStoryQuickReaction(id self, SEL _cmd, id view, id sourceBut
                     orig_storyQuickReaction(self, _cmd, view, sourceButton, emoji);
                 SPKStoryReplySideEffects();
             }
-                       title:@"Confirm Quick Reaction"
-                     message:@"Are you sure you want to send this emoji reaction?"];
+                       title:SPKLocalizedString(@"Confirm Quick Reaction")
+                     message:SPKLocalizedString(@"Are you sure you want to send this emoji reaction?")];
         return;
     }
     if (orig_storyQuickReaction)
@@ -709,8 +709,8 @@ static void SPKHookedStoryPrivateEmojiQuick(id self, SEL _cmd, id button) {
                     orig_storyPrivateEmojiQuick(self, _cmd, button);
                 SPKStoryReplySideEffects();
             }
-                       title:@"Confirm Quick Reaction"
-                     message:@"Are you sure you want to send this emoji reaction?"];
+                       title:SPKLocalizedString(@"Confirm Quick Reaction")
+                     message:SPKLocalizedString(@"Are you sure you want to send this emoji reaction?")];
         return;
     }
     if (orig_storyPrivateEmojiQuick)
@@ -727,8 +727,8 @@ static void SPKHookedDirectReshareQuickReaction(id self, SEL _cmd, id arg) {
                     orig_directReshareQuickReaction(self, _cmd, arg);
                 SPKStoryReplySideEffects();
             }
-                       title:@"Confirm Quick Reaction"
-                     message:@"Are you sure you want to send this emoji reaction?"];
+                       title:SPKLocalizedString(@"Confirm Quick Reaction")
+                     message:SPKLocalizedString(@"Are you sure you want to send this emoji reaction?")];
         return;
     }
     if (orig_directReshareQuickReaction)

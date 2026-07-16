@@ -93,55 +93,55 @@ typedef NS_ENUM(NSInteger, SPKGalleryDeleteSection) {
     }
 
     self.sections = @[
-        @[ [self actionWithTitle:@"Delete All Files" iconName:@"trash" predicate:nil successTitle:@"All files deleted"] ],
+        @[ [self actionWithTitle:SPKLocalizedString(@"Delete All Files") iconName:@"trash" predicate:nil successTitle:@"All files deleted"] ],
         @[
-            [self actionWithTitle:@"Delete All Images"
+            [self actionWithTitle:SPKLocalizedString(@"Delete All Images")
                          iconName:@"photo"
                         predicate:[NSPredicate predicateWithFormat:@"mediaType == %d", SPKGalleryMediaTypeImage]
                      successTitle:@"Images deleted"],
-            [self actionWithTitle:@"Delete All Videos"
+            [self actionWithTitle:SPKLocalizedString(@"Delete All Videos")
                          iconName:@"video"
                         predicate:[NSPredicate predicateWithFormat:@"mediaType == %d", SPKGalleryMediaTypeVideo]
                      successTitle:@"Videos deleted"],
-            [self actionWithTitle:@"Delete All Audio"
+            [self actionWithTitle:SPKLocalizedString(@"Delete All Audio")
                          iconName:@"audio"
                         predicate:[NSPredicate predicateWithFormat:@"mediaType == %d", SPKGalleryMediaTypeAudio]
                      successTitle:@"Audio deleted"]
         ],
         @[
-            [self actionWithTitle:@"Delete Feed Posts"
+            [self actionWithTitle:SPKLocalizedString(@"Delete Feed Posts")
                          iconName:@"feed"
                         predicate:[NSPredicate predicateWithFormat:@"source == %d", SPKGallerySourceFeed]
                      successTitle:@"Feed posts deleted"],
-            [self actionWithTitle:@"Delete Stories"
+            [self actionWithTitle:SPKLocalizedString(@"Delete Stories")
                          iconName:@"story"
                         predicate:[NSPredicate predicateWithFormat:@"source == %d", SPKGallerySourceStories]
                      successTitle:@"Stories deleted"],
-            [self actionWithTitle:@"Delete Reels"
+            [self actionWithTitle:SPKLocalizedString(@"Delete Reels")
                          iconName:@"reels"
                         predicate:[NSPredicate predicateWithFormat:@"source == %d", SPKGallerySourceReels]
                      successTitle:@"Reels deleted"],
-            [self actionWithTitle:@"Delete Thumbnails"
+            [self actionWithTitle:SPKLocalizedString(@"Delete Thumbnails")
                          iconName:@"photo_gallery"
                         predicate:[NSPredicate predicateWithFormat:@"source == %d", SPKGallerySourceThumbnail]
                      successTitle:@"Thumbnails deleted"],
-            [self actionWithTitle:@"Delete DM Media"
+            [self actionWithTitle:SPKLocalizedString(@"Delete DM Media")
                          iconName:@"messages"
                         predicate:[NSPredicate predicateWithFormat:@"source == %d", SPKGallerySourceDMs]
                      successTitle:@"DM media deleted"],
-            [self actionWithTitle:@"Delete Profile Pictures"
+            [self actionWithTitle:SPKLocalizedString(@"Delete Profile Pictures")
                          iconName:@"user_circle"
                         predicate:[NSPredicate predicateWithFormat:@"source == %d", SPKGallerySourceProfile]
                      successTitle:@"Profile pictures deleted"],
-            [self actionWithTitle:@"Delete Instants"
+            [self actionWithTitle:SPKLocalizedString(@"Delete Instants")
                          iconName:@"instants"
                         predicate:[NSPredicate predicateWithFormat:@"source == %d", SPKGallerySourceInstants]
                      successTitle:@"Instants deleted"],
-            [self actionWithTitle:@"Delete Audio Page Media"
+            [self actionWithTitle:SPKLocalizedString(@"Delete Audio Page Media")
                          iconName:@"audio_page"
                         predicate:[NSPredicate predicateWithFormat:@"source == %d", SPKGallerySourceAudioPage]
                      successTitle:@"Audio page media deleted"],
-            [self actionWithTitle:@"Delete Comment Media"
+            [self actionWithTitle:SPKLocalizedString(@"Delete Comment Media")
                          iconName:@"comment"
                         predicate:[NSPredicate predicateWithFormat:@"source == %d", SPKGallerySourceComments]
                      successTitle:@"Comment media deleted"]
@@ -149,7 +149,7 @@ typedef NS_ENUM(NSInteger, SPKGalleryDeleteSection) {
         @[]
     ];
 
-    SPKGalleryDeleteAction *usersAction = [self actionWithTitle:@"Delete by User" iconName:@"users" predicate:nil successTitle:nil];
+    SPKGalleryDeleteAction *usersAction = [self actionWithTitle:SPKLocalizedString(@"Delete by User") iconName:@"users" predicate:nil successTitle:nil];
     usersAction.navigatesToUsers = YES;
     self.sections = @[
         self.sections[0],
@@ -312,10 +312,10 @@ typedef NS_ENUM(NSInteger, SPKGalleryDeleteSection) {
                                                   title:title
                                                 message:message
                                                 actions:@[
-                                                    [SPKIGAlertAction actionWithTitle:@"Cancel"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Cancel")
                                                                                 style:SPKIGAlertActionStyleCancel
                                                                               handler:nil],
-                                                    [SPKIGAlertAction actionWithTitle:@"Delete"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Delete")
                                                                                 style:SPKIGAlertActionStyleDestructive
                                                                               handler:^{
                                                                                   NSFileManager *fm = [NSFileManager defaultManager];

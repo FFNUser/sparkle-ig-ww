@@ -66,11 +66,11 @@
 
 + (NSArray *)sections {
     NSMutableArray *sections = [NSMutableArray arrayWithArray:@[
-        SPKTopicSection(@"Appearance", @[
-            [SPKSetting switchCellWithTitle:@"Glow"
-                                   subtitle:@"Show glow effect around notifications"
+        SPKTopicSection(SPKLocalizedString(@"Appearance"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Glow")
+                                   subtitle:SPKLocalizedString(@"Show glow effect around notifications")
                                 defaultsKey:kSPKNotificationPillGlowEnabledKey],
-            [SPKSetting switchCellWithTitle:@"Liquid Glass"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Liquid Glass")
                                    subtitle:(SPKPrefIsAvailable(kSPKNotificationPillLiquidGlassEnabledKey)
                                                  ? @"Render notifications with iOS 26 Liquid Glass"
                                                  : @"Requires iOS 26 or later")
@@ -82,7 +82,7 @@
                                  subtitle:@""
                                      menu:SPKNotificationPillPositionMenu()],
             [SPKSetting stepperCellWithTitle:@"Duration"
-                                    subtitle:@"Dismiss after %@%@"
+                                    subtitle:SPKLocalizedString(@"Dismiss after %@%@")
                                  defaultsKey:kSPKNotificationPillDurationKey
                                          min:0.5
                                          max:5.0
@@ -91,8 +91,8 @@
                                singularLabel:@" second"]
         ],
                         nil),
-        SPKTopicSection(@"Preview", @[
-            [SPKSetting buttonCellWithTitle:@"Test Notification"
+        SPKTopicSection(SPKLocalizedString(@"Preview"), @[
+            [SPKSetting buttonCellWithTitle:SPKLocalizedString(@"Test Notification")
                                    subtitle:@""
                                        icon:nil
                                      action:^{

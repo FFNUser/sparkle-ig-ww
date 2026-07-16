@@ -121,8 +121,8 @@ static UIMenu *SPKFollowIndicatorModeMenu(void) {
 
 + (SPKSetting *)rootSetting {
     return SPKTopicNavigationSetting(@"Profile", @"user_circle", 24.0, @[
-        SPKTopicSection(@"Action Button", @[
-            [SPKSetting switchCellWithTitle:@"Profile Action Button"
+        SPKTopicSection(SPKLocalizedString(@"Action Button"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Profile Action Button")
                                        icon:SPKSettingsIcon(@"action")
                                 defaultsKey:@"profile_action_btn"],
             SPKActionButtonDefaultActionNavigationSetting(SPKActionButtonSourceProfile),
@@ -130,13 +130,13 @@ static UIMenu *SPKFollowIndicatorModeMenu(void) {
             SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:@"Copy Info Default" icon:SPKSettingsIcon(@"copy") menu:SPKProfileDefaultCopyInfoMenu()], SPKSettingsIcon(@"copy"))
         ],
                         @"Choose what tapping the action button does. Copy Info Default controls what gets copied when Default Tap Action is Copy Info."),
-        SPKTopicSection(@"Profile Picture", @[
-            [SPKSetting switchCellWithTitle:@"Long Press to Expand"
+        SPKTopicSection(SPKLocalizedString(@"Profile Picture"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Long Press to Expand")
                                        icon:SPKSettingsIcon(@"expand")
                                 defaultsKey:@"profile_photo_zoom"]
         ],
-                        @"Long press a profile picture to open it expanded."),
-        SPKTopicSection(@"Indicators", @[
+                        SPKLocalizedString(@"Long press a profile picture to open it expanded.")),
+        SPKTopicSection(SPKLocalizedString(@"Indicators"), @[
             ({
                 SPKSetting *mode = [SPKSetting menuCellWithTitle:@"Following Indicator"
                                                             icon:SPKSettingsIcon(@"user_check")
@@ -158,7 +158,7 @@ static UIMenu *SPKFollowIndicatorModeMenu(void) {
                 // doesn't stand out as modded. On = the colored green/red. Uses a
                 // custom value provider so the legacy fallback (pre-menu users who
                 // had the indicator on keep colored) is reflected accurately.
-                SPKSetting *colorful = [SPKSetting switchCellWithTitle:@"Colorful Indicator"
+                SPKSetting *colorful = [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Colorful Indicator")
                                                                   icon:SPKSettingsIcon(@"palette")
                                                            defaultsKey:kSPKFollowIndicatorColorfulKey];
                 colorful.switchValueProvider = ^BOOL {
@@ -173,19 +173,19 @@ static UIMenu *SPKFollowIndicatorModeMenu(void) {
                 };
                 colorful;
             }),
-            [SPKSetting switchCellWithTitle:@"Hide Notes Bubble"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Notes Bubble")
                                        icon:SPKSettingsIcon(@"notes")
                                 defaultsKey:@"profile_hide_notes_bubble"],
-            [SPKSetting switchCellWithTitle:@"Hide Threads Button"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Threads Button")
                                        icon:SPKSettingsIcon(@"threads")
                                 defaultsKey:@"profile_hide_threads_btn"]
         ],
                         @"Following Indicator shows whether a profile follows you back, under their stats. Text or Icon; it's Instagram's native gray unless you turn on Colorful Indicator for green/red."),
-        SPKTopicSection(@"Confirmation", @[
-            [SPKSetting switchCellWithTitle:@"Confirm Follow"
+        SPKTopicSection(SPKLocalizedString(@"Confirmation"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Follow")
                                        icon:SPKSettingsIcon(@"user_follow")
                                 defaultsKey:@"profile_confirm_follow"],
-            [SPKSetting switchCellWithTitle:@"Confirm Unfollow"
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Unfollow")
                                        icon:SPKSettingsIcon(@"user_unfollow")
                                 defaultsKey:@"profile_confirm_unfollow"]
         ],

@@ -629,13 +629,13 @@ typedef NS_ENUM(NSUInteger, SPKDownloadsHistoryRowKind) {
 
 - (void)clearFinished {
     [SPKIGAlertPresenter presentAlertFromViewController:self
-                                                  title:@"Clear Finished Downloads"
-                                                message:@"Removes finished entries and their staged preview copies. Active and queued downloads are kept; media saved to Photos or the Gallery is not affected."
+                                                  title:SPKLocalizedString(@"Clear Finished Downloads")
+                                                message:SPKLocalizedString(@"Removes finished entries and their staged preview copies. Active and queued downloads are kept; media saved to Photos or the Gallery is not affected.")
                                                 actions:@[
-                                                    [SPKIGAlertAction actionWithTitle:@"Cancel"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Cancel")
                                                                                 style:SPKIGAlertActionStyleCancel
                                                                               handler:nil],
-                                                    [SPKIGAlertAction actionWithTitle:@"Clear"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Clear")
                                                                                 style:SPKIGAlertActionStyleDestructive
                                                                               handler:^{
                                                                                   [[SPKDownloadService shared] clearFinishedHistory];
@@ -654,13 +654,13 @@ typedef NS_ENUM(NSUInteger, SPKDownloadsHistoryRowKind) {
 
     // Navigation actions (top)
     NSMutableArray<UIAction *> *nav = [NSMutableArray array];
-    [nav addObject:[UIAction actionWithTitle:@"Open Gallery"
+    [nav addObject:[UIAction actionWithTitle:SPKLocalizedString(@"Open Gallery")
                                        image:[SPKAssetUtils menuIconNamed:@"sparkle_gallery"]
                                   identifier:nil
                                      handler:^(__unused UIAction *a) {
                                          [SPKGalleryViewController presentGallery];
                                      }]];
-    [nav addObject:[UIAction actionWithTitle:@"Open Photos App"
+    [nav addObject:[UIAction actionWithTitle:SPKLocalizedString(@"Open Photos App")
                                        image:[SPKAssetUtils menuIconNamed:@"photo_gallery"]
                                   identifier:nil
                                      handler:^(__unused UIAction *a) {
@@ -671,7 +671,7 @@ typedef NS_ENUM(NSUInteger, SPKDownloadsHistoryRowKind) {
     // Destructive actions (bottom — inline section keeps them visually grouped last)
     NSMutableArray<UIAction *> *destructive = [NSMutableArray array];
 
-    UIAction *clearAction = [UIAction actionWithTitle:@"Clear Finished"
+    UIAction *clearAction = [UIAction actionWithTitle:SPKLocalizedString(@"Clear Finished")
                                                 image:[SPKAssetUtils menuIconNamed:@"trash"]
                                            identifier:nil
                                               handler:^(__unused UIAction *a) {
@@ -688,7 +688,7 @@ typedef NS_ENUM(NSUInteger, SPKDownloadsHistoryRowKind) {
         }
     }
     if (hasActive) {
-        UIAction *cancelAll = [UIAction actionWithTitle:@"Cancel All Active"
+        UIAction *cancelAll = [UIAction actionWithTitle:SPKLocalizedString(@"Cancel All Active")
                                                   image:[SPKAssetUtils menuIconNamed:@"xmark"]
                                              identifier:nil
                                                 handler:^(__unused UIAction *a) {
@@ -1056,10 +1056,10 @@ static void SPKApplyStatusBadge(SPKDownloadHistoryCell *cell, SPKDownloadState s
                                                       title:title
                                                     message:message
                                                     actions:@[
-                                                        [SPKIGAlertAction actionWithTitle:@"Dismiss"
+                                                        [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Dismiss")
                                                                                     style:SPKIGAlertActionStyleCancel
                                                                                   handler:nil],
-                                                        [SPKIGAlertAction actionWithTitle:@"Retry"
+                                                        [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Retry")
                                                                                     style:SPKIGAlertActionStyleDefault
                                                                                   handler:^{
                                                                                       if (isChild)

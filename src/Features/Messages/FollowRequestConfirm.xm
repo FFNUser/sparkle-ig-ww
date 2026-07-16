@@ -11,8 +11,8 @@
             showConfirmation:^(void) {
                 %orig;
             }
-                       title:@"Confirm Accept Request"
-                     message:@"Are you sure you want to accept this follow request?"];
+                       title:SPKLocalizedString(@"Confirm Accept Request")
+                     message:SPKLocalizedString(@"Are you sure you want to accept this follow request?")];
     } else {
         return %orig;
     }
@@ -25,8 +25,8 @@
             showConfirmation:^(void) {
                 %orig;
             }
-                       title:@"Confirm Decline Request"
-                     message:@"Are you sure you want to decline this follow request?"];
+                       title:SPKLocalizedString(@"Confirm Decline Request")
+                     message:SPKLocalizedString(@"Are you sure you want to decline this follow request?")];
     } else {
         return %orig;
     }

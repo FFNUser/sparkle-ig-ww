@@ -242,7 +242,36 @@ embed_safari_extension() {
     rm -rf "$temp_dir"
 }
 
+
+inject_sparkle_bundle() {
+    local input_ipa="$1"
+    local output_ipa="$2"
+    local temp_dir
+    temp_dir="$(mktemp -d "${TMPDIR:-/tmp}/sparkle-bundle-ipa.XXXXXX")"
+
+    unzip -q "$input_ipa" -d "$temp_dir"
+
+    local app_dir
+    app_dir="$(find "$temp_dir/Payload" -maxdepth 1 -type d -name "*.app" | head -n 1)"
+    if [ -z "$app_dir" ]; then
+        echo -e '\033[1m\033[0;31mCould not find Payload/*.app in IPA.\033[0m'
+        rm -rf "$temp_dir"
+        return 1
+    fi
+
+    echo -e '\033[1m\033[32mInjecting Sparkle.bundle...\033[0m'
+
+    cp -a "$ROOT_DIR/resources/Sparkle.bundle" "$app_dir/"
+
+    cd "$temp_dir" || return 1
+    zip -qr "$ROOT_DIR/$output_ipa" "Payload"
+    cd "$ROOT_DIR" || return 1
+
+    rm -rf "$temp_dir"
+}
+
 inject_custom_icons() {
+
     local input_ipa="$1"
     local output_ipa="$2"
     local temp_dir
@@ -562,9 +591,16 @@ then
         mv -f "$ipa_embed_tmp" "$ipa_stage_input"
     fi
 
+
     # Inject Sparkle alternate icons
     inject_custom_icons "$ipa_stage_input" "$ipa_icons_tmp"
     mv -f "$ipa_icons_tmp" "$ipa_stage_input"
+
+    # Inject Sparkle.bundle
+    ipa_bundle_tmp="$ROOT_DIR/packages/.sparkle-build-tmp-bundle.ipa"
+    inject_sparkle_bundle "$ipa_stage_input" "$ipa_bundle_tmp"
+    mv -f "$ipa_bundle_tmp" "$ipa_stage_input"
+
 
     echo -e '\033[1m\033[32mCreating the IPA file...\033[0m'
     CYAN_FILES=()

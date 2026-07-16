@@ -28,8 +28,8 @@ void SPKMarkDirectThreadSeenAfterReaction(id source);
             %orig;
             SPKMarkDirectThreadSeenAfterReaction(self);
         }
-                   title:@"Confirm Message Double Tap"
-                 message:@"Are you sure you want to double tap this message?"];
+                   title:SPKLocalizedString(@"Confirm Message Double Tap")
+                 message:SPKLocalizedString(@"Are you sure you want to double tap this message?")];
 }
 
 %end
@@ -61,8 +61,8 @@ void SPKMarkDirectThreadSeenAfterReaction(id source);
             %orig;
             SPKMarkDirectThreadSeenAfterReaction(self);
         }
-                   title:@"Confirm Message Reaction"
-                 message:@"Are you sure you want to react to this message?"];
+                   title:SPKLocalizedString(@"Confirm Message Reaction")
+                 message:SPKLocalizedString(@"Are you sure you want to react to this message?")];
 }
 
 %end

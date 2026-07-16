@@ -35,9 +35,13 @@ $(TWEAK_NAME)_CXXFLAGS += -std=c++11
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 
+
 after-stage::
+	@mkdir -p $(THEOS_STAGING_DIR)/Library/Application\ Support/Sparkle.bundle
+	@cp -a resources/Sparkle.bundle/* $(THEOS_STAGING_DIR)/Library/Application\ Support/Sparkle.bundle/
 	@mkdir -p $(THEOS_STAGING_DIR)/Library/Application\ Support/Sparkle.bundle/FFmpegKit
 	@cp -a modules/ffmpegkit/*.framework $(THEOS_STAGING_DIR)/Library/Application\ Support/Sparkle.bundle/FFmpegKit/
+
 	@for fw in $(THEOS_STAGING_DIR)/Library/Application\ Support/Sparkle.bundle/FFmpegKit/*.framework; do \
 		name=$$(basename "$$fw" .framework); \
 		install_name_tool -id "@loader_path/../$$name.framework/$$name" "$$fw/$$name"; \

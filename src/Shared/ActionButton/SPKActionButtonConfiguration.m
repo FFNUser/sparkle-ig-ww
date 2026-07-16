@@ -269,32 +269,32 @@ NSArray<SPKActionMenuSection *> *SPKActionButtonDefaultSectionsForSource(SPKActi
 
     if (moreActions.count > 0) {
         [sections addObject:[SPKActionMenuSection sectionWithIdentifier:@"more"
-                                                                  title:@"More"
+                                                                  title:SPKLocalizedString(@"More")
                                                                iconName:@"more"
                                                             collapsible:YES
                                                                 actions:moreActions]];
     }
     if (audioActions.count > 0) {
         [sections addObject:[SPKActionMenuSection sectionWithIdentifier:@"audio"
-                                                                  title:@"Audio"
+                                                                  title:SPKLocalizedString(@"Audio")
                                                                iconName:@"audio_upload"
                                                             collapsible:YES
                                                                 actions:audioActions]];
     }
     if (zoomActions.count > 0) {
         [sections addObject:[SPKActionMenuSection sectionWithIdentifier:@"zoom"
-                                                                  title:@"Zoom"
+                                                                  title:SPKLocalizedString(@"Zoom")
                                                                iconName:@"zoom"
                                                             collapsible:YES
                                                                 actions:zoomActions]];
     }
     [sections addObject:[SPKActionMenuSection sectionWithIdentifier:@"copy"
-                                                              title:@"Copy"
+                                                              title:SPKLocalizedString(@"Copy")
                                                            iconName:@"copy"
                                                         collapsible:YES
                                                             actions:copyActions]];
     [sections addObject:[SPKActionMenuSection sectionWithIdentifier:@"download"
-                                                              title:@"Download"
+                                                              title:SPKLocalizedString(@"Download")
                                                            iconName:@"download"
                                                         collapsible:YES
                                                             actions:downloadActions]];
@@ -350,7 +350,7 @@ NSArray<SPKActionMenuSection *> *SPKActionButtonDefaultSectionsForSource(SPKActi
         }
         if (!hasBulkSection) {
             SPKActionMenuSection *bulkSection = [SPKActionMenuSection sectionWithIdentifier:@"bulk"
-                                                                                      title:@"Bulk"
+                                                                                      title:SPKLocalizedString(@"Bulk")
                                                                                    iconName:@"carousel"
                                                                                 collapsible:YES
                                                                                     actions:@[]];

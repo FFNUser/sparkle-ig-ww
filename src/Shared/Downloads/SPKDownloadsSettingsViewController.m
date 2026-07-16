@@ -68,12 +68,12 @@
         : @"FFmpegKit is required for video quality options and encoding features.";
 
     return @[
-        SPKTopicSection(@"Behavior", @[
-            [SPKSetting switchCellWithTitle:@"Detect Duplicate Downloads"
+        SPKTopicSection(SPKLocalizedString(@"Behavior"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Detect Duplicate Downloads")
                                        icon:SPKSettingsIcon(@"duplicate")
                                 defaultsKey:kSPKDownloadDetectDuplicatesKey],
             [SPKSetting stepperCellWithTitle:@"Parallel Downloads"
-                                    subtitle:@"%@ concurrent %@"
+                                    subtitle:SPKLocalizedString(@"%@ concurrent %@")
                                         icon:SPKSettingsIcon(@"parallel")
                                  defaultsKey:kSPKDownloadMaxConcurrentKey
                                          min:1
@@ -82,7 +82,7 @@
                                        label:@"downloads"
                                singularLabel:@"download"],
             [SPKSetting stepperCellWithTitle:@"History Limit"
-                                    subtitle:@"%@ saved %@"
+                                    subtitle:SPKLocalizedString(@"%@ saved %@")
                                         icon:SPKSettingsIcon(@"history")
                                  defaultsKey:kSPKDownloadHistoryLimitKey
                                          min:50
@@ -94,8 +94,8 @@
                         @"1. Check before downloading and skip media already saved. Gallery checks are exact; Photos checks cover media Sparkle saved while tracking is enabled.\n"
                         @"2. How many downloads may run at the same time.\n"
                         @"3. How many finished entries the download history keeps before trimming the oldest."),
-        SPKTopicSection(@"Quality", @[
-            [SPKSetting switchCellWithTitle:@"Enhanced Media Resolution"
+        SPKTopicSection(SPKLocalizedString(@"Quality"), @[
+            [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Enhanced Media Resolution")
                                        icon:SPKSettingsIcon(@"hd")
                                 defaultsKey:@"downloads_enhanced_media_resolution"],
             [SPKSetting menuCellWithTitle:@"Default Photo Quality"
@@ -118,7 +118,7 @@
         return [SPKUtils getBoolPref:@"downloads_audio_enabled"];
     };
 
-    SPKSetting *master = [SPKSetting switchCellWithTitle:@"Audio Downloads" icon:SPKSettingsIcon(@"audio_download") defaultsKey:@"downloads_audio_enabled"];
+    SPKSetting *master = [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Audio Downloads") icon:SPKSettingsIcon(@"audio_download") defaultsKey:@"downloads_audio_enabled"];
     master.switchChangeHandler = ^(BOOL isOn) {
         [[NSUserDefaults standardUserDefaults] setBool:isOn forKey:SPKEffectivePreferenceKey(@"downloads_audio_enabled")];
         if (isOn)
@@ -126,13 +126,13 @@
     };
     master.reloadsTableOnSwitchChange = YES; // grey out / re-enable the dependents live
 
-    SPKSetting *pageButton = [SPKSetting switchCellWithTitle:@"Audio Page Button" icon:SPKSettingsIcon(@"audio_page") defaultsKey:@"downloads_audio_page_button"];
+    SPKSetting *pageButton = [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Audio Page Button") icon:SPKSettingsIcon(@"audio_page") defaultsKey:@"downloads_audio_page_button"];
     pageButton.enabledProvider = audioEnabled;
 
     SPKSetting *pageDefault = SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:@"Audio Page Default Action" icon:SPKSettingsIcon(@"action") menu:[self audioPageDefaultActionMenu]], SPKSettingsIcon(@"action"));
     pageDefault.enabledProvider = audioEnabled;
 
-    return SPKTopicSection(@"Audio", @[ master, pageButton, pageDefault ],
+    return SPKTopicSection(SPKLocalizedString(@"Audio"), @[ master, pageButton, pageDefault ],
                            @"Adds audio actions for audio pages and media action buttons.");
 }
 

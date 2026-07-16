@@ -93,9 +93,9 @@
     if (!supportsAlternate) {
         SPKLog(@"AppIcon", @"[Sparkle] abort: supportsAlternateIcons == NO");
         [SPKIGAlertPresenter presentAlertFromViewController:self
-                                                      title:@"App Icons Unavailable"
-                                                    message:@"This device or app build does not allow alternate app icons."
-                                                    actions:@[ [SPKIGAlertAction actionWithTitle:@"OK" style:SPKIGAlertActionStyleDefault handler:nil] ]];
+                                                      title:SPKLocalizedString(@"App Icons Unavailable")
+                                                    message:SPKLocalizedString(@"This device or app build does not allow alternate app icons.")
+                                                    actions:@[ [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"OK") style:SPKIGAlertActionStyleDefault handler:nil] ]];
         return;
     }
 
@@ -111,9 +111,9 @@
 
                             if (error) {
                                 [SPKIGAlertPresenter presentAlertFromViewController:self
-                                                                              title:@"Changing App Icon Failed"
+                                                                              title:SPKLocalizedString(@"Changing App Icon Failed")
                                                                             message:error.localizedDescription ?: @"Unable to change the app icon."
-                                                                            actions:@[ [SPKIGAlertAction actionWithTitle:@"OK" style:SPKIGAlertActionStyleDefault handler:nil] ]];
+                                                                            actions:@[ [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"OK") style:SPKIGAlertActionStyleDefault handler:nil] ]];
                                 return;
                             }
 

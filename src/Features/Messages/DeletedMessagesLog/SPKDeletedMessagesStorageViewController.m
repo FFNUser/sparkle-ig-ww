@@ -126,7 +126,7 @@ static NSString *SPKDMStorageOwnerPK(void) {
                                                             (unsigned long)self.senderCount, self.senderCount == 1 ? @"" : @"s",
                                                             [self formattedSize:totalDisk]];
 
-    [sections addObject:SPKTopicSection(@"Overview", @[
+    [sections addObject:SPKTopicSection(SPKLocalizedString(@"Overview"), @[
                   [SPKSetting valueCellWithTitle:@"Logged"
                                         subtitle:overviewSubtitle
                                             icon:SPKSettingsIcon(@"history")],
@@ -140,9 +140,9 @@ static NSString *SPKDMStorageOwnerPK(void) {
     if (self.otherCount > 0) {
         [breakdown addObject:[SPKSetting valueCellWithTitle:@"Other" subtitle:[NSString stringWithFormat:@"%lu", (unsigned long)self.otherCount] icon:SPKSettingsIcon(@"messages")]];
     }
-    [sections addObject:SPKTopicSection(@"Messages", breakdown, nil)];
+    [sections addObject:SPKTopicSection(SPKLocalizedString(@"Messages"), breakdown, nil)];
 
-    [sections addObject:SPKTopicSection(@"Disk Usage", @[
+    [sections addObject:SPKTopicSection(SPKLocalizedString(@"Disk Usage"), @[
                   [SPKSetting valueCellWithTitle:@"Captured Media"
                                         subtitle:[self formattedSize:self.mediaBytes]
                                             icon:SPKSettingsIcon(@"media")],
@@ -154,7 +154,7 @@ static NSString *SPKDMStorageOwnerPK(void) {
 
     __weak typeof(self) weakSelf = self;
 
-    SPKSetting *clearMedia = [SPKSetting buttonCellWithTitle:@"Clear Captured Media"
+    SPKSetting *clearMedia = [SPKSetting buttonCellWithTitle:SPKLocalizedString(@"Clear Captured Media")
                                                     subtitle:nil
                                                         icon:SPKSettingsIcon(@"media")
                                                       action:^{
@@ -163,7 +163,7 @@ static NSString *SPKDMStorageOwnerPK(void) {
     clearMedia.tintColor = [SPKUtils SPKColor_InstagramDestructive];
     clearMedia.iconTintColor = [SPKUtils SPKColor_InstagramDestructive];
 
-    SPKSetting *clearStaged = [SPKSetting buttonCellWithTitle:@"Clear Media Recovery Cache"
+    SPKSetting *clearStaged = [SPKSetting buttonCellWithTitle:SPKLocalizedString(@"Clear Media Recovery Cache")
                                                      subtitle:nil
                                                          icon:SPKSettingsIcon(@"clock")
                                                        action:^{
@@ -172,7 +172,7 @@ static NSString *SPKDMStorageOwnerPK(void) {
     clearStaged.tintColor = [SPKUtils SPKColor_InstagramDestructive];
     clearStaged.iconTintColor = [SPKUtils SPKColor_InstagramDestructive];
 
-    SPKSetting *clearLog = [SPKSetting buttonCellWithTitle:@"Clear Entire Log"
+    SPKSetting *clearLog = [SPKSetting buttonCellWithTitle:SPKLocalizedString(@"Clear Entire Log")
                                                   subtitle:nil
                                                       icon:SPKSettingsIcon(@"trash")
                                                     action:^{
@@ -181,7 +181,7 @@ static NSString *SPKDMStorageOwnerPK(void) {
     clearLog.tintColor = [SPKUtils SPKColor_InstagramDestructive];
     clearLog.iconTintColor = [SPKUtils SPKColor_InstagramDestructive];
 
-    [sections addObject:SPKTopicSection(@"Maintenance", @[ clearMedia, clearStaged, clearLog ],
+    [sections addObject:SPKTopicSection(SPKLocalizedString(@"Maintenance"), @[ clearMedia, clearStaged, clearLog ],
                                         @"Clearing the media recovery cache keeps lightweight message metadata for best-effort fallback after a future unsend. Clearing the log does not clear the recovery cache.")];
 
     [self replaceSections:sections];
@@ -191,13 +191,13 @@ static NSString *SPKDMStorageOwnerPK(void) {
 
 - (void)confirmClearMedia {
     [SPKIGAlertPresenter presentAlertFromViewController:self
-                                                  title:@"Clear captured media?"
-                                                message:@"This removes all captured media (photos, videos, voice notes) but keeps the message log."
+                                                  title:SPKLocalizedString(@"Clear captured media?")
+                                                message:SPKLocalizedString(@"This removes all captured media (photos, videos, voice notes) but keeps the message log.")
                                                 actions:@[
-                                                    [SPKIGAlertAction actionWithTitle:@"Cancel"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Cancel")
                                                                                 style:SPKIGAlertActionStyleCancel
                                                                               handler:nil],
-                                                    [SPKIGAlertAction actionWithTitle:@"Clear Media"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Clear Media")
                                                                                 style:SPKIGAlertActionStyleDestructive
                                                                               handler:^{
                                                                                   for (SPKDeletedMessage *message in [SPKDeletedMessagesStorage allMessagesForOwnerPK:self.ownerPK]) {
@@ -218,13 +218,13 @@ static NSString *SPKDMStorageOwnerPK(void) {
 
 - (void)confirmClearLog {
     [SPKIGAlertPresenter presentAlertFromViewController:self
-                                                  title:@"Clear entire log?"
-                                                message:@"This removes every logged deleted message and captured media for this account."
+                                                  title:SPKLocalizedString(@"Clear entire log?")
+                                                message:SPKLocalizedString(@"This removes every logged deleted message and captured media for this account.")
                                                 actions:@[
-                                                    [SPKIGAlertAction actionWithTitle:@"Cancel"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Cancel")
                                                                                 style:SPKIGAlertActionStyleCancel
                                                                               handler:nil],
-                                                    [SPKIGAlertAction actionWithTitle:@"Clear"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Clear")
                                                                                 style:SPKIGAlertActionStyleDestructive
                                                                               handler:^{
                                                                                   [SPKDeletedMessagesStorage resetForOwnerPK:self.ownerPK];
@@ -235,13 +235,13 @@ static NSString *SPKDMStorageOwnerPK(void) {
 
 - (void)confirmClearStagedMedia {
     [SPKIGAlertPresenter presentAlertFromViewController:self
-                                                  title:@"Clear media recovery cache?"
-                                                message:@"This removes pre-cached view-once, view-twice, GIF, and sticker media. Lightweight metadata remains so Sparkle can still attempt a best-effort download after a future unsend."
+                                                  title:SPKLocalizedString(@"Clear media recovery cache?")
+                                                message:SPKLocalizedString(@"This removes pre-cached view-once, view-twice, GIF, and sticker media. Lightweight metadata remains so Sparkle can still attempt a best-effort download after a future unsend.")
                                                 actions:@[
-                                                    [SPKIGAlertAction actionWithTitle:@"Cancel"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Cancel")
                                                                                 style:SPKIGAlertActionStyleCancel
                                                                               handler:nil],
-                                                    [SPKIGAlertAction actionWithTitle:@"Clear Media"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Clear Media")
                                                                                 style:SPKIGAlertActionStyleDestructive
                                                                               handler:^{
                                                                                   [SPKDeletedMessagesStorage clearStagedMediaForOwnerPK:self.ownerPK];

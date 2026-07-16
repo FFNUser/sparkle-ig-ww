@@ -61,8 +61,8 @@ static BOOL SPKInstantsLooksLikeEmojiText(NSString *text) {
         showConfirmation:^{
             %orig;
         }
-                   title:@"Confirm Instant Reaction"
-                 message:@"Are you sure you want to react to this Instant?"];
+                   title:SPKLocalizedString(@"Confirm Instant Reaction")
+                 message:SPKLocalizedString(@"Are you sure you want to react to this Instant?")];
 }
 %end
 

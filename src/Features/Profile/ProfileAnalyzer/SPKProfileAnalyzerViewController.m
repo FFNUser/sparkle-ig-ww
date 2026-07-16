@@ -451,9 +451,9 @@ static NSString *SPKPACompact(NSInteger n) {
     NSMutableArray *current = [NSMutableArray array];
     NSMutableArray *changes = [NSMutableArray array];
     if (rep.current) {
-        [current addObject:[self row:SPKPACategoryMutual title:@"Mutual Followers" icon:@"user_check" count:rep.mutualFollowers.count]];
-        [current addObject:[self row:SPKPACategoryNotFollowingBack title:@"Not Following You Back" icon:@"user_unfollow" count:rep.notFollowingYouBack.count]];
-        [current addObject:[self row:SPKPACategoryDontFollowBack title:@"You Don't Follow Back" icon:@"user_follow" count:rep.youDontFollowBack.count]];
+        [current addObject:[self row:SPKPACategoryMutual title:SPKLocalizedString(@"Mutual Followers") icon:@"user_check" count:rep.mutualFollowers.count]];
+        [current addObject:[self row:SPKPACategoryNotFollowingBack title:SPKLocalizedString(@"Not Following You Back") icon:@"user_unfollow" count:rep.notFollowingYouBack.count]];
+        [current addObject:[self row:SPKPACategoryDontFollowBack title:SPKLocalizedString(@"You Don't Follow Back") icon:@"user_follow" count:rep.youDontFollowBack.count]];
     }
 
     // Change rows are driven by the durable change log (accumulated across runs),
@@ -468,11 +468,11 @@ static NSString *SPKPACompact(NSInteger n) {
             unseen[k] = @(unseen[k].integerValue + 1);
     }
     if (self.changeEvents.count > 0) {
-        [changes addObject:[self changeRow:SPKPACategoryNewFollowers title:@"New Followers" icon:@"face_happy" total:total unseen:unseen]];
-        [changes addObject:[self changeRow:SPKPACategoryLostFollowers title:@"Lost Followers" icon:@"face_sad" total:total unseen:unseen]];
-        [changes addObject:[self changeRow:SPKPACategoryYouStartedFollowing title:@"You Started Following" icon:@"user_follow" total:total unseen:unseen]];
-        [changes addObject:[self changeRow:SPKPACategoryYouUnfollowed title:@"You Unfollowed" icon:@"user_unfollow" total:total unseen:unseen]];
-        [changes addObject:[self changeRow:SPKPACategoryProfileUpdates title:@"Profile Updates" icon:@"edit" total:total unseen:unseen]];
+        [changes addObject:[self changeRow:SPKPACategoryNewFollowers title:SPKLocalizedString(@"New Followers") icon:@"face_happy" total:total unseen:unseen]];
+        [changes addObject:[self changeRow:SPKPACategoryLostFollowers title:SPKLocalizedString(@"Lost Followers") icon:@"face_sad" total:total unseen:unseen]];
+        [changes addObject:[self changeRow:SPKPACategoryYouStartedFollowing title:SPKLocalizedString(@"You Started Following") icon:@"user_follow" total:total unseen:unseen]];
+        [changes addObject:[self changeRow:SPKPACategoryYouUnfollowed title:SPKLocalizedString(@"You Unfollowed") icon:@"user_unfollow" total:total unseen:unseen]];
+        [changes addObject:[self changeRow:SPKPACategoryProfileUpdates title:SPKLocalizedString(@"Profile Updates") icon:@"edit" total:total unseen:unseen]];
     }
     self.currentRows = current;
     self.changeRows = changes;
@@ -523,7 +523,7 @@ static NSString *SPKPACompact(NSInteger n) {
                 return;
             }
             [pill setProgress:1.0f animated:YES];
-            [pill showSuccessWithTitle:@"Analysis complete" subtitle:@"Tap to view results" icon:nil];
+            [pill showSuccessWithTitle:@"Analysis complete" subtitle:SPKLocalizedString(@"Tap to view results") icon:nil];
             pill.onTapWhenCompleted = ^{
                 [SPKProfileAnalyzerViewController presentFromTop];
             };
@@ -794,10 +794,10 @@ typedef NS_ENUM(NSInteger, SPKPASectionKind) {
         @"Analysis runs in the background; you'll get a notification when it finishes.\n\n"
         @"All data stays on your device and is never uploaded.";
     [SPKIGAlertPresenter presentAlertFromViewController:self
-                                                  title:@"About Profile Analyzer"
+                                                  title:SPKLocalizedString(@"About Profile Analyzer")
                                                 message:message
                                                 actions:@[
-                                                    [SPKIGAlertAction actionWithTitle:@"OK"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"OK")
                                                                                 style:SPKIGAlertActionStyleCancel
                                                                               handler:nil],
                                                 ]];
@@ -805,13 +805,13 @@ typedef NS_ENUM(NSInteger, SPKPASectionKind) {
 
 - (void)confirmReset {
     [SPKIGAlertPresenter presentAlertFromViewController:self
-                                                  title:@"Reset Profile Analyzer"
-                                                message:@"This deletes all stored snapshots, the change history and visited-profile history. This cannot be undone."
+                                                  title:SPKLocalizedString(@"Reset Profile Analyzer")
+                                                message:SPKLocalizedString(@"This deletes all stored snapshots, the change history and visited-profile history. This cannot be undone.")
                                                 actions:@[
-                                                    [SPKIGAlertAction actionWithTitle:@"Cancel"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Cancel")
                                                                                 style:SPKIGAlertActionStyleCancel
                                                                               handler:nil],
-                                                    [SPKIGAlertAction actionWithTitle:@"Reset"
+                                                    [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Reset")
                                                                                 style:SPKIGAlertActionStyleDestructive
                                                                               handler:^{
                                                                                   [SPKProfileAnalyzerStorage resetAll];

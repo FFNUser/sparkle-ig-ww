@@ -11,8 +11,8 @@
             showConfirmation:^(void) {
                 %orig;
             }
-                       title:@"Confirm Comment Post"
-                     message:@"Are you sure you want to post this comment?"];
+                       title:SPKLocalizedString(@"Confirm Comment Post")
+                     message:SPKLocalizedString(@"Are you sure you want to post this comment?")];
     } else {
         return %orig;
     }
