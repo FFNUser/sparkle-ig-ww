@@ -41,11 +41,7 @@ static NSDictionary *SPKFeatureDefaults(void) {
         @"general_copy_text" : @(NO),
         @"stories_detailed_color_picker" : @(NO),
         @"msgs_disable_screenshot_detection" : @(YES),
-#if SPK_SIDELOAD
         @"tools_hide_testflight_popup" : @(YES),
-#else
-        @"tools_hide_testflight_popup" : @(NO),
-#endif
         @"tools_fix_duplicate_notifications" : @(NO),
         @"general_hold_send_copy_link" : @(YES),
         @"stories_mark_seen_on_like" : @(NO),
