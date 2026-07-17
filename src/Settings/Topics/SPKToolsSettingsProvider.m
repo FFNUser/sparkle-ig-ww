@@ -116,7 +116,7 @@ static NSDictionary *SPKSettingsLockSection(void) {
         flexOpen.userInfo = @{@"enabled" : @NO};
     }
     NSMutableArray *sections = [NSMutableArray arrayWithArray:@[
-        SPKTopicSection(@"FLEX", @[ flexOpen, flexGesture, flexLaunch, flexFocus ], flexFooter),
+        SPKTopicSection(SPKLocalizedString(@"FLEX"), @[ flexOpen, flexGesture, flexLaunch, flexFocus ], flexFooter),
         SPKTopicSection(SPKLocalizedString(@"Tweak"), @[
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Quick Settings Access")
                                 defaultsKey:@"tools_settings_shortcut"

@@ -100,7 +100,7 @@ static NSString *const kGalleryQuickAccessDisabledValue = @"none";
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Show Favorites at Top")
                                        icon:SPKSettingsIcon(@"heart")
                                 defaultsKey:kFavoritesAtTopKey],
-            [SPKSetting navigationCellWithTitle:@"Hidden Sources"
+            [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Hidden Sources")
                                        subtitle:@""
                                            icon:SPKSettingsIcon(@"eye_off")
                                  viewController:[SPKGalleryHiddenSourcesViewController new]]
@@ -233,7 +233,7 @@ static NSString *const kGalleryQuickAccessDisabledValue = @"none";
     };
     [sections addObject:SPKTopicSection(SPKLocalizedString(@"Visibility"), @[
                   accountFilterRow,
-                  [SPKSetting navigationCellWithTitle:@"Hidden Sources"
+                  [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Hidden Sources")
                                              subtitle:@""
                                                  icon:SPKSettingsIcon(@"eye_off")
                                        viewController:[SPKGalleryHiddenSourcesViewController new]]

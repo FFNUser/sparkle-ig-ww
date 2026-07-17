@@ -24,7 +24,7 @@ static NSString *const kSPKFeedActionButtonEnabledKey = @"feed_action_btn";
                                        icon:SPKSettingsIcon(@"action")
                                 defaultsKey:kSPKHeaderButtonEnabledKey],
             SPKFeedHeaderButtonDefaultActionNavigationSetting(),
-            [SPKSetting navigationCellWithTitle:@"Configure Destinations"
+            [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Configure Destinations")
                                        subtitle:@""
                                            icon:SPKSettingsIcon(@"sliders")
                                     navSections:@[
@@ -51,7 +51,7 @@ static NSString *const kSPKFeedActionButtonEnabledKey = @"feed_action_btn";
                         @"Adds a Sparkle button to the home feed header. "
                         @"Tap opens the selected destination. Long press opens the menu of enabled destinations."),
         SPKTopicSection(SPKLocalizedString(@"Layout"), @[
-            SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:@"Main Feed" icon:SPKSettingsIcon(@"feed") menu:SPKMainFeedModeMenu()], SPKSettingsIcon(@"feed")),
+            SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:SPKLocalizedString(@"Main Feed") icon:SPKSettingsIcon(@"feed") menu:SPKMainFeedModeMenu()], SPKSettingsIcon(@"feed")),
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Disable App Icon Gesture")
                                        icon:SPKSettingsIcon(@"app")
                                 defaultsKey:@"feed_disable_appicon_gesture"],

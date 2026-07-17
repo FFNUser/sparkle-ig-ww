@@ -1592,16 +1592,16 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
         [sections addObject:SPKTopicSection(
                                 SPKLocalizedString(@"Video"),
                                 @[
-                                    [SPKSetting menuCellWithTitle:@"Video Codec"
+                                    [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Video Codec")
                                                          subtitle:nil
                                                              menu:[self codecMenu]],
-                                    [SPKSetting menuCellWithTitle:@"Preset"
+                                    [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Preset")
                                                          subtitle:nil
                                                              menu:[self presetMenu]],
-                                    [SPKSetting menuCellWithTitle:@"H.264 Profile"
+                                    [SPKSetting menuCellWithTitle:SPKLocalizedString(@"H.264 Profile")
                                                          subtitle:nil
                                                              menu:[self profileMenu]],
-                                    [SPKSetting menuCellWithTitle:@"H.264 Level"
+                                    [SPKSetting menuCellWithTitle:SPKLocalizedString(@"H.264 Level")
                                                          subtitle:nil
                                                              menu:[self levelMenu]]
                                 ],
@@ -1622,7 +1622,7 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
                                             keyboardType:UIKeyboardTypeNumberPad
                                              defaultsKey:@"downloads_encoding_"
                                                          @"vid_bitrate_kbps"],
-                              [SPKSetting menuCellWithTitle:@"Max Resolution"
+                              [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Max Resolution")
                                                    subtitle:nil
                                                        menu:[self maxResMenu]]
                           ],
@@ -1638,7 +1638,7 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
                                             keyboardType:UIKeyboardTypeNumberPad
                                              defaultsKey:@"downloads_encoding_"
                                                          @"audio_bitrate_kbps"],
-                              [SPKSetting menuCellWithTitle:@"Audio Channels"
+                              [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Audio Channels")
                                                    subtitle:nil
                                                        menu:[self audioChannelsMenu]]
                           ],
@@ -1649,7 +1649,7 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
                 SPKTopicSection(
                     SPKLocalizedString(@"Advanced"),
                     @[
-                        [SPKSetting menuCellWithTitle:@"Pixel Format"
+                        [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Pixel Format")
                                              subtitle:nil
                                                  menu:[self pixelFormatMenu]],
                         [SPKSetting
@@ -1704,7 +1704,7 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
         [sections
             addObject:
                 SPKTopicSection(
-                    SPKLocalizedString(@"Video"), @[ [SPKSetting menuCellWithTitle:@"Encoding Speed"
+                    SPKLocalizedString(@"Video"), @[ [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Encoding Speed")
                                                       subtitle:nil
                                                           menu:[self speedMenu]] ],
                     @"Controls the libx264 encoding effort. Slower presets take "
@@ -1733,19 +1733,19 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
         SPKTopicSection(
             SPKLocalizedString(@"Video"),
             @[
-                [SPKSetting menuCellWithTitle:@"Encoding Speed"
+                [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Encoding Speed")
                                      subtitle:nil
                                          menu:[self speedMenu]],
-                [SPKSetting menuCellWithTitle:@"Video Codec"
+                [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Video Codec")
                                      subtitle:nil
                                          menu:[self codecMenu]],
-                [SPKSetting menuCellWithTitle:@"Preset"
+                [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Preset")
                                      subtitle:nil
                                          menu:[self presetMenu]],
-                [SPKSetting menuCellWithTitle:@"H.264 Profile"
+                [SPKSetting menuCellWithTitle:SPKLocalizedString(@"H.264 Profile")
                                      subtitle:nil
                                          menu:[self profileMenu]],
-                [SPKSetting menuCellWithTitle:@"H.264 Level"
+                [SPKSetting menuCellWithTitle:SPKLocalizedString(@"H.264 Level")
                                      subtitle:nil
                                          menu:[self levelMenu]]
             ],
@@ -1764,7 +1764,7 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
                                placeholder:@"Auto"
                               keyboardType:UIKeyboardTypeNumberPad
                                defaultsKey:@"downloads_encoding_vid_bitrate_kbps"],
-                [SPKSetting menuCellWithTitle:@"Max Resolution"
+                [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Max Resolution")
                                      subtitle:nil
                                          menu:[self maxResMenu]]
             ],
@@ -1777,7 +1777,7 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
                                placeholder:@"128"
                               keyboardType:UIKeyboardTypeNumberPad
                                defaultsKey:@"downloads_encoding_audio_bitrate_kbps"],
-                [SPKSetting menuCellWithTitle:@"Audio Channels"
+                [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Audio Channels")
                                      subtitle:nil
                                          menu:[self audioChannelsMenu]]
             ],
@@ -1785,7 +1785,7 @@ static NSString *SPKMediaCodecBadge(NSString *codec) {
         SPKTopicSection(
             SPKLocalizedString(@"Advanced"),
             @[
-                [SPKSetting menuCellWithTitle:@"Pixel Format"
+                [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Pixel Format")
                                      subtitle:nil
                                          menu:[self pixelFormatMenu]],
                 [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Fast Start")

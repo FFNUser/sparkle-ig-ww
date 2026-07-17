@@ -154,7 +154,7 @@ static NSArray *SPKStoriesSettingsSections(void) {
 @implementation SPKStoriesSettingsProvider
 
 + (SPKSetting *)rootSetting {
-    SPKSetting *setting = [SPKSetting navigationCellWithTitle:@"Stories"
+    SPKSetting *setting = [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Stories")
                                                      subtitle:@""
                                                          icon:SPKSettingsIcon(@"story")
                                                viewController:[[SPKStoriesSettingsViewController alloc] init]];

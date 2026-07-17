@@ -77,7 +77,7 @@ static NSArray *SPKMessagesSettingsSections(void) {
     // Chooses where the manual-seen eye button lives: the top nav bar, or a
     // draggable bubble above the composer. Only meaningful while manual seen is on.
     // Up/Down arrows mirror the placement on both the menu items and the cell.
-    SPKSetting *seenButtonPosition = SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:@"Seen Button Position"
+    SPKSetting *seenButtonPosition = SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:SPKLocalizedString(@"Seen Button Position")
                                                                                               icon:SPKSettingsIcon(@"arrow_up")
                                                                                               menu:SPKSeenButtonPositionMenu()],
                                                                      SPKSettingsIcon(@"arrow_up"));
@@ -93,7 +93,7 @@ static NSArray *SPKMessagesSettingsSections(void) {
 
     // Tri-state control for reformatting the chat-header last-active presence
     // label: Off / Smart / Date & Time.
-    SPKSetting *lastActiveFormat = SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:@"Last Active"
+    SPKSetting *lastActiveFormat = SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:SPKLocalizedString(@"Last Active")
                                                                                             icon:SPKSettingsIcon(@"clock")
                                                                                             menu:SPKLastActiveFormatMenu()],
                                                                    SPKSettingsIcon(@"clock"));
@@ -160,7 +160,7 @@ static NSArray *SPKMessagesSettingsSections(void) {
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Respect Seen Chat List")
                                        icon:SPKSettingsIcon(@"eye")
                                 defaultsKey:@"msgs_deleted_log_respect_seen_list"],
-            [SPKSetting navigationCellWithTitle:@"View Deleted Messages"
+            [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"View Deleted Messages")
                                        subtitle:@""
                                            icon:SPKSettingsIcon(@"channels")
                                  viewController:[SPKDeletedMessagesViewController new]],
@@ -290,7 +290,7 @@ static NSArray *SPKMessagesSettingsSections(void) {
 @implementation SPKMessagesSettingsProvider
 
 + (SPKSetting *)rootSetting {
-    SPKSetting *setting = [SPKSetting navigationCellWithTitle:@"Messages"
+    SPKSetting *setting = [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Messages")
                                                      subtitle:@""
                                                          icon:SPKSettingsIcon(@"messages")
                                                viewController:[[SPKMessagesSettingsViewController alloc] init]];

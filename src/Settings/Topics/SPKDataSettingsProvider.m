@@ -156,19 +156,19 @@
 
     NSArray *sections = @[
         SPKTopicSection(SPKLocalizedString(@"Storage"), @[
-            [SPKSetting navigationCellWithTitle:@"Storage Usage"
+            [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Storage Usage")
                                        subtitle:@""
                                            icon:SPKSettingsIcon(@"info")
                                  viewController:[SPKStorageUsageViewController new]]
         ],
                         SPKLocalizedString(@"See how much on-device space each Sparkle feature uses.")),
         SPKTopicSection(SPKLocalizedString(@"Backup & Transfer"), @[
-            SPKSettingApplyIconTint([SPKSetting navigationCellWithTitle:@"Export"
+            SPKSettingApplyIconTint([SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Export")
                                                                subtitle:@""
                                                                    icon:SPKSettingsIcon(@"arrow_up")
                                                          viewController:[[SPKSettingsTransferSelectionViewController alloc] initWithImportMode:NO]],
                                     [SPKUtils SPKColor_InstagramPrimaryText]),
-            SPKSettingApplyIconTint([SPKSetting navigationCellWithTitle:@"Import"
+            SPKSettingApplyIconTint([SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Import")
                                                                subtitle:@""
                                                                    icon:SPKSettingsIcon(@"arrow_down")
                                                          viewController:[[SPKSettingsTransferSelectionViewController alloc] initWithImportMode:YES]],

@@ -38,13 +38,13 @@
         [[NSUserDefaults standardUserDefaults] setObject:@"high_ignore_dash" forKey:@"downloads_video_quality"];
     }
 
-    SPKSetting *videoQualitySetting = [SPKSetting menuCellWithTitle:@"Default Video Quality"
+    SPKSetting *videoQualitySetting = [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Default Video Quality")
                                                            subtitle:(ffmpegAvailable ? @"" : @"Requires FFmpegKit")
                                                            icon:SPKSettingsIcon(@"video")
                                                                menu:SPKMediaVideoQualityMenu()];
     videoQualitySetting.userInfo = @{@"enabled" : @(ffmpegAvailable)};
 
-    SPKSetting *encodingSettings = [SPKSetting navigationCellWithTitle:@"Encoding Settings"
+    SPKSetting *encodingSettings = [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Encoding Settings")
                                                               subtitle:(ffmpegAvailable ? @"" : @"Requires FFmpegKit")
                                                               icon:SPKSettingsIcon(@"settings")
                                                         viewController:[SPKMediaQualityManager encodingSettingsViewController]];
@@ -53,7 +53,7 @@
         return [SPKMediaQualityManager encodingSettingsSearchSections];
     };
 
-    SPKSetting *encodingLogs = [SPKSetting navigationCellWithTitle:@"View Encoding Logs"
+    SPKSetting *encodingLogs = [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"View Encoding Logs")
                                                           subtitle:@""
                                                               icon:SPKSettingsIcon(@"logs")
                                                     viewController:[SPKMediaFFmpeg logsViewController]];
@@ -72,7 +72,7 @@
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Detect Duplicate Downloads")
                                        icon:SPKSettingsIcon(@"duplicate")
                                 defaultsKey:kSPKDownloadDetectDuplicatesKey],
-            [SPKSetting stepperCellWithTitle:@"Parallel Downloads"
+            [SPKSetting stepperCellWithTitle:SPKLocalizedString(@"Parallel Downloads")
                                     subtitle:SPKLocalizedString(@"%@ concurrent %@")
                                         icon:SPKSettingsIcon(@"parallel")
                                  defaultsKey:kSPKDownloadMaxConcurrentKey
@@ -81,7 +81,7 @@
                                         step:1
                                        label:@"downloads"
                                singularLabel:@"download"],
-            [SPKSetting stepperCellWithTitle:@"History Limit"
+            [SPKSetting stepperCellWithTitle:SPKLocalizedString(@"History Limit")
                                     subtitle:SPKLocalizedString(@"%@ saved %@")
                                         icon:SPKSettingsIcon(@"history")
                                  defaultsKey:kSPKDownloadHistoryLimitKey
@@ -98,7 +98,7 @@
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Enhanced Media Resolution")
                                        icon:SPKSettingsIcon(@"hd")
                                 defaultsKey:@"downloads_enhanced_media_resolution"],
-            [SPKSetting menuCellWithTitle:@"Default Photo Quality"
+            [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Default Photo Quality")
                                      icon:SPKSettingsIcon(@"photo")
                                      menu:SPKMediaPhotoQualityMenu()],
             videoQualitySetting,
@@ -129,7 +129,7 @@
     SPKSetting *pageButton = [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Audio Page Button") icon:SPKSettingsIcon(@"audio_page") defaultsKey:@"downloads_audio_page_button"];
     pageButton.enabledProvider = audioEnabled;
 
-    SPKSetting *pageDefault = SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:@"Audio Page Default Action" icon:SPKSettingsIcon(@"action") menu:[self audioPageDefaultActionMenu]], SPKSettingsIcon(@"action"));
+    SPKSetting *pageDefault = SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:SPKLocalizedString(@"Audio Page Default Action") icon:SPKSettingsIcon(@"action") menu:[self audioPageDefaultActionMenu]], SPKSettingsIcon(@"action"));
     pageDefault.enabledProvider = audioEnabled;
 
     return SPKTopicSection(SPKLocalizedString(@"Audio"), @[ master, pageButton, pageDefault ],

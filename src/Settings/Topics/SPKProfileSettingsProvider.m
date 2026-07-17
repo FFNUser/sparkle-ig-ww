@@ -127,7 +127,7 @@ static UIMenu *SPKFollowIndicatorModeMenu(void) {
                                 defaultsKey:@"profile_action_btn"],
             SPKActionButtonDefaultActionNavigationSetting(SPKActionButtonSourceProfile),
             SPKActionButtonConfigurationNavigationSetting(SPKActionButtonSourceProfile, @"Profile", SPKActionButtonSupportedActionsForSource(SPKActionButtonSourceProfile), SPKActionButtonDefaultSectionsForSource(SPKActionButtonSourceProfile)),
-            SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:@"Copy Info Default" icon:SPKSettingsIcon(@"copy") menu:SPKProfileDefaultCopyInfoMenu()], SPKSettingsIcon(@"copy"))
+            SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:SPKLocalizedString(@"Copy Info Default") icon:SPKSettingsIcon(@"copy") menu:SPKProfileDefaultCopyInfoMenu()], SPKSettingsIcon(@"copy"))
         ],
                         @"Choose what tapping the action button does. Copy Info Default controls what gets copied when Default Tap Action is Copy Info."),
         SPKTopicSection(SPKLocalizedString(@"Profile Picture"), @[
@@ -138,7 +138,7 @@ static UIMenu *SPKFollowIndicatorModeMenu(void) {
                         SPKLocalizedString(@"Long press a profile picture to open it expanded.")),
         SPKTopicSection(SPKLocalizedString(@"Indicators"), @[
             ({
-                SPKSetting *mode = [SPKSetting menuCellWithTitle:@"Following Indicator"
+                SPKSetting *mode = [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Following Indicator")
                                                             icon:SPKSettingsIcon(@"user_check")
                                                             menu:SPKFollowIndicatorModeMenu()];
                 mode.accessoryTextProvider = ^NSString * {

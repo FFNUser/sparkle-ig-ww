@@ -19,7 +19,7 @@ static NSString *const kSPKReelsActionButtonEnabledKey = @"reels_action_btn";
         ],
                         @"Choose what tapping the action button does. Long press opens the full menu."),
         SPKTopicSection(SPKLocalizedString(@"Behavior"), @[
-            [SPKSetting menuCellWithTitle:@"Tap Controls"
+            [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Tap Controls")
                                      icon:SPKSettingsIcon(@"play")
                                      menu:SPKReelsTapControlMenu()],
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Show Progress Scrubber")
@@ -42,7 +42,7 @@ static NSString *const kSPKReelsActionButtonEnabledKey = @"reels_action_btn";
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Prevent Doom Scrolling")
                                        icon:SPKSettingsIcon(@"arrow_down")
                                 defaultsKey:@"reels_prevent_doom_scroll"],
-            [SPKSetting stepperCellWithTitle:@"Doom Scrolling Limit"
+            [SPKSetting stepperCellWithTitle:SPKLocalizedString(@"Doom Scrolling Limit")
                                     subtitle:SPKLocalizedString(@"Only loads %@ %@")
                                  defaultsKey:@"reels_doom_scroll_limit"
                                          min:1
