@@ -9,7 +9,7 @@
 @implementation SPKGallerySettingsProvider
 
 + (SPKSetting *)rootSetting {
-    SPKSetting *gallerySettings = [SPKSetting navigationCellWithTitle:@"Gallery Settings"
+    SPKSetting *gallerySettings = [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Gallery Settings")
                                                              subtitle:nil
                                                                  icon:SPKSettingsIcon(@"settings")
                                                        viewController:[[SPKGallerySettingsViewController alloc] init]];
@@ -25,7 +25,7 @@
                                      action:^(void) {
                                          [SPKGalleryViewController presentGallery];
                                      }],
-            SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:@"Quick Gallery Access" icon:SPKSettingsIcon(@"circle_off") menu:SPKGalleryShortcutTargetMenu()], SPKSettingsIcon(@"circle_off"))
+            SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:SPKLocalizedString(@"Quick Gallery Access") icon:SPKSettingsIcon(@"circle_off") menu:SPKGalleryShortcutTargetMenu()], SPKSettingsIcon(@"circle_off"))
         ],
                         @"Choose the tab that opens Gallery on long press. None disables the action."),
         SPKTopicSection(SPKLocalizedString(@"Settings"), @[

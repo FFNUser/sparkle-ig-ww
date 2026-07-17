@@ -2046,7 +2046,7 @@ typedef NS_ENUM(NSInteger, SPKGalleryViewMode) {
     NSMutableArray<SPKIGAlertAction *> *actions = [NSMutableArray array];
 
     if (!currentIsRoot) {
-        [actions addObject:[SPKIGAlertAction actionWithTitle:@"/"
+        [actions addObject:[SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"/")
                                                        style:SPKIGAlertActionStyleDefault
                                                      handler:^{
                                                          [self assignFolderPath:nil toFiles:files];

@@ -21,7 +21,7 @@
                                                                           }];
     controller.title = @"Open Menu Icon";
 
-    SPKSetting *setting = [SPKSetting navigationCellWithTitle:@"Open Menu Icon"
+    SPKSetting *setting = [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Open Menu Icon")
                                                      subtitle:@""
                                                          icon:SPKSettingsIcon(@"action")
                                                viewController:controller];
@@ -36,7 +36,7 @@
 + (SPKSetting *)appIconSetting {
     SPKAppIconPickerViewController *controller = [[SPKAppIconPickerViewController alloc] initWithSelectedIdentifier:[SPKAppIconCatalog currentAppIconIdentifier]
                                                                                                            onSelect:nil];
-    SPKSetting *setting = [SPKSetting navigationCellWithTitle:@"App Icon"
+    SPKSetting *setting = [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"App Icon")
                                                      subtitle:@""
                                                          icon:SPKSettingsIcon(@"app")
                                                viewController:controller];
@@ -142,7 +142,7 @@
         ],
                         @"Overlay the author and post date on the expanded photo preview."),
         SPKTopicSection(SPKLocalizedString(@"Recommendations"), @[
-            [SPKSetting navigationCellWithTitle:@"Ads"
+            [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Ads")
                                        subtitle:@""
                                            icon:SPKSettingsIcon(@"ads")
                                     navSections:@[
@@ -160,7 +160,7 @@
                                         ],
                                                         nil)
                                     ]],
-            [SPKSetting navigationCellWithTitle:@"Meta AI"
+            [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Meta AI")
                                        subtitle:@""
                                            icon:SPKSettingsIcon(@"meta_ai")
                                     navSections:@[
@@ -178,7 +178,7 @@
                                         ],
                                                         @"Direct includes inbox, composer, recipients, themes, and message menus. Global chrome covers generic Meta AI buttons, placeholders, and branded entry points.")
                                     ]],
-            [SPKSetting navigationCellWithTitle:@"Suggested Users"
+            [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Suggested Users")
                                        subtitle:@""
                                            icon:SPKSettingsIcon(@"users")
                                     navSections:@[
@@ -222,7 +222,7 @@
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Swipe to Close Comments")
                                        icon:SPKSettingsIcon(@"left_right")
                                 defaultsKey:@"general_comments_swipe_close"],
-            SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:@"Swipe Direction" icon:SPKSettingsIcon(@"left_right") menu:SPKSwipeCloseCommentsDirectionMenu()], SPKSettingsIcon(@"left_right")),
+            SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:SPKLocalizedString(@"Swipe Direction") icon:SPKSettingsIcon(@"left_right") menu:SPKSwipeCloseCommentsDirectionMenu()], SPKSettingsIcon(@"left_right")),
         ],
                         @"Adds a horizontal swipe gesture to close comment sheets, in the chosen direction."),
         SPKTopicSection(@"", @[
@@ -246,7 +246,7 @@
                         @"Give each logged-in account its own Sparkle settings."),
         SPKTopicSection(SPKLocalizedString(@"Storage"), @[
             clearCacheSetting,
-            [SPKSetting menuCellWithTitle:@"Auto Clear Cache"
+            [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Auto Clear Cache")
                                      icon:SPKSettingsIcon(@"clock")
                                      menu:SPKCacheAutoClearMenu()]
         ],

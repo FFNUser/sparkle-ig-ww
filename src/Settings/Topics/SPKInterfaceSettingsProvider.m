@@ -60,20 +60,20 @@ static SPKSetting *SPKHideTabSwitch(NSString *title, NSString *iconName, NSStrin
 + (SPKSetting *)rootSetting {
     NSMutableArray *sections = [NSMutableArray arrayWithArray:@[
         SPKTopicSection(SPKLocalizedString(@"Notifications"), @[
-            [SPKSetting navigationCellWithTitle:@"Notifications"
+            [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Notifications")
                                        subtitle:nil
                                            icon:SPKSettingsIcon(@"notification")
                                     navSections:[SPKNotificationSettingsProvider sections]]
         ],
                         nil),
         SPKTopicSection(SPKLocalizedString(@"Tabs"), @[
-            [SPKSetting menuCellWithTitle:@"Launch Tab"
+            [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Launch Tab")
                                      icon:SPKSettingsIcon(@"home")
                                      menu:SPKLaunchTabMenu()],
-            [SPKSetting menuCellWithTitle:@"Tab Icon Order"
+            [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Tab Icon Order")
                                      icon:SPKSettingsIcon(@"sort")
                                      menu:SPKNavigationIconOrderingMenu()],
-            [SPKSetting menuCellWithTitle:@"Swipe Between Tabs"
+            [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Swipe Between Tabs")
                                      icon:SPKSettingsIcon(@"left_right")
                                      menu:SPKSwipeBetweenTabsMenu()],
         ],
@@ -147,7 +147,7 @@ static SPKSetting *SPKHideTabSwitch(NSString *title, NSString *iconName, NSStrin
         // scroll behavior of the (pill/glass) tab bar and is enabled whenever
         // the Liquid Glass pref is on.
         SPKSetting *(^tabBarBehaviorCell)(void) = ^SPKSetting * {
-            SPKSetting *tabBarBehavior = [SPKSetting menuCellWithTitle:@"Tab Bar Behavior"
+            SPKSetting *tabBarBehavior = [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Tab Bar Behavior")
                                                                   icon:nil
                                                                   menu:SPKLiquidGlassTabBarStateMenu()];
             tabBarBehavior.defaultsKey = kSPKPrefInterfaceLiquidGlassTabBarMode;

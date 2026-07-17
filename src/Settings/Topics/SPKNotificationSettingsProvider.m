@@ -75,13 +75,13 @@
                                                  ? @"Render notifications with iOS 26 Liquid Glass"
                                                  : @"Requires iOS 26 or later")
                                    defaultsKey:kSPKNotificationPillLiquidGlassEnabledKey],
-            [SPKSetting menuCellWithTitle:@"Download Progress"
+            [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Download Progress")
                                  subtitle:@""
                                      menu:SPKNotificationProgressSubtitleStyleMenu()],
-            [SPKSetting menuCellWithTitle:@"Position"
+            [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Position")
                                  subtitle:@""
                                      menu:SPKNotificationPillPositionMenu()],
-            [SPKSetting stepperCellWithTitle:@"Duration"
+            [SPKSetting stepperCellWithTitle:SPKLocalizedString(@"Duration")
                                     subtitle:SPKLocalizedString(@"Dismiss after %@%@")
                                  defaultsKey:kSPKNotificationPillDurationKey
                                          min:0.5
@@ -101,7 +101,7 @@
         ],
                         nil),
         SPKTopicSection(@"", @[
-            [SPKSetting navigationCellWithTitle:@"Haptics"
+            [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Haptics")
                                        subtitle:@""
                                            icon:SPKSettingsIcon(@"haptics")
                                     navSections:[self spk_featureSectionsForHaptics:YES]]

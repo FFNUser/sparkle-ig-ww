@@ -127,7 +127,7 @@ SPKSetting *SPKTopicNavigationSetting(NSString *title, NSString *iconName, CGFlo
 }
 
 SPKSetting *SPKActionButtonDefaultActionNavigationSetting(SPKActionButtonSource source) {
-    SPKSetting *setting = [SPKSetting navigationCellWithTitle:@"Default Tap Action"
+    SPKSetting *setting = [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Default Tap Action")
                                                      subtitle:@""
                                                          icon:SPKSettingsIcon(@"action")
                                                viewController:[[SPKActionButtonDefaultActionPickerViewController alloc] initWithSource:source]];
@@ -170,7 +170,7 @@ SPKSetting *SPKActionButtonConfigurationNavigationSetting(SPKActionButtonSource 
     SPKEditActionsListViewController *controller = [[SPKEditActionsListViewController alloc] initWithSource:source topicTitle:topicTitle];
     (void)supportedActions;
     (void)defaultSections;
-    return [SPKSetting navigationCellWithTitle:@"Configure Actions"
+    return [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Configure Actions")
                                       subtitle:@""
                                           icon:SPKSettingsIcon(@"slider")
                                 viewController:controller];
@@ -335,7 +335,7 @@ SPKSetting *SPKFeedHeaderButtonDefaultActionNavigationSetting(void) {
     // A navigation row (like the media action button's Default Tap Action) rather
     // than a menu-button cell: the selected value renders as a full-width subtitle
     // beneath the title instead of squeezing / truncating the title on one line.
-    SPKSetting *setting = [SPKSetting navigationCellWithTitle:@"Default Tap Action"
+    SPKSetting *setting = [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Default Tap Action")
                                                      subtitle:@""
                                                          icon:SPKSettingsIcon(@"action")
                                                viewController:[SPKHeaderButtonDefaultActionPickerViewController new]];

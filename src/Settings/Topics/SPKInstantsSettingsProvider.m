@@ -95,7 +95,7 @@ static NSArray *SPKInstantsSettingsSections(void) {
 }
 
 + (SPKSetting *)rootSetting {
-    SPKSetting *setting = [SPKSetting navigationCellWithTitle:@"Instants"
+    SPKSetting *setting = [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Instants")
                                                      subtitle:@""
                                                          icon:SPKSettingsIcon(@"instants")
                                                viewController:[[SPKInstantsSettingsViewController alloc] init]];
