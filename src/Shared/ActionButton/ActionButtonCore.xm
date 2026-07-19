@@ -2719,11 +2719,11 @@ static BOOL SPKExecuteCommonAction(NSString *identifier,
     if ([identifier isEqualToString:kSPKActionOpenTopicSettings]) {
         NSString *settingsTitle = SPKResolvedSettingsTitleForContext(context);
         if (settingsTitle.length == 0) {
-            SPKNotify(identifier, @"Settings unavailable", nil, @"error_filled", SPKNotificationToneError);
+            SPKNotify(identifier, SPKLocalizedString(@"Settings unavailable"), nil, @"error_filled", SPKNotificationToneError);
             return YES;
         }
 
-        SPKNotify(identifier, @"Opened settings", nil, @"settings", SPKNotificationToneForIconResource(@"settings"));
+        SPKNotify(identifier, SPKLocalizedString(@"Opened settings"), nil, @"settings", SPKNotificationToneForIconResource(@"settings"));
         [SPKUtils showSettingsForTopicTitle:settingsTitle];
         return YES;
     }
@@ -2914,10 +2914,10 @@ BOOL SPKExecuteActionIdentifier(NSString *identifier, SPKActionButtonContext *co
     if ([identifier isEqualToString:kSPKActionOpenTopicSettings]) {
         NSString *settingsTitle = SPKResolvedSettingsTitleForContext(context);
         if (settingsTitle.length == 0) {
-            SPKNotify(identifier, @"Settings unavailable", nil, @"error_filled", SPKNotificationToneError);
+            SPKNotify(identifier, SPKLocalizedString(@"Settings unavailable"), nil, @"error_filled", SPKNotificationToneError);
             return YES;
         }
-        SPKNotify(identifier, @"Opened settings", nil, @"settings", SPKNotificationToneForIconResource(@"settings"));
+        SPKNotify(identifier, SPKLocalizedString(@"Opened settings"), nil, @"settings", SPKNotificationToneForIconResource(@"settings"));
         [SPKUtils showSettingsForTopicTitle:settingsTitle];
         return YES;
     }

@@ -17,7 +17,7 @@
         return [SPKGallerySettingsViewController searchSections];
     };
 
-    return SPKTopicNavigationSetting(@"Gallery", @"sparkle_gallery", 24.0, @[
+    return SPKTopicNavigationSetting(SPKLocalizedString(@"Gallery"), @"sparkle_gallery", 24.0, @[
         SPKTopicSection(SPKLocalizedString(@"Access"), @[
             [SPKSetting buttonCellWithTitle:SPKLocalizedString(@"Open Gallery")
                                    subtitle:@""

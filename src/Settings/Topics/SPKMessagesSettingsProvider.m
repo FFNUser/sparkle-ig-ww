@@ -115,7 +115,7 @@ static NSArray *SPKMessagesSettingsSections(void) {
                                 defaultsKey:kSPKMessagesActionButtonEnabledKey],
             chatMediaActionButton,
             SPKActionButtonDefaultActionNavigationSetting(SPKActionButtonSourceDirect),
-            SPKActionButtonConfigurationNavigationSetting(SPKActionButtonSourceDirect, @"Messages", SPKActionButtonSupportedActionsForSource(SPKActionButtonSourceDirect), SPKActionButtonDefaultSectionsForSource(SPKActionButtonSourceDirect))
+            SPKActionButtonConfigurationNavigationSetting(SPKActionButtonSourceDirect, SPKLocalizedString(@"Messages"), SPKActionButtonSupportedActionsForSource(SPKActionButtonSourceDirect), SPKActionButtonDefaultSectionsForSource(SPKActionButtonSourceDirect))
         ],
                         @"Choose what tapping the action button does. Long press opens the full menu.\n"
                         @"\"Also Show on Chat Media\" adds it to camera-roll photos and videos opened in a chat."),

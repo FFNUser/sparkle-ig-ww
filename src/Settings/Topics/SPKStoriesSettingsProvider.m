@@ -78,7 +78,7 @@ static NSArray *SPKStoriesSettingsSections(void) {
                                        icon:SPKSettingsIcon(@"action")
                                 defaultsKey:kSPKStoriesActionButtonEnabledKey],
             SPKActionButtonDefaultActionNavigationSetting(SPKActionButtonSourceStories),
-            SPKActionButtonConfigurationNavigationSetting(SPKActionButtonSourceStories, @"Stories", SPKActionButtonSupportedActionsForSource(SPKActionButtonSourceStories), SPKActionButtonDefaultSectionsForSource(SPKActionButtonSourceStories))
+            SPKActionButtonConfigurationNavigationSetting(SPKActionButtonSourceStories, SPKLocalizedString(@"Stories"), SPKActionButtonSupportedActionsForSource(SPKActionButtonSourceStories), SPKActionButtonDefaultSectionsForSource(SPKActionButtonSourceStories))
         ],
                         @"1. Add an action button above the bottom story bar.\n"
                         @"2. Choose the default action. Long press opens the full menu."),

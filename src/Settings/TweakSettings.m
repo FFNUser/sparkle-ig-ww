@@ -1,4 +1,5 @@
 #import "TweakSettings.h"
+#import "../Utils.h"
 
 #import "Topics/SPKAboutSettingsProvider.h"
 #import "Topics/SPKDataSettingsProvider.h"
@@ -57,7 +58,7 @@
 }
 
 + (NSString *)title {
-    return @"Sparkle";
+    return SPKLocalizedString(@"Sparkle");
 }
 
 @end

@@ -39,13 +39,13 @@
     }
 
     SPKSetting *videoQualitySetting = [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Default Video Quality")
-                                                           subtitle:(ffmpegAvailable ? @"" : @"Requires FFmpegKit")
+                                                           subtitle:(ffmpegAvailable ? @"" : SPKLocalizedString(@"Requires FFmpegKit"))
                                                            icon:SPKSettingsIcon(@"video")
                                                                menu:SPKMediaVideoQualityMenu()];
     videoQualitySetting.userInfo = @{@"enabled" : @(ffmpegAvailable)};
 
     SPKSetting *encodingSettings = [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Encoding Settings")
-                                                              subtitle:(ffmpegAvailable ? @"" : @"Requires FFmpegKit")
+                                                              subtitle:(ffmpegAvailable ? @"" : SPKLocalizedString(@"Requires FFmpegKit"))
                                                               icon:SPKSettingsIcon(@"settings")
                                                         viewController:[SPKMediaQualityManager encodingSettingsViewController]];
     encodingSettings.userInfo = @{@"enabled" : @(ffmpegAvailable)};
@@ -79,8 +79,8 @@
                                          min:1
                                          max:4
                                         step:1
-                                       label:@"downloads"
-                               singularLabel:@"download"],
+                                       label:SPKLocalizedString(@"downloads")
+                               singularLabel:SPKLocalizedString(@"download")],
             [SPKSetting stepperCellWithTitle:SPKLocalizedString(@"History Limit")
                                     subtitle:SPKLocalizedString(@"%@ saved %@")
                                         icon:SPKSettingsIcon(@"history")

@@ -16,7 +16,7 @@
                                                  [SPKUtils SPKColor_InstagramFavorite]);
     donate.userInfo = @{@"titleFont" : [UIFont systemFontOfSize:20.0 weight:UIFontWeightSemibold]};
 
-    return SPKTopicNavigationSetting(@"About", @"info", 24.0, @[
+    return SPKTopicNavigationSetting(SPKLocalizedString(@"About"), @"info", 24.0, @[
         SPKTopicSection(SPKLocalizedString(@"Support"), @[
             donate
         ],

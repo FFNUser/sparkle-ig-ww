@@ -77,26 +77,26 @@ static SPKSetting *SPKHideTabSwitch(NSString *title, NSString *iconName, NSStrin
                                      icon:SPKSettingsIcon(@"left_right")
                                      menu:SPKSwipeBetweenTabsMenu()],
         ],
-                        @"Control the order of the tabs:\n"
+                        SPKLocalizedString(@"Control the order of the tabs:\n"
                         @"   - Default: Instagram default\n"
                         @"   - Standard: Home, Reels, Messages, Explore, Profile\n"
                         @"   - Classic: Messages in the top right corner\n"
                         @"   - Alternate: Home and Reels tabs swapped\n"
-                        @"To get the old layout back, use Classic and disable swiping between tabs."),
+                        @"To get the old layout back, use Classic and disable swiping between tabs.")),
         SPKTopicSection(@"", @[
-            SPKHideTabSwitch(@"Hide Feed Tab", @"home", @"interface_hide_feed_tab"),
-            SPKHideTabSwitch(@"Hide Explore Tab", @"search", @"interface_hide_explore_tab"),
+            SPKHideTabSwitch(SPKLocalizedString(@"Hide Feed Tab"), @"home", @"interface_hide_feed_tab"),
+            SPKHideTabSwitch(SPKLocalizedString(@"Hide Explore Tab"), @"search", @"interface_hide_explore_tab"),
             ({
                 // Classic puts Messages back in the top-right corner instead of the
                 // bottom bar (that layout is where the Create "+" becomes a tab), so
                 // the "tab" toggle doesn't apply — hide it whenever Create's does show.
-                SPKSetting *hideMessagesTab = SPKHideTabSwitch(@"Hide Messages Tab", @"messages", @"interface_hide_msgs_tab");
+                SPKSetting *hideMessagesTab = SPKHideTabSwitch(SPKLocalizedString(@"Hide Messages Tab"), @"messages", @"interface_hide_msgs_tab");
                 hideMessagesTab.hiddenProvider = ^BOOL {
                     return [[SPKUtils getStringPref:@"interface_nav_order"] isEqualToString:@"classic"];
                 };
                 hideMessagesTab;
             }),
-            SPKHideTabSwitch(@"Hide Reels Tab", @"reels", @"interface_hide_reels_tab"),
+            SPKHideTabSwitch(SPKLocalizedString(@"Hide Reels Tab"), @"reels", @"interface_hide_reels_tab"),
             ({
                 // The create button is only a dedicated tab in the Classic tab
                 // order; the other layouts fold it into the composer, so the
@@ -110,7 +110,7 @@ static SPKSetting *SPKHideTabSwitch(NSString *title, NSString *iconName, NSStrin
                 };
                 hideCreateTab;
             }),
-            SPKHideTabSwitch(@"Hide Profile Tab", @"user_circle", @"interface_hide_profile_tab")
+            SPKHideTabSwitch(SPKLocalizedString(@"Hide Profile Tab"), @"user_circle", @"interface_hide_profile_tab")
         ],
                         nil),
         SPKTopicSection(SPKLocalizedString(@"Explore & Search"), @[
@@ -124,9 +124,9 @@ static SPKSetting *SPKHideTabSwitch(NSString *title, NSString *iconName, NSStrin
                                        icon:SPKSettingsIcon(@"link")
                                 defaultsKey:@"interface_open_clipboard_link"]
         ],
-                        @"1. Hide the grid of suggested posts on the explore tab.\n"
+                        SPKLocalizedString(@"1. Hide the grid of suggested posts on the explore tab.\n"
                         @"2. Hide the trending searches under the explore search bar.\n"
-                        @"3. Long press the Explore tab to open the Instagram URL in your clipboard."),
+                        @"3. Long press the Explore tab to open the Instagram URL in your clipboard.")),
         SPKTopicSection(SPKLocalizedString(@"Capture"), @[
             ({
                 SPKSetting *s = [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide UI on Capture")
@@ -206,7 +206,7 @@ static SPKSetting *SPKHideTabSwitch(NSString *title, NSString *iconName, NSStrin
         }
     }
 
-    return SPKTopicNavigationSetting(@"Interface", @"interface", 24.0, sections);
+    return SPKTopicNavigationSetting(SPKLocalizedString(@"Interface"), @"interface", 24.0, sections);
 }
 
 @end

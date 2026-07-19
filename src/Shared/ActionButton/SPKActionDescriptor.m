@@ -207,10 +207,10 @@
 
 NSString *SPKActionDescriptorDisplayTitle(NSString *identifier, NSString *topicTitle) {
     if ([identifier isEqualToString:kSPKActionOpenTopicSettings] && topicTitle.length > 0) {
-        return [NSString stringWithFormat:@"%@ Settings", topicTitle];
+        return [NSString stringWithFormat:SPKLocalizedString(@"%@ Settings"), topicTitle];
     }
     SPKActionDescriptor *descriptor = [SPKActionDescriptor descriptorForIdentifier:identifier];
-    return descriptor.title ?: @"Action";
+    return descriptor.title ?: SPKLocalizedString(@"Action");
 }
 
 NSString *SPKActionDescriptorIconName(NSString *identifier) {

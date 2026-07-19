@@ -9,15 +9,15 @@ static NSString *const kSPKReelsActionButtonEnabledKey = @"reels_action_btn";
 @implementation SPKReelsSettingsProvider
 
 + (SPKSetting *)rootSetting {
-    return SPKTopicNavigationSetting(@"Reels", @"reels", 24.0, @[
+    return SPKTopicNavigationSetting(SPKLocalizedString(@"Reels"), @"reels", 24.0, @[
         SPKTopicSection(SPKLocalizedString(@"Action Button"), @[
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Reels Action Button")
                                        icon:SPKSettingsIcon(@"action")
                                 defaultsKey:kSPKReelsActionButtonEnabledKey],
             SPKActionButtonDefaultActionNavigationSetting(SPKActionButtonSourceReels),
-            SPKActionButtonConfigurationNavigationSetting(SPKActionButtonSourceReels, @"Reels", SPKActionButtonSupportedActionsForSource(SPKActionButtonSourceReels), SPKActionButtonDefaultSectionsForSource(SPKActionButtonSourceReels))
+            SPKActionButtonConfigurationNavigationSetting(SPKActionButtonSourceReels, SPKLocalizedString(@"Reels"), SPKActionButtonSupportedActionsForSource(SPKActionButtonSourceReels), SPKActionButtonDefaultSectionsForSource(SPKActionButtonSourceReels))
         ],
-                        @"Choose what tapping the action button does. Long press opens the full menu."),
+                        SPKLocalizedString(@"Choose what tapping the action button does. Long press opens the full menu.")),
         SPKTopicSection(SPKLocalizedString(@"Behavior"), @[
             [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Tap Controls")
                                      icon:SPKSettingsIcon(@"play")

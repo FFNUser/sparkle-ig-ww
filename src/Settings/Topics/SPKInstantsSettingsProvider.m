@@ -32,9 +32,9 @@ static NSArray *SPKInstantsSettingsSections(void) {
                                        icon:SPKSettingsIcon(@"action")
                                 defaultsKey:kSPKInstantsActionButtonEnabledKey],
             SPKActionButtonDefaultActionNavigationSetting(SPKActionButtonSourceInstants),
-            SPKActionButtonConfigurationNavigationSetting(SPKActionButtonSourceInstants, @"Instants", SPKActionButtonSupportedActionsForSource(SPKActionButtonSourceInstants), SPKActionButtonDefaultSectionsForSource(SPKActionButtonSourceInstants))
+            SPKActionButtonConfigurationNavigationSetting(SPKActionButtonSourceInstants, SPKLocalizedString(@"Instants"), SPKActionButtonSupportedActionsForSource(SPKActionButtonSourceInstants), SPKActionButtonDefaultSectionsForSource(SPKActionButtonSourceInstants))
         ],
-                        @"Choose what tapping the action button does. Long press opens the full menu."),
+                        SPKLocalizedString(@"Choose what tapping the action button does. Long press opens the full menu.")),
         SPKTopicSection(SPKLocalizedString(@"Privacy"), @[
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Allow Screenshots")
                                        icon:SPKSettingsIcon(@"warning")

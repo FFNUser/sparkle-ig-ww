@@ -174,14 +174,14 @@
                                                          viewController:[[SPKSettingsTransferSelectionViewController alloc] initWithImportMode:YES]],
                                     [SPKUtils SPKColor_InstagramPrimaryText])
         ],
-                        @"Choose to export or import settings, Gallery media, Deleted Messages, and Profile Analyzer data."),
+                        SPKLocalizedString(@"Choose to export or import settings, Gallery media, Deleted Messages, and Profile Analyzer data.")),
         SPKTopicSection(SPKLocalizedString(@"Reset"), @[
             resetAllSettings
         ],
                         SPKLocalizedString(@"Restore every preference to its default value."))
     ];
 
-    return SPKTopicNavigationSetting(@"Data & Settings", @"cloud", 24.0, sections);
+    return SPKTopicNavigationSetting(SPKLocalizedString(@"Data & Settings"), @"cloud", 24.0, sections);
 }
 
 @end

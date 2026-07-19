@@ -10,15 +10,15 @@ static NSString *const kSPKFeedActionButtonEnabledKey = @"feed_action_btn";
 @implementation SPKFeedSettingsProvider
 
 + (SPKSetting *)rootSetting {
-    return SPKTopicNavigationSetting(@"Feed", @"feed", 24.0, @[
+    return SPKTopicNavigationSetting(SPKLocalizedString(@"Feed"), @"feed", 24.0, @[
         SPKTopicSection(SPKLocalizedString(@"Action Button"), @[
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Feed Action Button")
                                        icon:SPKSettingsIcon(@"action")
                                 defaultsKey:kSPKFeedActionButtonEnabledKey],
             SPKActionButtonDefaultActionNavigationSetting(SPKActionButtonSourceFeed),
-            SPKActionButtonConfigurationNavigationSetting(SPKActionButtonSourceFeed, @"Feed", SPKActionButtonSupportedActionsForSource(SPKActionButtonSourceFeed), SPKActionButtonDefaultSectionsForSource(SPKActionButtonSourceFeed))
+            SPKActionButtonConfigurationNavigationSetting(SPKActionButtonSourceFeed, SPKLocalizedString(@"Feed"), SPKActionButtonSupportedActionsForSource(SPKActionButtonSourceFeed), SPKActionButtonDefaultSectionsForSource(SPKActionButtonSourceFeed))
         ],
-                        @"Choose what tapping the action button does. Long press opens the full menu."),
+                        SPKLocalizedString(@"Choose what tapping the action button does. Long press opens the full menu.")),
         SPKTopicSection(SPKLocalizedString(@"Header Shortcut"), @[
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Feed Header Button")
                                        icon:SPKSettingsIcon(@"action")
@@ -45,11 +45,11 @@ static NSString *const kSPKFeedActionButtonEnabledKey = @"feed_action_btn";
                                                                        icon:SPKSettingsIcon(@"settings")
                                                                 defaultsKey:@"feed_header_button_dest_settings"],
                                         ],
-                                                        @"Choose which sheets the header button can open. Enable one for a direct tap, or several to pick from the long-press menu.")
+                                                        SPKLocalizedString(@"Choose which sheets the header button can open. Enable one for a direct tap, or several to pick from the long-press menu."))
                                     ]],
         ],
-                        @"Adds a Sparkle button to the home feed header. "
-                        @"Tap opens the selected destination. Long press opens the menu of enabled destinations."),
+                        SPKLocalizedString(@"Adds a Sparkle button to the home feed header. "
+                        @"Tap opens the selected destination. Long press opens the menu of enabled destinations.")),
         SPKTopicSection(SPKLocalizedString(@"Layout"), @[
             SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:SPKLocalizedString(@"Main Feed") icon:SPKSettingsIcon(@"feed") menu:SPKMainFeedModeMenu()], SPKSettingsIcon(@"feed")),
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Disable App Icon Gesture")
@@ -75,14 +75,14 @@ static NSString *const kSPKFeedActionButtonEnabledKey = @"feed_action_btn";
                                 defaultsKey:@"feed_hide_repost_btn"
                             requiresRestart:YES]
         ],
-                        @"1. Force Instagram's chronological Following feed instead of the algorithmic For You feed. Title stays \"For you\".\n"
+                        SPKLocalizedString(@"1. Force Instagram's chronological Following feed instead of the algorithmic For You feed. Title stays \"For you\".\n"
                         @"2. Stop the feed header logo long-press from opening Instagram's app icon picker. Sparkle has its own in Settings.\n"
                         @"3. Hide the horizontal stories tray at the top of the feed.\n"
                         @"4. Hide the entire home feed, leaving only the header.\n"
                         @"5. Remove algorithmically suggested posts from the feed.\n"
                         @"6. Remove suggested reels from the feed.\n"
                         @"7. Remove suggested Threads posts from the feed.\n"
-                        @"8. Hide the repost button on feed posts."),
+                        @"8. Hide the repost button on feed posts.")),
         SPKTopicSection(SPKLocalizedString(@"Metrics"), @[
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Like Count")
                                        icon:SPKSettingsIcon(@"heart")
@@ -110,7 +110,7 @@ static NSString *const kSPKFeedActionButtonEnabledKey = @"feed_action_btn";
                                        icon:SPKSettingsIcon(@"volume_off")
                                 defaultsKey:@"feed_expanded_vid_start_muted"],
         ],
-                        @"Long press media in the feed to open it expanded. Autoplay controls prevent feed videos from playing automatically."),
+                        SPKLocalizedString(@"Long press media in the feed to open it expanded. Autoplay controls prevent feed videos from playing automatically.")),
         SPKTopicSection(SPKLocalizedString(@"Refresh"), @[
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Disable Home Tab Refresh")
                                        icon:SPKSettingsIcon(@"home")
@@ -119,7 +119,7 @@ static NSString *const kSPKFeedActionButtonEnabledKey = @"feed_action_btn";
                                        icon:SPKSettingsIcon(@"arrow_cw")
                                 defaultsKey:@"feed_disable_bg_refresh"]
         ],
-                        @"Prevents refreshes from re-tapping the Home tab or from background app activity."),
+                        SPKLocalizedString(@"Prevents refreshes from re-tapping the Home tab or from background app activity.")),
         SPKTopicSection(SPKLocalizedString(@"Confirmation"), @[
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Like")
                                        icon:SPKSettingsIcon(@"heart")
@@ -134,7 +134,7 @@ static NSString *const kSPKFeedActionButtonEnabledKey = @"feed_action_btn";
                                        icon:SPKSettingsIcon(@"comment")
                                 defaultsKey:@"feed_confirm_post_comment"]
         ],
-                        @"Shows confirmation alerts before the enabled feed actions are performed.")
+                        SPKLocalizedString(@"Shows confirmation alerts before the enabled feed actions are performed."))
     ]);
 }
 
