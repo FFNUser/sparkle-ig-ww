@@ -9,14 +9,14 @@
 
 + (SPKSetting *)rootSetting {
     // Larger, bolder title so it reads in balance with the 44pt donate glyph.
-    SPKSetting *donate = SPKSettingApplyIconTint([SPKSetting linkCellWithTitle:@"Donate to waffle"
+    SPKSetting *donate = SPKSettingApplyIconTint([SPKSetting linkCellWithTitle:SPKLocalizedString(@"Donate to waffle")
                                                                       subtitle:@""
                                                                           icon:[SPKAssetUtils instagramIconNamed:@"donate" pointSize:44.0]
                                                                            url:@"https://ko-fi.com/sparkle_ig"],
                                                  [SPKUtils SPKColor_InstagramFavorite]);
     donate.userInfo = @{@"titleFont" : [UIFont systemFontOfSize:20.0 weight:UIFontWeightSemibold]};
 
-    return SPKTopicNavigationSetting(@"About", @"info", 24.0, @[
+    return SPKTopicNavigationSetting(SPKLocalizedString(@"About"), @"info", 24.0, @[
         SPKTopicSection(SPKLocalizedString(@"Support"), @[
             donate
         ],
@@ -38,14 +38,14 @@
                                  subtitle:SPKLocalizedString(@"Sparkle developer")
                                  imageUrl:@"https://avatars.githubusercontent.com/u/117626247?v=4"
                                       url:@"https://github.com/efibalogh"],
-            [SPKSetting linkCellWithTitle:@"View Source Code"
+            [SPKSetting linkCellWithTitle:SPKLocalizedString(@"View Source Code")
                                  subtitle:SPKLocalizedString(@"Tap to open on GitHub")
                                  imageUrl:@"https://i.imgur.com/BBUNzeP.png"
                                       url:@"https://github.com/efibalogh/sparkle-ig"]
         ],
                         nil),
         SPKTopicSection(SPKLocalizedString(@"Community"), @[
-            [SPKSetting linkCellWithTitle:@"Telegram Channel"
+            [SPKSetting linkCellWithTitle:SPKLocalizedString(@"Telegram Channel")
                                  subtitle:SPKLocalizedString(@"Join the community for updates and support")
                                  imageUrl:@"https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/960px-Telegram_logo.svg.png"
                                       url:@"https://t.me/sparkle_ig"]

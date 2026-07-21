@@ -114,7 +114,7 @@ static char kSPKActionsListSwitchAssocKey;
 
 - (SPKBulkActionMenuEditViewController *)bulkEditorControllerForKind:(NSString *)kind {
     if ([kind isEqualToString:@"copy_info"]) {
-        return [[SPKBulkActionMenuEditViewController alloc] initWithTitle:@"Copy Info Menu"
+        return [[SPKBulkActionMenuEditViewController alloc] initWithTitle:SPKLocalizedString(@"Copy Info Menu")
                                                                    source:self.source
                                                          supportedActions:SPKProfileCopyInfoSupportedActions()
                                                         configuredActions:SPKProfileConfiguredCopyInfoActions()

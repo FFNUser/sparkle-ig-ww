@@ -19,7 +19,7 @@
                                                                               SPKPreferenceSetObject(iconName.length > 0 ? iconName : @"action", @"general_action_btn_default_menu_icon");
                                                                               [[NSNotificationCenter defaultCenter] postNotificationName:SPKActionButtonConfigurationDidChangeNotification object:nil];
                                                                           }];
-    controller.title = @"Open Menu Icon";
+    controller.title = SPKLocalizedString(@"Open Menu Icon");
 
     SPKSetting *setting = [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Open Menu Icon")
                                                      subtitle:@""
@@ -42,7 +42,7 @@
                                                viewController:controller];
     setting.accessoryTextProvider = ^NSString * {
         SPKAppIconItem *currentIcon = [SPKAppIconCatalog currentAppIcon];
-        return currentIcon.displayName.length > 0 ? currentIcon.displayName : @"Default";
+        return currentIcon.displayName.length > 0 ? currentIcon.displayName : SPKLocalizedString(@"Default");
     };
     return setting;
 }
@@ -63,7 +63,7 @@
                                       icon:SPKSettingsIcon(@"info")
                                     action:^{
                                         NSString *message =
-                                            @"Each logged-in account gets its own Sparkle settings. A newly seen "
+                                            SPKLocalizedString(@"Each logged-in account gets its own Sparkle settings. A newly seen "
                                             @"account starts from your current settings until you change something.\n\n"
                                             @"These stay shared across all accounts:\n"
                                             @"•  App icon\n"
@@ -76,7 +76,7 @@
                                             @"•  Download encoding settings\n"
                                             @"•  Gallery view, sort & lock\n"
                                             @"•  Disable All (master switch)\n\n"
-                                            @"Gallery media ownership is controlled separately in Gallery settings.";
+                                            @"Gallery media ownership is controlled separately in Gallery settings.");
 
                                         [SPKIGAlertPresenter presentAlertFromViewController:topMostController()
                                                                                       title:SPKLocalizedString(@"Per-Account Settings")
@@ -92,9 +92,9 @@
                                                              action:^(void) {
                                                                  unsigned long long freedBytes = [SPKUtils cleanCacheReturningFreedBytes];
                                                                  NSString *subtitle = freedBytes > 0
-                                                                                          ? [NSString stringWithFormat:@"Freed %@", [NSByteCountFormatter stringFromByteCount:(long long)freedBytes countStyle:NSByteCountFormatterCountStyleFile]]
-                                                                                          : @"Cache was already empty";
-                                                                 SPKNotify(kSPKNotificationSettingsClearCache, @"Cache cleared", subtitle, @"circle_check_filled", SPKNotificationToneForIconResource(@"circle_check_filled"));
+                                                                                          ? [NSString stringWithFormat:SPKLocalizedString(@"Freed %@"), [NSByteCountFormatter stringFromByteCount:(long long)freedBytes countStyle:NSByteCountFormatterCountStyleFile]]
+                                                                                          : SPKLocalizedString(@"Cache was already empty");
+                                                                 SPKNotify(kSPKNotificationSettingsClearCache, SPKLocalizedString(@"Cache cleared"), subtitle, @"circle_check_filled", SPKNotificationToneForIconResource(@"circle_check_filled"));
                                                              }];
     clearCacheSetting.tintColor = [SPKUtils SPKColor_InstagramDestructive];
     clearCacheSetting.iconTintColor = [SPKUtils SPKColor_InstagramDestructive];
@@ -102,7 +102,7 @@
         return [SPKUtils formattedCacheSize];
     };
 
-    return SPKTopicNavigationSetting(@"General", @"settings", 24.0, @[
+    return SPKTopicNavigationSetting(SPKLocalizedString(@"General"), @"settings", 24.0, @[
         SPKTopicSection(SPKLocalizedString(@"Behavior"), @[
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Copy Text")
                                        icon:SPKSettingsIcon(@"text")
@@ -117,10 +117,10 @@
                                        icon:SPKSettingsIcon(@"link")
                                 defaultsKey:@"general_hold_send_copy_link"],
         ],
-                        @"1. Long press on text fields across the app to copy.\n"
+                        SPKLocalizedString(@"1. Long press on text fields across the app to copy.\n"
                         @"2. Search bars will no longer save recent searches.\n"
                         @"3. Remove the user and tracking identifiers from copied links.\n"
-                        @"4. Long press the send/share button to copy the post link."),
+                        @"4. Long press the send/share button to copy the post link.")),
         SPKTopicSection(SPKLocalizedString(@"Sharing"), @[
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Create Group Button")
                                        icon:SPKSettingsIcon(@"group")
@@ -132,15 +132,15 @@
                                        icon:SPKSettingsIcon(@"messages")
                                 defaultsKey:@"general_confirm_send"],
         ],
-                        @"1. Hide the create group button from the Instagram send/share sheet.\n"
+                        SPKLocalizedString(@"1. Hide the create group button from the Instagram send/share sheet.\n"
                         @"2. Show a confirmation alert when you try to create a group.\n"
-                        @"3. Show a confirmation alert when sending a post."),
+                        @"3. Show a confirmation alert when sending a post.")),
         SPKTopicSection(SPKLocalizedString(@"Media Preview"), @[
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Show Media Info")
                                        icon:SPKSettingsIcon(@"info")
                                 defaultsKey:@"general_preview_show_metadata"],
         ],
-                        @"Overlay the author and post date on the expanded photo preview."),
+                        SPKLocalizedString(@"Overlay the author and post date on the expanded photo preview.")),
         SPKTopicSection(SPKLocalizedString(@"Recommendations"), @[
             [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Ads")
                                        subtitle:@""
@@ -176,7 +176,7 @@
                                             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Global AI Chrome")
                                                                 defaultsKey:@"general_hide_meta_ai_global"]
                                         ],
-                                                        @"Direct includes inbox, composer, recipients, themes, and message menus. Global chrome covers generic Meta AI buttons, placeholders, and branded entry points.")
+                                                        SPKLocalizedString(@"Direct includes inbox, composer, recipients, themes, and message menus. Global chrome covers generic Meta AI buttons, placeholders, and branded entry points."))
                                     ]],
             [SPKSetting navigationCellWithTitle:SPKLocalizedString(@"Suggested Users")
                                        subtitle:@""
@@ -203,7 +203,7 @@
                                                         nil)
                                     ]]
         ],
-                        @"Control ads, AI and suggestions visibility by surface."),
+                        SPKLocalizedString(@"Control ads, AI and suggestions visibility by surface.")),
         SPKTopicSection(SPKLocalizedString(@"Comments"), @[
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Copy Comment")
                                        icon:SPKSettingsIcon(@"copy")
@@ -215,16 +215,16 @@
                                        icon:SPKSettingsIcon(@"photo")
                                 defaultsKey:@"general_comments_gallery_upload"]
         ],
-                        @"1. Adds a copy action to comment menus.\n"
+                        SPKLocalizedString(@"1. Adds a copy action to comment menus.\n"
                         @"2. Adds Photos, Share, Gallery, and link actions for GIF and photo comments.\n"
-                        @"3. Long-press the composer's photo button to attach an image from your Sparkle Gallery."),
+                        @"3. Long-press the composer's photo button to attach an image from your Sparkle Gallery.")),
         SPKTopicSection(@"", @[
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Swipe to Close Comments")
                                        icon:SPKSettingsIcon(@"left_right")
                                 defaultsKey:@"general_comments_swipe_close"],
             SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:SPKLocalizedString(@"Swipe Direction") icon:SPKSettingsIcon(@"left_right") menu:SPKSwipeCloseCommentsDirectionMenu()], SPKSettingsIcon(@"left_right")),
         ],
-                        @"Adds a horizontal swipe gesture to close comment sheets, in the chosen direction."),
+                        SPKLocalizedString(@"Adds a horizontal swipe gesture to close comment sheets, in the chosen direction.")),
         SPKTopicSection(@"", @[
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Comment Like")
                                        icon:SPKSettingsIcon(@"heart")
@@ -236,21 +236,21 @@
                                        icon:SPKSettingsIcon(@"gift")
                                 defaultsKey:@"general_comments_hide_gifts_button"],
         ],
-                        @"1. Shows a confirmation alert before liking a comment.\n"
+                        SPKLocalizedString(@"1. Shows a confirmation alert before liking a comment.\n"
                         @"2. Removes commerce carousels in comment threads.\n"
-                        @"3. Removes the gift shortcut from the comment composer."),
+                        @"3. Removes the gift shortcut from the comment composer.")),
         SPKTopicSection(SPKLocalizedString(@"Accounts"), @[
             [self perAccountSetting],
             [self perAccountInfoSetting]
         ],
-                        @"Give each logged-in account its own Sparkle settings."),
+                        SPKLocalizedString(@"Give each logged-in account its own Sparkle settings.")),
         SPKTopicSection(SPKLocalizedString(@"Storage"), @[
             clearCacheSetting,
             [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Auto Clear Cache")
                                      icon:SPKSettingsIcon(@"clock")
                                      menu:SPKCacheAutoClearMenu()]
         ],
-                        @"Automatic clearing is checked whenever Instagram becomes active."),
+                        SPKLocalizedString(@"Automatic clearing is checked whenever Instagram becomes active.")),
         SPKTopicSection(SPKLocalizedString(@"App"), @[
             [self appIconSetting],
             [self defaultMenuIconSetting],
@@ -258,7 +258,7 @@
                                        icon:SPKSettingsIcon(@"haptics")
                                 defaultsKey:@"general_disable_haptics"]
         ],
-                        @"Choose an app icon directly from the icons exposed by the installed Instagram bundle. Open Menu Icon sets the glyph shown on every action button whose default tap action is Open Menu. Disable App Haptics turns off haptics and vibrations within the app."),
+                        SPKLocalizedString(@"Choose an app icon directly from the icons exposed by the installed Instagram bundle. Open Menu Icon sets the glyph shown on every action button whose default tap action is Open Menu. Disable App Haptics turns off haptics and vibrations within the app.")),
     ]);
 }
 

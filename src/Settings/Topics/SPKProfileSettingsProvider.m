@@ -26,7 +26,7 @@ static UIImage *SPKProfileSettingsMenuIcon(NSString *resourceName) {
 
 static UICommand *SPKProfileActionDefaultCommand(NSString *title, NSString *resourceName, NSString *value) {
     UIImage *image = SPKProfileSettingsMenuIcon(resourceName);
-    return [UICommand commandWithTitle:title
+    return [UICommand commandWithTitle:SPKLocalizedString(title)
                                  image:image
                                 action:@selector(menuChanged:)
                           propertyList:@{
@@ -49,7 +49,7 @@ static UIMenu *SPKProfileActionDefaultMenu(void) {
 
 static UICommand *SPKProfileDefaultCopyInfoCommand(NSString *title, NSString *resourceName, NSString *value) {
     UIImage *image = SPKProfileSettingsMenuIcon(resourceName);
-    return [UICommand commandWithTitle:title
+    return [UICommand commandWithTitle:SPKLocalizedString(title)
                                  image:image
                                 action:@selector(menuChanged:)
                           propertyList:@{
@@ -99,7 +99,7 @@ static BOOL SPKFollowIndicatorColorfulEnabled(void) {
 // No per-item icons: the menu is a plain title list. The cell keeps a static
 // leading icon instead of reflecting the selection.
 static UICommand *SPKFollowIndicatorModeCommand(NSString *title, NSString *value) {
-    return [UICommand commandWithTitle:title
+    return [UICommand commandWithTitle:SPKLocalizedString(title)
                                  image:nil
                                 action:@selector(menuChanged:)
                           propertyList:@{
@@ -120,16 +120,16 @@ static UIMenu *SPKFollowIndicatorModeMenu(void) {
 @implementation SPKProfileSettingsProvider
 
 + (SPKSetting *)rootSetting {
-    return SPKTopicNavigationSetting(@"Profile", @"user_circle", 24.0, @[
+    return SPKTopicNavigationSetting(SPKLocalizedString(@"Profile"), @"user_circle", 24.0, @[
         SPKTopicSection(SPKLocalizedString(@"Action Button"), @[
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Profile Action Button")
                                        icon:SPKSettingsIcon(@"action")
                                 defaultsKey:@"profile_action_btn"],
             SPKActionButtonDefaultActionNavigationSetting(SPKActionButtonSourceProfile),
-            SPKActionButtonConfigurationNavigationSetting(SPKActionButtonSourceProfile, @"Profile", SPKActionButtonSupportedActionsForSource(SPKActionButtonSourceProfile), SPKActionButtonDefaultSectionsForSource(SPKActionButtonSourceProfile)),
+            SPKActionButtonConfigurationNavigationSetting(SPKActionButtonSourceProfile, SPKLocalizedString(@"Profile"), SPKActionButtonSupportedActionsForSource(SPKActionButtonSourceProfile), SPKActionButtonDefaultSectionsForSource(SPKActionButtonSourceProfile)),
             SPKSettingApplySelectedMenuIcon([SPKSetting menuCellWithTitle:SPKLocalizedString(@"Copy Info Default") icon:SPKSettingsIcon(@"copy") menu:SPKProfileDefaultCopyInfoMenu()], SPKSettingsIcon(@"copy"))
         ],
-                        @"Choose what tapping the action button does. Copy Info Default controls what gets copied when Default Tap Action is Copy Info."),
+                        SPKLocalizedString(@"Choose what tapping the action button does. Copy Info Default controls what gets copied when Default Tap Action is Copy Info.")),
         SPKTopicSection(SPKLocalizedString(@"Profile Picture"), @[
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Long Press to Expand")
                                        icon:SPKSettingsIcon(@"expand")
@@ -144,12 +144,12 @@ static UIMenu *SPKFollowIndicatorModeMenu(void) {
                 mode.accessoryTextProvider = ^NSString * {
                     NSString *value = SPKFollowIndicatorEffectiveMode();
                     if ([value isEqualToString:kSPKFollowIndicatorModeText])
-                        return @"Text";
+                        return SPKLocalizedString(@"Text");
                     if ([value isEqualToString:kSPKFollowIndicatorModeIcon])
-                        return @"Icon";
+                        return SPKLocalizedString(@"Icon");
                     if ([value isEqualToString:kSPKFollowIndicatorModeIconText])
-                        return @"Icon + Text";
-                    return @"Off";
+                        return SPKLocalizedString(@"Icon + Text");
+                    return SPKLocalizedString(@"Off");
                 };
                 mode;
             }),
@@ -180,7 +180,7 @@ static UIMenu *SPKFollowIndicatorModeMenu(void) {
                                        icon:SPKSettingsIcon(@"threads")
                                 defaultsKey:@"profile_hide_threads_btn"]
         ],
-                        @"Following Indicator shows whether a profile follows you back, under their stats. Text or Icon; it's Instagram's native gray unless you turn on Colorful Indicator for green/red."),
+                        SPKLocalizedString(@"Following Indicator shows whether a profile follows you back, under their stats. Text or Icon; it's Instagram's native gray unless you turn on Colorful Indicator for green/red.")),
         SPKTopicSection(SPKLocalizedString(@"Confirmation"), @[
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Confirm Follow")
                                        icon:SPKSettingsIcon(@"user_follow")
@@ -189,7 +189,7 @@ static UIMenu *SPKFollowIndicatorModeMenu(void) {
                                        icon:SPKSettingsIcon(@"user_unfollow")
                                 defaultsKey:@"profile_confirm_unfollow"]
         ],
-                        @"Shows confirmation alerts before the enabled profile actions are performed.")
+                        SPKLocalizedString(@"Shows confirmation alerts before the enabled profile actions are performed."))
     ]);
 }
 
