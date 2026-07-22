@@ -1,5 +1,6 @@
 #import "SPKWhatsNewViewController.h"
 #import "../Tweak.h"
+#import "../Utils.h"
 
 @implementation SPKWhatsNewViewController
 

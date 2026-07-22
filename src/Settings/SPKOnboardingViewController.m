@@ -1,4 +1,5 @@
 #import "SPKOnboardingViewController.h"
+#import "../Utils.h"
 
 @implementation SPKOnboardingViewController
 

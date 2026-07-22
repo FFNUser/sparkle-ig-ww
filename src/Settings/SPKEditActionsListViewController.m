@@ -419,7 +419,7 @@ static char kSPKActionsListSwitchAssocKey;
         resetConfigurationGroupFromController:self
                                         title:SPKLocalizedString(@"Reset to Default")
                                       message:SPKLocalizedString(@"This restores this surface's menu sections, default action, and bulk menus to their defaults. The action button stays enabled and other surfaces are unaffected.")
-                                 confirmTitle:@"Reset"
+                                 confirmTitle:SPKLocalizedString(@"Reset")
                                          keys:[self configurationResetKeys]
                                       onReset:^{
                                           typeof(self) strongSelf = weakSelf;
