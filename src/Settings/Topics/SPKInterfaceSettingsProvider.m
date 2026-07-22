@@ -33,7 +33,7 @@ static BOOL SPKEnablingKeyHidesEveryTab(NSString *keyToEnable) {
 // this is the only tab still visible its switch is greyed out and can't be
 // turned on, while any already-hidden tab can always be turned back on.
 static SPKSetting *SPKHideTabSwitch(NSString *title, NSString *iconName, NSString *key) {
-    SPKSetting *row = [SPKSetting switchCellWithTitle:title
+    SPKSetting *row = [SPKSetting switchCellWithTitle:SPKLocalizedString(title)
                                                  icon:SPKSettingsIcon(iconName)
                                           defaultsKey:key
                                       requiresRestart:YES];
@@ -77,12 +77,12 @@ static SPKSetting *SPKHideTabSwitch(NSString *title, NSString *iconName, NSStrin
                                      icon:SPKSettingsIcon(@"left_right")
                                      menu:SPKSwipeBetweenTabsMenu()],
         ],
-                        @"Control the order of the tabs:\n"
+                        SPKLocalizedString(@"Control the order of the tabs:\n"
                         @"   - Default: Instagram default\n"
                         @"   - Standard: Home, Reels, Messages, Explore, Profile\n"
                         @"   - Classic: Messages in the top right corner\n"
                         @"   - Alternate: Home and Reels tabs swapped\n"
-                        @"To get the old layout back, use Classic and disable swiping between tabs."),
+                        @"To get the old layout back, use Classic and disable swiping between tabs.")),
         SPKTopicSection(@"", @[
             SPKHideTabSwitch(@"Hide Feed Tab", @"home", @"interface_hide_feed_tab"),
             SPKHideTabSwitch(@"Hide Explore Tab", @"search", @"interface_hide_explore_tab"),
@@ -124,9 +124,9 @@ static SPKSetting *SPKHideTabSwitch(NSString *title, NSString *iconName, NSStrin
                                        icon:SPKSettingsIcon(@"link")
                                 defaultsKey:@"interface_open_clipboard_link"]
         ],
-                        @"1. Hide the grid of suggested posts on the explore tab.\n"
+                        SPKLocalizedString(@"1. Hide the grid of suggested posts on the explore tab.\n"
                         @"2. Hide the trending searches under the explore search bar.\n"
-                        @"3. Long press the Explore tab to open the Instagram URL in your clipboard."),
+                        @"3. Long press the Explore tab to open the Instagram URL in your clipboard.")),
         SPKTopicSection(SPKLocalizedString(@"Capture"), @[
             ({
                 SPKSetting *s = [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide UI on Capture")
@@ -178,9 +178,9 @@ static SPKSetting *SPKHideTabSwitch(NSString *title, NSString *iconName, NSStrin
                           progressiveBlur,
                           tabBarBehaviorCell(),
                       ],
-                                                @"1. Force-enable Instagram's native Liquid Glass UI.\n"
+                                                SPKLocalizedString(@"1. Force-enable Instagram's native Liquid Glass UI.\n"
                                                 @"2. Restore the native progressive navigation bar blur on scroll.\n"
-                                                @"3. Configure how the tab bar behaves while scrolling.")];
+                                                @"3. Configure how the tab bar behaves while scrolling."))];
         } else {
             // Pre-iOS 26 can't render the glass material, but the same tab bar
             // experiment gates still reshape the bar into the floating pill.
@@ -200,13 +200,13 @@ static SPKSetting *SPKHideTabSwitch(NSString *title, NSString *iconName, NSStrin
                           pillTabBar,
                           tabBarBehaviorCell(),
                       ],
-                                                @"Reshape the tab bar into the iOS 26-style floating pill. "
+                                                SPKLocalizedString(@"Reshape the tab bar into the iOS 26-style floating pill. "
                                                 @"The Liquid Glass material itself requires iOS 26, so on this "
-                                                @"device only the pill shape is applied.")];
+                                                @"device only the pill shape is applied."))];
         }
     }
 
-    return SPKTopicNavigationSetting(@"Interface", @"interface", 24.0, sections);
+    return SPKTopicNavigationSetting(SPKLocalizedString(@"Interface"), @"interface", 24.0, sections);
 }
 
 @end

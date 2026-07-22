@@ -90,7 +90,7 @@ static NSDictionary *SPKSettingsLockSection(void) {
         return [SPKSettingsLockManager sharedManager].isLockEnabled;
     };
 
-    return SPKTopicSection(SPKLocalizedString(@"Settings Lock"), @[ lockSwitch, changePasscode ], @"Require the independent Settings passcode or biometrics when opening Sparkle Settings, including topic sheets.");
+    return SPKTopicSection(SPKLocalizedString(@"Settings Lock"), @[ lockSwitch, changePasscode ], SPKLocalizedString(@"Require the independent Settings passcode or biometrics when opening Sparkle Settings, including topic sheets."));
 }
 
 @implementation SPKToolsSettingsProvider
@@ -98,8 +98,8 @@ static NSDictionary *SPKSettingsLockSection(void) {
 + (SPKSetting *)rootSetting {
     BOOL flexInstalled = SPKFlexIsBundled();
     NSString *flexFooter = flexInstalled
-                               ? @"The first time FLEX is opened in a session it can take a moment to initialize."
-                               : @"FLEX is not installed. Rebuild with \"--flex\" flag or install \"libFLEX.dylib\" to enable these options.";
+                               ? SPKLocalizedString(@"The first time FLEX is opened in a session it can take a moment to initialize.")
+                               : SPKLocalizedString(@"FLEX is not installed. Rebuild with \"--flex\" flag or install \"libFLEX.dylib\" to enable these options.");
     SPKSetting *flexGesture = [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Three-finger Hold") defaultsKey:@"tools_flex_instagram"];
     SPKSetting *flexLaunch = [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Open on App Launch") defaultsKey:@"tools_flex_app_launch"];
     SPKSetting *flexFocus = [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Open on App Focus") defaultsKey:@"tools_flex_app_start"];
@@ -141,10 +141,10 @@ static NSDictionary *SPKSettingsLockSection(void) {
                                          [SPKWhatsNewViewController presentFromViewController:nil onFinish:nil];
                                      }],
         ],
-                        @"1. Opens settings when long pressing the Home tab or the next visible tab if the Home tab is hidden.\n"
+                        SPKLocalizedString(@"1. Opens settings when long pressing the Home tab or the next visible tab if the Home tab is hidden.\n"
                         @"2. Haptic feedback when the settings shortcut gesture fires.\n"
                         @"3. Open Sparkle settings automatically every time Instagram launches.\n"
-                        @"4. Suppress every Sparkle feature hook, leaving only the shortcut to reach this screen. Use to isolate crashes."),
+                        @"4. Suppress every Sparkle feature hook, leaving only the shortcut to reach this screen. Use to isolate crashes.")),
 
         SPKTopicSection(@"", @[
             [SPKSetting buttonCellWithTitle:SPKLocalizedString(@"Reset Safe Startup Mode")
@@ -167,7 +167,7 @@ static NSDictionary *SPKSettingsLockSection(void) {
                                          [SPKUtils showRestartConfirmation];
                                      }],
 #endif
-        ], @"Clears failed-launch counters and temporary hook suppression. Tap this button if it appears as if features aren't enabled."),
+        ], SPKLocalizedString(@"Clears failed-launch counters and temporary hook suppression. Tap this button if it appears as if features aren't enabled.")),
         SPKSettingsLockSection(),
     ]];
 
@@ -184,13 +184,13 @@ static NSDictionary *SPKSettingsLockSection(void) {
                                                   defaultsKey:@"tools_disable_safe_mode"]];
 
     NSString *instagramFooter =
-        @"1. Suppresses the Instagram Beta update popup.\n"
+        SPKLocalizedString(@"1. Suppresses the Instagram Beta update popup.\n"
         @"2. Drops the duplicate in-app banner sideloaded Instagram posts while the notification extension is already delivering the same push. Only acts while the app is foregrounded.\n"
-        @"3. Makes Instagram not reset settings after subsequent crashes. Use at your own risk.";
+        @"3. Makes Instagram not reset settings after subsequent crashes. Use at your own risk.");
 
     [sections addObject:SPKTopicSection(SPKLocalizedString(@"Instagram"), instagramCells, instagramFooter)];
 
-    return SPKTopicNavigationSetting(@"Tools", @"toolbox", 24.0, sections);
+    return SPKTopicNavigationSetting(SPKLocalizedString(@"Tools"), @"toolbox", 24.0, sections);
 }
 
 @end

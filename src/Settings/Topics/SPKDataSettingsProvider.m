@@ -21,7 +21,7 @@
 @implementation SPKSettingsTransferSelectionViewController
 
 - (instancetype)initWithImportMode:(BOOL)importMode {
-    if ((self = [super initWithTitle:(importMode ? @"Import" : @"Export") sections:@[] reduceMargin:NO])) {
+    if ((self = [super initWithTitle:(importMode ? SPKLocalizedString(@"Import") : SPKLocalizedString(@"Export")) sections:@[] reduceMargin:NO])) {
         _importMode = importMode;
         _includeSettings = YES;
         _includeGallery = YES;
@@ -94,9 +94,9 @@
     profileAnalyzerRow.userInfo = @{@"checkmarked" : @(self.includeProfileAnalyzer)};
 
     NSString *footer = self.importMode
-                           ? @"Preferences are restored, replacing your current values for the imported scope. "
+                           ? SPKLocalizedString(@"Preferences are restored, replacing your current values for the imported scope. "
                              @"Gallery, Deleted Messages, and Profile Analyzer data are merged in — existing items are never deleted. "
-                             @"A restart prompt appears only when preferences change."
+                             @"A restart prompt appears only when preferences change.")
                            : nil;
     NSArray *sections = @[ SPKTopicSection(@"", @[ settingsRow, galleryRow, deletedMessagesRow, profileAnalyzerRow ], footer) ];
     [self replaceSections:sections];
@@ -174,14 +174,14 @@
                                                          viewController:[[SPKSettingsTransferSelectionViewController alloc] initWithImportMode:YES]],
                                     [SPKUtils SPKColor_InstagramPrimaryText])
         ],
-                        @"Choose to export or import settings, Gallery media, Deleted Messages, and Profile Analyzer data."),
+                        SPKLocalizedString(@"Choose to export or import settings, Gallery media, Deleted Messages, and Profile Analyzer data.")),
         SPKTopicSection(SPKLocalizedString(@"Reset"), @[
             resetAllSettings
         ],
                         SPKLocalizedString(@"Restore every preference to its default value."))
     ];
 
-    return SPKTopicNavigationSetting(@"Data & Settings", @"cloud", 24.0, sections);
+    return SPKTopicNavigationSetting(SPKLocalizedString(@"Data & Settings"), @"cloud", 24.0, sections);
 }
 
 @end

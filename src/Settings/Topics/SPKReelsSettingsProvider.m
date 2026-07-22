@@ -9,15 +9,15 @@ static NSString *const kSPKReelsActionButtonEnabledKey = @"reels_action_btn";
 @implementation SPKReelsSettingsProvider
 
 + (SPKSetting *)rootSetting {
-    return SPKTopicNavigationSetting(@"Reels", @"reels", 24.0, @[
+    return SPKTopicNavigationSetting(SPKLocalizedString(@"Reels"), @"reels", 24.0, @[
         SPKTopicSection(SPKLocalizedString(@"Action Button"), @[
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Reels Action Button")
                                        icon:SPKSettingsIcon(@"action")
                                 defaultsKey:kSPKReelsActionButtonEnabledKey],
             SPKActionButtonDefaultActionNavigationSetting(SPKActionButtonSourceReels),
-            SPKActionButtonConfigurationNavigationSetting(SPKActionButtonSourceReels, @"Reels", SPKActionButtonSupportedActionsForSource(SPKActionButtonSourceReels), SPKActionButtonDefaultSectionsForSource(SPKActionButtonSourceReels))
+            SPKActionButtonConfigurationNavigationSetting(SPKActionButtonSourceReels, SPKLocalizedString(@"Reels"), SPKActionButtonSupportedActionsForSource(SPKActionButtonSourceReels), SPKActionButtonDefaultSectionsForSource(SPKActionButtonSourceReels))
         ],
-                        @"Choose what tapping the action button does. Long press opens the full menu."),
+                        SPKLocalizedString(@"Choose what tapping the action button does. Long press opens the full menu.")),
         SPKTopicSection(SPKLocalizedString(@"Behavior"), @[
             [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Tap Controls")
                                      icon:SPKSettingsIcon(@"play")
@@ -33,7 +33,7 @@ static NSString *const kSPKReelsActionButtonEnabledKey = @"reels_action_btn";
                                        icon:SPKSettingsIcon(@"arrow_cw")
                                 defaultsKey:@"reels_disable_tab_refresh"]
         ],
-                        @"Tap Controls changes what happens when you tap on a reel. Auto-unmuting controls prevent reels from unmuting when volume or silent mode changes."),
+                        SPKLocalizedString(@"Tap Controls changes what happens when you tap on a reel. Auto-unmuting controls prevent reels from unmuting when volume or silent mode changes.")),
         SPKTopicSection(SPKLocalizedString(@"Limits"), @[
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Disable Scrolling Reels")
                                        icon:SPKSettingsIcon(@"autoscroll")
@@ -48,12 +48,12 @@ static NSString *const kSPKReelsActionButtonEnabledKey = @"reels_action_btn";
                                          min:1
                                          max:100
                                         step:1
-                                       label:@"reels"
-                               singularLabel:@"reel"]
+                                       label:SPKLocalizedString(@"reels")
+                               singularLabel:SPKLocalizedString(@"reel")]
         ],
-                        @"1. Stop vertical swiping between reels so the current reel stays put.\n"
+                        SPKLocalizedString(@"1. Stop vertical swiping between reels so the current reel stays put.\n"
                         @"2. Stop loading more reels once the limit below is reached.\n"
-                        @"3. How many reels load before Prevent Doom Scrolling kicks in."),
+                        @"3. How many reels load before Prevent Doom Scrolling kicks in.")),
         SPKTopicSection(SPKLocalizedString(@"Layout"), @[
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Hide Reels Header")
                                        icon:SPKSettingsIcon(@"reels")
@@ -96,7 +96,7 @@ static NSString *const kSPKReelsActionButtonEnabledKey = @"reels_action_btn";
                                        icon:SPKSettingsIcon(@"repost")
                                 defaultsKey:@"reels_confirm_repost"]
         ],
-                        @"Shows confirmation alerts before the enabled reels actions are performed.")
+                        SPKLocalizedString(@"Shows confirmation alerts before the enabled reels actions are performed."))
     ]);
 }
 

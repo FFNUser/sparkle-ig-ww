@@ -944,7 +944,7 @@ static NSString *SPKTransferArchiveFilename(BOOL includeSettings, BOOL includeGa
     };
     void (^failExport)(NSString *) = ^(NSString *message) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [pill showErrorWithTitle:@"Export failed" subtitle:message icon:nil];
+            [pill showErrorWithTitle:SPKLocalizedString(@"Export failed") subtitle:message icon:nil];
         });
     };
 
@@ -1106,7 +1106,7 @@ static NSString *SPKTransferArchiveFilename(BOOL includeSettings, BOOL includeGa
         dispatch_async(dispatch_get_main_queue(), ^{
             if (scoped)
                 [url stopAccessingSecurityScopedResource];
-            [pill showErrorWithTitle:@"Import failed" subtitle:message icon:nil];
+            [pill showErrorWithTitle:SPKLocalizedString(@"Import failed") subtitle:message icon:nil];
         });
     };
 
@@ -1367,8 +1367,8 @@ static NSString *SPKTransferArchiveFilename(BOOL includeSettings, BOOL includeGa
     BOOL currentScope = (scope == SPKTransferAccountScopeCurrentAccount);
     NSString *username = [SPKAccountManager currentAccountUsername];
     NSString *message = currentScope
-                            ? [NSString stringWithFormat:@"This restores every Sparkle preference for %@ to its default value. Other accounts and Gallery media are left untouched. This cannot be undone.", username.length ? username : @"the active account"]
-                            : @"This restores every Sparkle preference to its default value. Gallery media is left untouched. This cannot be undone.";
+                            ? [NSString stringWithFormat:SPKLocalizedString(@"This restores every Sparkle preference for %@ to its default value. Other accounts and Gallery media are left untouched. This cannot be undone."), username.length ? username : SPKLocalizedString(@"the active account")]
+                            : SPKLocalizedString(@"This restores every Sparkle preference to its default value. Gallery media is left untouched. This cannot be undone.");
     NSString *currentPK = [SPKAccountManager currentAccountPK];
     [SPKIGAlertPresenter presentAlertFromViewController:controller
                                                   title:SPKLocalizedString(@"Reset All Settings")
@@ -1396,8 +1396,8 @@ static NSString *SPKTransferArchiveFilename(BOOL includeSettings, BOOL includeGa
                                                                                       [[SPKSettingsLockManager sharedManager] removePasscode];
                                                                                   }
                                                                                   SPKNotify(kSPKNotificationSettingsImport,
-                                                                                            @"Settings reset",
-                                                                                            currentScope ? @"This account's Sparkle preferences were restored to defaults." : @"All Sparkle preferences were restored to defaults.",
+                                                                                            SPKLocalizedString(@"Settings reset"),
+                                                                                            currentScope ? SPKLocalizedString(@"This account's Sparkle preferences were restored to defaults.") : SPKLocalizedString(@"All Sparkle preferences were restored to defaults."),
                                                                                             @"circle_check_filled",
                                                                                             SPKNotificationToneForIconResource(@"circle_check_filled"));
                                                                                   [SPKUtils showRestartConfirmation];
@@ -1418,7 +1418,7 @@ static NSString *SPKTransferArchiveFilename(BOOL includeSettings, BOOL includeGa
                                                     [SPKIGAlertAction actionWithTitle:SPKLocalizedString(@"Cancel")
                                                                                 style:SPKIGAlertActionStyleCancel
                                                                               handler:nil],
-                                                    [SPKIGAlertAction actionWithTitle:(confirmTitle.length ? confirmTitle : @"Reset")
+                                                    [SPKIGAlertAction actionWithTitle:(confirmTitle.length ? confirmTitle : SPKLocalizedString(@"Reset"))
                                                                                 style:SPKIGAlertActionStyleDestructive
                                                                               handler:^{
                                                                                   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -1432,8 +1432,8 @@ static NSString *SPKTransferArchiveFilename(BOOL includeSettings, BOOL includeGa
                                                                                           [defaults removeObjectForKey:effectiveKey];
                                                                                   }
                                                                                   SPKNotify(kSPKNotificationSettingsImport,
-                                                                                            @"Reset to default",
-                                                                                            @"These settings were restored to their default values.",
+                                                                                            SPKLocalizedString(@"Reset to default"),
+                                                                                            SPKLocalizedString(@"These settings were restored to their default values."),
                                                                                             @"circle_check_filled",
                                                                                             SPKNotificationToneForIconResource(@"circle_check_filled"));
                                                                                   dispatch_async(dispatch_get_main_queue(), ^{

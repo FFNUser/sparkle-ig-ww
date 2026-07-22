@@ -13,7 +13,7 @@
 @implementation SPKStorageUsageViewController
 
 - (instancetype)init {
-    return [super initWithTitle:@"Storage" sections:@[] reduceMargin:NO];
+    return [super initWithTitle:SPKLocalizedString(@"Storage") sections:@[] reduceMargin:NO];
 }
 
 - (void)viewDidLoad {
@@ -40,26 +40,26 @@
     NSMutableArray *sections = [NSMutableArray array];
 
     [sections addObject:SPKTopicSection(SPKLocalizedString(@"Overview"), @[
-                  [SPKSetting valueCellWithTitle:@"Total"
+                  [SPKSetting valueCellWithTitle:SPKLocalizedString(@"Total")
                                         subtitle:[self formattedKey:@"total"]
                                             icon:SPKSettingsIcon(@"info")],
               ],
-                                        @"On-device storage used by all Sparkle data. Instagram's own cache is not included.")];
+                                        SPKLocalizedString(@"On-device storage used by all Sparkle data. Instagram's own cache is not included."))];
 
     [sections addObject:SPKTopicSection(SPKLocalizedString(@"Breakdown"), @[
-                  [SPKSetting valueCellWithTitle:@"Gallery"
+                  [SPKSetting valueCellWithTitle:SPKLocalizedString(@"Gallery")
                                         subtitle:[self formattedKey:@"gallery"]
                                             icon:SPKSettingsIcon(@"sparkle_gallery")],
-                  [SPKSetting valueCellWithTitle:@"Downloads"
+                  [SPKSetting valueCellWithTitle:SPKLocalizedString(@"Downloads")
                                         subtitle:[self formattedKey:@"downloads"]
                                             icon:SPKSettingsIcon(@"download")],
-                  [SPKSetting valueCellWithTitle:@"Deleted Messages"
+                  [SPKSetting valueCellWithTitle:SPKLocalizedString(@"Deleted Messages")
                                         subtitle:[self formattedKey:@"deletedMessages"]
                                             icon:SPKSettingsIcon(@"channels")],
-                  [SPKSetting valueCellWithTitle:@"Profile Analyzer"
+                  [SPKSetting valueCellWithTitle:SPKLocalizedString(@"Profile Analyzer")
                                         subtitle:[self formattedKey:@"profileAnalyzer"]
                                             icon:SPKSettingsIcon(@"profile_analyzer")],
-                  [SPKSetting valueCellWithTitle:@"Profile Pictures"
+                  [SPKSetting valueCellWithTitle:SPKLocalizedString(@"Profile Pictures")
                                         subtitle:[self formattedKey:@"avatars"]
                                             icon:SPKSettingsIcon(@"user_circle")],
               ],

@@ -13,7 +13,7 @@
         NSMutableArray<SPKSetting *> *rows = [NSMutableArray array];
         for (NSDictionary *item in sectionInfo[@"items"] ?: @[]) {
             NSString *identifier = item[@"identifier"];
-            NSString *title = item[@"title"] ?: @"Feature";
+            NSString *title = item[@"title"] ? SPKLocalizedString(item[@"title"]) : SPKLocalizedString(@"Feature");
             NSString *iconName = item[@"iconName"] ?: @"info";
             SPKSetting *setting = [SPKSetting switchCellWithTitle:title
                                                          subtitle:@""
@@ -23,7 +23,7 @@
             [rows addObject:setting];
         }
 
-        NSString *sectionTitle = sectionInfo[@"title"] ?: @"";
+        NSString *sectionTitle = sectionInfo[@"title"] ? SPKLocalizedString(sectionInfo[@"title"]) : @"";
         [sections addObject:SPKTopicSection(sectionTitle, [rows copy], nil)];
     }
 
@@ -35,20 +35,20 @@
 
     NSArray<NSDictionary *> *configs = @[
         @{
-            @"title" : @"Saved to Gallery",
-            @"subtitle" : @"Notification preview: success tone.",
+            @"title" : SPKLocalizedString(@"Saved to Gallery"),
+            @"subtitle" : SPKLocalizedString(@"Notification preview: success tone."),
             @"iconResource" : @"circle_check_filled",
             @"tone" : @(SPKNotificationToneSuccess)
         },
         @{
-            @"title" : @"Something Went Wrong",
-            @"subtitle" : @"Notification preview: error tone.",
+            @"title" : SPKLocalizedString(@"Something Went Wrong"),
+            @"subtitle" : SPKLocalizedString(@"Notification preview: error tone."),
             @"iconResource" : @"error_filled",
             @"tone" : @(SPKNotificationToneError)
         },
         @{
-            @"title" : @"Heads Up",
-            @"subtitle" : @"Notification preview: info tone.",
+            @"title" : SPKLocalizedString(@"Heads Up"),
+            @"subtitle" : SPKLocalizedString(@"Notification preview: info tone."),
             @"iconResource" : @"info_filled",
             @"tone" : @(SPKNotificationToneInfo)
         }
@@ -72,8 +72,8 @@
                                 defaultsKey:kSPKNotificationPillGlowEnabledKey],
             [SPKSetting switchCellWithTitle:SPKLocalizedString(@"Liquid Glass")
                                    subtitle:(SPKPrefIsAvailable(kSPKNotificationPillLiquidGlassEnabledKey)
-                                                 ? @"Render notifications with iOS 26 Liquid Glass"
-                                                 : @"Requires iOS 26 or later")
+                                                 ? SPKLocalizedString(@"Render notifications with iOS 26 Liquid Glass")
+                                                 : SPKLocalizedString(@"Requires iOS 26 or later"))
                                    defaultsKey:kSPKNotificationPillLiquidGlassEnabledKey],
             [SPKSetting menuCellWithTitle:SPKLocalizedString(@"Download Progress")
                                  subtitle:@""
@@ -87,8 +87,8 @@
                                          min:0.5
                                          max:5.0
                                         step:0.25
-                                       label:@" seconds"
-                               singularLabel:@" second"]
+                                       label:SPKLocalizedString(@" seconds")
+                               singularLabel:SPKLocalizedString(@" second")]
         ],
                         nil),
         SPKTopicSection(SPKLocalizedString(@"Preview"), @[
